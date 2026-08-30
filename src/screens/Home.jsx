@@ -213,13 +213,7 @@ export default function Home({ navigate }) {
             </div>
           </section>
 
-          <footer className="bg-inverse-surface text-inverse-on-surface pt-xl pb-4 px-margin-mobile flex flex-col items-center text-center">
-            <div className="flex flex-col items-center">
-              <h3 className="font-headline-sm text-headline-sm mb-xs">Upsala Trips</h3>
-              <p className="font-body-md text-on-tertiary-container mb-lg max-w-sm">Curaduría de aventuras premium en el sur del mundo.</p>
-              <p className="font-body-md text-[12px] text-on-tertiary-container/50">© 2024 Upsala Trips. Todos los derechos reservados.</p>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </div>
 

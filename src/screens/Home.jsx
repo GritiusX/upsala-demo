@@ -224,61 +224,83 @@ export default function Home({ navigate }) {
 
       {/* ══════════════════ DESKTOP ══════════════════ */}
       <div className="hidden md:block pt-20">
-        {/* Hero — imagen full, texto abajo a la izquierda */}
-        <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden -mt-20">
-          {/* Fondo */}
+        {/* Hero — full width, texto grande abajo */}
+        <section className="relative w-full min-h-screen flex flex-col justify-end overflow-hidden -mt-20">
+          {/* Imagen de fondo */}
           <div className="absolute inset-0 z-0">
             <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('${HERO_DESK}')` }} />
-            {/* gradiente de izquierda blanca a transparente */}
-            <div className="absolute inset-0 bg-gradient-to-r from-surface/90 via-surface/50 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent" />
+            {/* Gradiente oscuro desde abajo para legibilidad del texto */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           </div>
 
-          {/* Contenido — anclado abajo */}
-          <div className="relative z-10 px-margin-desktop pb-xl pt-[calc(80px+120px)] flex flex-col gap-lg max-w-4xl">
-            <div className="flex flex-col gap-md">
-              <h1 className="font-headline-xl text-on-surface leading-[1.1]">
-                Aventurá más allá de<br />
-                <span className="text-primary">lo esperado.</span>
+          {/* Contenido — full width, anclado al fondo */}
+          <div className="relative z-10 w-full px-margin-desktop pb-xl flex flex-col gap-lg">
+            {/* Titular grande */}
+            <div className="flex flex-col gap-sm max-w-4xl">
+              <h1 style={{ fontSize: '72px', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.025em' }} className="text-white drop-shadow-lg">
+                Aventurá más allá<br />
+                <span style={{ color: '#fd651e' }}>de lo esperado.</span>
               </h1>
-              <p className="font-body-lg text-on-surface-variant max-w-lg">
+              <p style={{ fontSize: '20px', lineHeight: '28px' }} className="text-white/80 max-w-2xl">
                 Expediciones a los rincones más salvajes de la Patagonia y los Andes. Guías expertos, logística premium, naturaleza sin filtros.
               </p>
             </div>
 
-            {/* Buscador */}
-            <div className="w-full max-w-3xl bg-surface/95 backdrop-blur-xl rounded-2xl p-xs shadow-[0_8px_32px_rgba(0,0,0,0.10)] flex items-stretch gap-xs">
-              <div className="flex-1 flex items-center px-md py-sm gap-sm hover:bg-surface-container/40 rounded-xl transition-colors">
-                <span className="material-symbols-outlined text-primary shrink-0">location_on</span>
-                <div className="flex flex-col">
-                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.08em]">Destino</label>
-                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/60 w-full" placeholder="¿A dónde vas?" type="text" />
-                </div>
-              </div>
-              <div className="w-px self-stretch my-sm bg-outline-variant/40" />
-              <div className="flex-1 flex items-center px-md py-sm gap-sm hover:bg-surface-container/40 rounded-xl transition-colors">
-                <span className="material-symbols-outlined text-primary shrink-0">calendar_today</span>
-                <div className="flex flex-col">
-                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.08em]">Fechas</label>
-                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/60 w-full" placeholder="Elegí un período" type="text" />
-                </div>
-              </div>
-              <div className="w-px self-stretch my-sm bg-outline-variant/40" />
-              <div className="flex-1 flex items-center px-md py-sm gap-sm hover:bg-surface-container/40 rounded-xl transition-colors">
-                <span className="material-symbols-outlined text-primary shrink-0">group</span>
-                <div className="flex flex-col">
-                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.08em]">Viajeros</label>
-                  <select className="bg-transparent border-none outline-none font-body-md text-on-surface w-full appearance-none cursor-pointer">
-                    <option>2 Exploradores</option>
-                    <option>1 Explorador</option>
-                    <option>3-4 Exploradores</option>
-                    <option>Grupo (5+)</option>
+            {/* Buscador full-width */}
+            <div className="w-full bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.25)] flex items-stretch overflow-hidden">
+              {/* Selector de expedición */}
+              <div className="flex-1 flex items-center px-md py-md gap-sm hover:bg-surface-container/30 transition-colors min-w-0">
+                <span className="material-symbols-outlined text-primary shrink-0 text-[22px]">explore</span>
+                <div className="flex flex-col w-full min-w-0">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-[2px]">Expedición</label>
+                  <select className="bg-transparent border-none outline-none font-body-md text-on-surface w-full appearance-none cursor-pointer truncate">
+                    <option value="">Elegí tu aventura</option>
+                    <option value="glacier">Glacier Core Traverse — $3,200</option>
+                    <option value="desert">High Desert Solitude — $4,150</option>
+                    <option value="fitzroy">Fitz Roy Summit Push — $5,800</option>
                   </select>
                 </div>
               </div>
-              <Button onClick={() => navigate('trips')} className="shrink-0 px-lg self-stretch rounded-xl bg-secondary-container text-on-secondary-container hover:bg-secondary-container/90 shadow-[0_4px_14px_rgba(253,101,30,0.4)] hover:-translate-y-0.5 transition-all font-label-md whitespace-nowrap">
+
+              <div className="w-px self-stretch my-md bg-outline-variant/40 shrink-0" />
+
+              {/* Fecha */}
+              <div className="flex-1 flex items-center px-md py-md gap-sm hover:bg-surface-container/30 transition-colors min-w-0">
+                <span className="material-symbols-outlined text-primary shrink-0 text-[22px]">calendar_month</span>
+                <div className="flex flex-col w-full">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-[2px]">Fecha de salida</label>
+                  <input
+                    type="date"
+                    className="bg-transparent border-none outline-none font-body-md text-on-surface w-full cursor-pointer"
+                    style={{ colorScheme: 'light' }}
+                  />
+                </div>
+              </div>
+
+              <div className="w-px self-stretch my-md bg-outline-variant/40 shrink-0" />
+
+              {/* Viajeros */}
+              <div className="flex items-center px-md py-md gap-sm hover:bg-surface-container/30 transition-colors">
+                <span className="material-symbols-outlined text-primary shrink-0 text-[22px]">group</span>
+                <div className="flex flex-col">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-[2px]">Viajeros</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="20"
+                    defaultValue="2"
+                    className="bg-transparent border-none outline-none font-body-md text-on-surface w-20 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                </div>
+              </div>
+
+              {/* Botón */}
+              <button
+                onClick={() => navigate('trips')}
+                className="shrink-0 px-xl bg-secondary-container text-on-secondary-container font-label-md hover:bg-secondary-container/90 transition-all shadow-[inset_-4px_0_16px_rgba(0,0,0,0.06)] whitespace-nowrap text-[15px] tracking-wide"
+              >
                 ENCONTRAR EXPEDICIÓN
-              </Button>
+              </button>
             </div>
           </div>
         </section>

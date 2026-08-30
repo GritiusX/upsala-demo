@@ -249,7 +249,7 @@ export default function Checkout({ navigate }) {
             <section className="flex flex-col gap-md">
               <h2 className="font-headline-md text-on-surface">Paso 1 — Tus Datos</h2>
               <Card className="bg-surface-container-lowest border-outline-variant shadow-sm">
-                <CardContent className="p-lg">
+                <CardContent className="px-lg pb-lg">
                   <form className="grid grid-cols-2 gap-md">
                     <div className="flex flex-col gap-xs">
                       <Label htmlFor="d-firstName" className="font-label-md text-on-surface">Nombre</Label>
@@ -360,7 +360,7 @@ export default function Checkout({ navigate }) {
 
               {/* Card form */}
               <Card className="bg-surface-container-lowest border-outline-variant shadow-sm">
-                <CardContent className="p-lg">
+                <CardContent className="px-lg pb-lg">
                   <div className="grid grid-cols-2 gap-md">
                     <div className="col-span-2 flex flex-col gap-xs">
                       <Label htmlFor="d-card" className="font-label-md text-on-surface">Número de Tarjeta</Label>

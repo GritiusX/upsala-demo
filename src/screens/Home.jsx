@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Footer from '../components/Footer'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import ParallaxHero from '../components/ParallaxHero'
 
 /* ── Mobile image URLs ─────────────────────────────────────────── */
 const LOGO_MOB   = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCIZThyURbLNJntYqPuQvOAuvya3orzxFpi_w9ghGDaCk5yRoK-lDecvkiqqf4oLJSyeMzm2753hAHMFeUls5PCnbUguUf6t9XLF2vqgPp7aydZbjPMAJugicO1w7BTAQPqcK75k_KWJ3YbBLlObuJZsFIL0jf_QMRf0beqJhtWLa9KHGohORxhG2TOb_UYBYGaOtBdgG2DWb5Fs7bmgiZo6k0zO4KfWbaSgkU5cMCV1XEVk8g4mNSzhg'
@@ -224,17 +225,10 @@ export default function Home({ navigate }) {
 
       {/* ══════════════════ DESKTOP ══════════════════ */}
       <div className="hidden md:block">
-        {/* Hero — full width, texto grande abajo */}
-        <section className="relative w-full min-h-screen flex flex-col justify-end overflow-hidden">
-          {/* Imagen de fondo */}
-          <div className="absolute inset-0 z-0">
-            <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('${HERO_DESK}')` }} />
-            {/* Gradiente oscuro desde abajo para legibilidad del texto */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-          </div>
-
-          {/* Contenido — full width, anclado al fondo */}
-          <div className="relative z-10 w-full px-margin-desktop pb-xl flex flex-col gap-lg">
+        {/* Hero — parallax full screen */}
+        <ParallaxHero>
+          {/* Contenido anclado al fondo */}
+          <div className="absolute bottom-0 left-0 right-0 px-margin-desktop pb-xl flex flex-col gap-lg pointer-events-auto">
             {/* Titular grande */}
             <div className="flex flex-col gap-sm max-w-4xl">
               <h1 style={{ fontSize: '72px', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.025em' }} className="text-white drop-shadow-lg">
@@ -303,7 +297,7 @@ export default function Home({ navigate }) {
               </button>
             </div>
           </div>
-        </section>
+        </ParallaxHero>
 
         {/* Barra de partners */}
         <section className="w-full py-lg bg-surface-container-lowest border-y border-outline-variant/20 flex flex-col items-center justify-center">

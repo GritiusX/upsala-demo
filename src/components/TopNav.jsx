@@ -25,7 +25,7 @@ export default function TopNav({ current, navigate, overlay = false }) {
           className="h-9 w-9 rounded-full object-cover shadow-sm"
           src={LOGO}
         />
-        <span className={`text-[15px] font-semibold tracking-tight ${overlay ? 'text-neutral-900 drop-shadow-sm' : 'text-primary'}`}>
+        <span className={`text-[15px] font-semibold tracking-tight ${overlay ? 'text-white drop-shadow-sm' : 'text-on-surface'}`}>
           Upsala trips
         </span>
       </div>

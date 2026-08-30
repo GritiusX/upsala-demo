@@ -3,6 +3,8 @@ import { useState } from 'react'
 const LOGO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCIZThyURbLNJntYqPuQvOAuvya3orzxFpi_w9ghGDaCk5yRoK-lDecvkiqqf4oLJSyeMzm2753hAHMFeUls5PCnbUguUf6t9XLF2vqgPp7aydZbjPMAJugicO1w7BTAQPqcK75k_KWJ3YbBLlObuJZsFIL0jf_QMRf0beqJhtWLa9KHGohORxhG2TOb_UYBYGaOtBdgG2DWb5Fs7bmgiZo6k0zO4KfWbaSgkU5cMCV1XEVk8g4mNSzhg'
 const PROFILE = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCheYdsipuktbVlX2BhtCH4yMCb36Wb9zyFxPbyT4VZnfR8GvujMu8CP6O_6c65y8Qzduyt2AiWXKQMq9efrp5noWo3qB32W-psprfXXnKI201YthVa3guEHHbdbksN7CyXuQmIbKT48iFnxwAvbLAcVssl07ztWXvEhvcO7xu9Pk9odT0J53dmjpGX6NelfC89MAC0MI88cMvUT5z3n9fXAOWfhsLtWqdfdv3SozR3ontT0FJMFCrV_Q'
 const TRIP_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0wPt8O6EHTOlqEUuS_uIf8XFE6AzhEhe6MXem7AYYaTzvdlQDSt5hJNT2MSALJni7zlyDxiAoQnOowlmuHQFpKTv_JR0cXV348gYFQAOWSwjv-KPkPXVKUdv2cFcrLHSSfRv96D5SYFPVSJLyFjr385tQIkDtDJ8SGbrPzdJqgzy4PYUEfxuB2kWyXB3kI5xlgZb3UFHKpkiVMUoLFDcq3ARJphyZRLrhHgT4IgdOlulqpBXYJ2yZcQ'
+const CHECKOUT_HERO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAfJ5s7hVXcqsp059dApfeVNBDcFfCwNGVyaoOUPdeQP31BYceX0aOxr7AZN89DZ7OcokcFfJfqU0c0oZakat6i_EwmdT1gug_TYR3iznoFDd4YFAKzuppBympkhwKKHQ3hjwVP0TsnAWwI4ZHSZXWBlv10JJZIG97-DQ70Qu28ChOt9wVBRxtDJv5aiatVkgnPPJE2r1ayJkkDx17TjEjUaEOxAMxBjRDBKfCWK56iIXubbykTCIlC-g'
+const SUMMARY_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDNRDHbd6ppGTNu70zEBMQfQaeSWJ3zKZeSdBJutkJBusjCSZMJlkTIHmB6kqh5x31CBrz_Bxd7azTctkMIHUoes5S8U5zGueBshH-J0CCCSPdrwcVSme5MW38GSxy_RPu_lJdI05k820wULAMXvWgLnEI4TLkIjH5emfK7bsKxmazjHNfxH4WELibQ6KBcT6QJ-u3b9UZ--LyFUIps8wW9fz9gjgZ4-FIZiJV5GCjFaMC7E-Ux84wmig'
 
 const plans = [
   { id: 'full', label: 'Pago Completo', sub: 'Asegura tu lugar de inmediato.', price: '$1,380', color: 'primary' },
@@ -39,7 +41,7 @@ export default function Checkout({ navigate }) {
       {/* Desktop page header */}
       <div className="hidden md:block relative w-full h-64 bg-surface-container overflow-hidden rounded-b-3xl">
         <div className="absolute inset-0 bg-cover bg-center opacity-60"
-          style={{backgroundImage:"url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfJ5s7hVXcqsp059dApfeVNBDcFfCwNGVyaoOUPdeQP31BYceX0aOxr7AZN89DZ7OcokcFfJfqU0c0oZakat6i_EwmdT1gug_TYR3iznoFDd4YFAKzuppBympkhwKKHQ3hjwVP0TsnAWwI4ZHSZXWBlv10JJZIG97-DQ70Qu28ChOt9wVBRxtDJv5aiatVkgnPPJE2r1ayJkkDx17TjEjUaEOxAMxBjRDBKfCWK56iIXubbykTCIlC-g')"}} />
+          style={{ backgroundImage: `url('${CHECKOUT_HERO}')` }} />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
         <div className="absolute bottom-md left-margin-desktop">
           <p className="font-label-md text-primary tracking-widest uppercase mb-xs">Step 3 of 3</p>
@@ -178,7 +180,7 @@ export default function Checkout({ navigate }) {
           <div className="sticky top-[100px] bg-surface-container-lowest rounded-2xl shadow-xl overflow-hidden">
             {/* Trip image */}
             <div className="h-48 relative w-full overflow-hidden">
-              <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage:"url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNRDHbd6ppGTNu70zEBMQfQaeSWJ3zKZeSdBJutkJBusjCSZMJlkTIHmB6kqh5x31CBrz_Bxd7azTctkMIHUoes5S8U5zGueBshH-J0CCCSPdrwcVSme5MW38GSxy_RPu_lJdI05k820wULAMXvWgLnEI4TLkIjH5emfK7bsKxmazjHNfxH4WELibQ6KBcT6QJ-u3b9UZ--LyFUIps8wW9fz9gjgZ4-FIZiJV5GCjFaMC7E-Ux84wmig')} />
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${SUMMARY_IMG}')` }} />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/20 to-transparent" />
             </div>
             {/* Summary content */}

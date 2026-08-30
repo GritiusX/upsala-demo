@@ -44,7 +44,7 @@ export default function ParallaxHero({ children }) {
   }, [])
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#060d1a]">
+    <div className="isolate relative w-full h-screen overflow-hidden bg-[#060d1a]">
       {/* Vignette radial */}
       <div className="absolute inset-0 z-[100] pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_65%,rgba(0,0,0,0.7))]" />
       {/* Bottom gradient for text legibility */}

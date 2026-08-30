@@ -12,7 +12,8 @@ export default function TopNav({ current, navigate, overlay = false }) {
   ]
 
   return (
-    <header className={`hidden md:flex fixed top-0 w-full z-50 h-20 items-center justify-between px-margin-desktop transition-all duration-300 ${
+    // z-[500] ensures TopNav renders above the parallax layers (which go up to z-300 inside an isolated context)
+    <header className={`hidden md:flex fixed top-0 w-full z-[500] h-20 items-center justify-between px-margin-desktop transition-all duration-300 ${
       overlay ? '' : 'bg-surface/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.06)]'
     }`}>
 
@@ -23,16 +24,16 @@ export default function TopNav({ current, navigate, overlay = false }) {
           className="h-9 w-9 rounded-full object-cover shadow-sm"
           src={LOGO}
         />
-        <span className={`text-[15px] font-semibold tracking-tight ${overlay ? 'text-white drop-shadow' : 'text-primary'}`}>
+        <span className={`text-[15px] font-semibold tracking-tight ${overlay ? 'text-neutral-900 drop-shadow-sm' : 'text-primary'}`}>
           Upsala trips
         </span>
       </div>
 
-      {/* Pill nav — centro */}
+      {/* Pill nav */}
       <nav>
         <div className={`flex items-center gap-1 rounded-full px-1 py-1 ring-1 backdrop-blur-md ${
           overlay
-            ? 'bg-white/10 ring-white/15'
+            ? 'bg-white/85 ring-black/8'
             : 'bg-surface-container ring-outline-variant/50'
         }`}>
           {links.map(l => (
@@ -40,12 +41,10 @@ export default function TopNav({ current, navigate, overlay = false }) {
               key={l.tab}
               onClick={() => navigate(l.screen)}
               className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-                overlay
-                  ? active === l.tab
-                    ? 'bg-white/25 text-white'
-                    : 'text-white/70 hover:text-white hover:bg-white/12'
-                  : active === l.tab
-                    ? 'bg-primary text-on-primary shadow-sm'
+                active === l.tab
+                  ? 'bg-primary/15 text-primary'
+                  : overlay
+                    ? 'text-neutral-700 hover:text-neutral-900 hover:bg-black/6'
                     : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
               }`}
             >
@@ -55,21 +54,15 @@ export default function TopNav({ current, navigate, overlay = false }) {
           {current === 'admin' && (
             <button
               onClick={() => navigate('admin')}
-              className={`px-4 py-2 text-sm font-medium rounded-full ${
-                overlay ? 'bg-white/25 text-white' : 'bg-primary text-on-primary'
-              }`}
+              className="px-4 py-2 text-sm font-medium rounded-full bg-primary/15 text-primary"
             >
               Admin
             </button>
           )}
-          {/* CTA button */}
+          {/* CTA */}
           <button
             onClick={() => navigate('my-trips')}
-            className={`ml-1 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-              overlay
-                ? 'bg-white text-neutral-900 hover:bg-white/90'
-                : 'bg-primary text-on-primary hover:bg-primary/90'
-            }`}
+            className="ml-1 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors bg-primary text-on-primary hover:bg-primary/90"
           >
             Mi cuenta
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -81,7 +74,6 @@ export default function TopNav({ current, navigate, overlay = false }) {
 
       {/* Profile con tooltip */}
       <div className="group/profile relative flex items-center shrink-0">
-        {/* Tooltip "Hola Juan" */}
         <div className={`absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap shadow-lg pointer-events-none opacity-0 group-hover/profile:opacity-100 transition-opacity duration-200 ${
           overlay
             ? 'bg-white/90 text-neutral-900 backdrop-blur-md'
@@ -93,7 +85,7 @@ export default function TopNav({ current, navigate, overlay = false }) {
           alt="Profile"
           src={PROFILE}
           className={`w-10 h-10 rounded-full object-cover cursor-pointer shadow-md transition-transform hover:scale-105 ${
-            overlay ? 'ring-2 ring-white/40' : 'ring-2 ring-outline-variant'
+            overlay ? 'ring-2 ring-black/15' : 'ring-2 ring-outline-variant'
           }`}
         />
       </div>

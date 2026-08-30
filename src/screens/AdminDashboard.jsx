@@ -68,6 +68,7 @@ export default function AdminDashboard() {
   const [trips, setTrips] = useState(INITIAL_TRIPS)
   const [editTrip, setEditTrip] = useState(null)
   const [deleteId, setDeleteId] = useState(null)
+  const [editingContent, setEditingContent] = useState(false)
 
   const handleSaveEdit = () => {
     setTrips(prev => prev.map(t => t.id === editTrip.id ? editTrip : t))
@@ -467,6 +468,161 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      {/* ── Editor de Contenido ── */}
+      <div className="hidden md:block px-margin-desktop pb-xl">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-sm">
+            <div>
+              <CardTitle className="font-headline-sm text-on-surface">Editor de Contenido — Home</CardTitle>
+              <p className="font-body-md text-on-surface-variant text-sm mt-xs">Hacé click en cualquier campo para ver cómo se edita el contenido de la página principal</p>
+            </div>
+            <Button size="sm" variant="outline" onClick={() => setEditingContent(p => !p)}>
+              <span className="material-symbols-outlined text-[16px] mr-1">{editingContent ? 'visibility' : 'edit'}</span>
+              {editingContent ? 'Ver preview' : 'Editar contenido'}
+            </Button>
+          </CardHeader>
+          <CardContent className="px-md pb-md">
+            <div className="flex flex-col gap-lg">
+
+              {/* Hero section */}
+              <div className="flex flex-col gap-sm">
+                <p className="font-label-md text-on-surface-variant uppercase tracking-widest text-xs flex items-center gap-2">
+                  <span className="w-4 h-px bg-outline-variant" /> Sección Hero
+                </p>
+                <div className="grid grid-cols-2 gap-md">
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Título principal</Label>
+                    {editingContent
+                      ? <Input defaultValue="Aventurá más allá de lo esperado." className="font-headline-sm" />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70">Aventurá más allá de lo esperado.</div>
+                    }
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Subtítulo</Label>
+                    {editingContent
+                      ? <Input defaultValue="Expediciones a los rincones más salvajes de la Patagonia y los Andes." />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70">Expediciones a los rincones más salvajes...</div>
+                    }
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Texto botón CTA</Label>
+                    {editingContent
+                      ? <Input defaultValue="ENCONTRAR EXPEDICIÓN" />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70">ENCONTRAR EXPEDICIÓN</div>
+                    }
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Imagen de fondo (URL)</Label>
+                    {editingContent
+                      ? <Input defaultValue="https://lh3.googleusercontent.com/aida-public/..." />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface-variant text-xs cursor-not-allowed opacity-70 truncate">https://lh3.googleusercontent.com/aida-public/...</div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-outline-variant/20" />
+
+              {/* Expediciones section */}
+              <div className="flex flex-col gap-sm">
+                <p className="font-label-md text-on-surface-variant uppercase tracking-widest text-xs flex items-center gap-2">
+                  <span className="w-4 h-px bg-outline-variant" /> Sección Expediciones
+                </p>
+                <div className="grid grid-cols-2 gap-md">
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Título sección</Label>
+                    {editingContent
+                      ? <Input defaultValue="Expediciones Exclusivas" />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70">Expediciones Exclusivas</div>
+                    }
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Descripción sección</Label>
+                    {editingContent
+                      ? <Input defaultValue="Nuestros itinerarios más buscados, combinando paisajes extremos con comodidad refinada." />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70 truncate">Nuestros itinerarios más buscados...</div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-outline-variant/20" />
+
+              {/* Comunidad section */}
+              <div className="flex flex-col gap-sm">
+                <p className="font-label-md text-on-surface-variant uppercase tracking-widest text-xs flex items-center gap-2">
+                  <span className="w-4 h-px bg-outline-variant" /> Sección Comunidad
+                </p>
+                <div className="grid grid-cols-2 gap-md">
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Título sección</Label>
+                    {editingContent
+                      ? <Input defaultValue="La Comunidad Upsala" />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70">La Comunidad Upsala</div>
+                    }
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">URL del video</Label>
+                    {editingContent
+                      ? <Input defaultValue="https://youtube.com/..." placeholder="URL del video de YouTube o Vimeo" />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface-variant text-xs cursor-not-allowed opacity-70">https://youtube.com/...</div>
+                    }
+                  </div>
+                  {[
+                    { label: 'Reseña 1 — Texto', val: '"Increíble la organización en Las Leñas. Los equipos de ski eran de primera..."' },
+                    { label: 'Reseña 1 — Autor', val: 'Martina R.' },
+                    { label: 'Reseña 2 — Texto', val: '"El surf camp en Chapa fue una locura. El nivel de los instructores..."' },
+                    { label: 'Reseña 2 — Autor', val: 'Juan Ignacio M.' },
+                    { label: 'Reseña 3 — Texto', val: '"Todo resuelto desde el día uno. Uruguay tiene unas olas tremendas..."' },
+                    { label: 'Reseña 3 — Autor', val: 'Sofía L.' },
+                  ].map(f => (
+                    <div key={f.label} className="flex flex-col gap-xs">
+                      <Label className="font-label-md text-on-surface text-sm">{f.label}</Label>
+                      {editingContent
+                        ? <Input defaultValue={f.val} />
+                        : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70 truncate text-sm">{f.val}</div>
+                      }
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-t border-outline-variant/20" />
+
+              {/* Footer section */}
+              <div className="flex flex-col gap-sm">
+                <p className="font-label-md text-on-surface-variant uppercase tracking-widest text-xs flex items-center gap-2">
+                  <span className="w-4 h-px bg-outline-variant" /> Footer
+                </p>
+                <div className="grid grid-cols-2 gap-md">
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Título CTA footer</Label>
+                    {editingContent
+                      ? <Input defaultValue="Viví tu próxima aventura." />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70">Viví tu próxima aventura.</div>
+                    }
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Label className="font-label-md text-on-surface text-sm">Subtítulo CTA footer</Label>
+                    {editingContent
+                      ? <Input defaultValue="Sumáte a miles de exploradores que confían en Upsala Trips para sus expediciones más épicas." />
+                      : <div className="px-sm py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-body-md text-on-surface cursor-not-allowed opacity-70 truncate">Sumáte a miles de exploradores...</div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              {editingContent && (
+                <div className="flex gap-sm justify-end pt-sm border-t border-outline-variant/20">
+                  <Button variant="outline" onClick={() => setEditingContent(false)}>Cancelar</Button>
+                  <Button onClick={() => setEditingContent(false)}>Guardar Cambios</Button>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* ── Edit Modal ── */}

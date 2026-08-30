@@ -388,6 +388,61 @@ export default function Home({ navigate }) {
           </div>
         </section>
 
+        {/* Comunidad Upsala */}
+        <section className="w-full py-[120px] px-margin-desktop bg-surface-container-low">
+          <div className="max-w-7xl mx-auto flex flex-col gap-xl">
+            <div className="flex flex-col md:flex-row justify-between items-end">
+              <div className="max-w-[576px]">
+                <span className="font-label-md text-primary uppercase tracking-[0.1em] flex items-center gap-2 mb-xs">
+                  <span className="w-8 h-px bg-primary" /> Comunidad
+                </span>
+                <h2 className="font-headline-lg text-on-surface">La Comunidad Upsala</h2>
+                <p className="font-body-lg text-on-surface-variant mt-sm">Experiencias reales de viajeros que confiaron en nosotros. Mirá lo que vivieron.</p>
+              </div>
+            </div>
+
+            {/* Video embed + reviews grid */}
+            <div className="grid grid-cols-12 gap-lg">
+              {/* Video placeholder */}
+              <div className="col-span-7 relative rounded-2xl overflow-hidden bg-on-surface aspect-video flex items-center justify-center group cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.12)]">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpygtKaAZVYaSRsCb3xkst7G9Tkf6JEmz4zewSmOKJnWeC7QfqLSlhvZRj_rk_Pe-k7RtPbieCzjhq5F9beKLzC3judrf3-A9UpGU9SrRi_yhG906jJunBXRpdhJPlE3W7rIqVaJhPcH7iAYmc7i2QK5GaFK9lbyHE0qK-vcDjiqp6WunYPFIeNHL3jrpVmrqzQbsEw353StX7rQqr2pXbOmIgfArkuN7dzxMBah4uS8ym6yoqmxIwPw"
+                  alt="Video comunidad"
+                  className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-60 transition-opacity duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div className="relative z-10 flex flex-col items-center gap-md">
+                  <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-200 shadow-xl">
+                    <span className="material-symbols-outlined text-white text-[40px]" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                  </div>
+                  <p className="text-white font-label-md text-sm opacity-80">Mirá el resumen de Las Leñas 2024</p>
+                </div>
+              </div>
+
+              {/* Reviews column */}
+              <div className="col-span-5 flex flex-col gap-md">
+                {reviews.map(r => (
+                  <div key={r.name} className="bg-surface-container-lowest rounded-2xl p-md shadow-sm flex flex-col gap-sm">
+                    <div className="flex text-secondary-container">
+                      {[1,2,3,4,5].map(i => (
+                        <span key={i} className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                      ))}
+                    </div>
+                    <p className="font-body-lg text-on-surface text-sm leading-relaxed">{r.text}</p>
+                    <div className="flex items-center gap-sm pt-xs border-t border-outline-variant/20">
+                      <img className="w-9 h-9 rounded-full object-cover" src={r.img} alt={r.name} />
+                      <div>
+                        <p className="font-label-md text-on-surface text-sm">{r.name}</p>
+                        <p className="font-body-md text-on-surface-variant text-xs">{r.sub}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <Footer />
       </div>
     </main>

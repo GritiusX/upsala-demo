@@ -23,6 +23,7 @@ export default function Checkout({ navigate }) {
   const [expiry, setExpiry] = useState('')
   const [cvv, setCvv] = useState('')
   const [plan, setPlan] = useState('full')
+  const [gateway, setGateway] = useState('mp')
   const [showConfirm, setShowConfirm] = useState(false)
 
   const handleSubmit = (e) => {
@@ -124,42 +125,52 @@ export default function Checkout({ navigate }) {
               </div>
 
               {/* Step 2 – Payment */}
-              <h2 className="font-headline-sm text-on-surface mt-sm">Paso 2 — Método de Pago</h2>
+              <h2 className="font-headline-sm text-on-surface mt-sm">Paso 2 — Plataforma de Pago</h2>
 
-              {/* Payment option cards */}
+              {/* Gateway selectors */}
               <div className="flex flex-col gap-sm">
-                {/* Full Payment */}
-                <button
-                  type="button"
-                  onClick={() => setPlan('full')}
-                  className={cn(
-                    'w-full text-left p-md rounded-xl border-2 transition-all',
-                    plan === 'full'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-outline-variant bg-surface-container-lowest'
-                  )}
-                >
+                <button type="button" onClick={() => setGateway('mp')}
+                  className={cn('w-full text-left p-md rounded-xl border-2 transition-all flex items-center gap-md',
+                    gateway === 'mp' ? 'border-[#009EE3] bg-[#009EE3]/5' : 'border-outline-variant bg-surface-container-lowest')}>
+                  <div className="w-10 h-10 rounded-lg bg-[#009EE3] flex items-center justify-center shrink-0">
+                    <span className="text-white font-bold text-[13px] leading-none">MP</span>
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-label-md text-on-surface">Mercado Pago</p>
+                    <p className="font-body-md text-on-surface-variant text-xs">Tarjeta, débito, cuotas sin interés</p>
+                  </div>
+                  {gateway === 'mp' && <span className="material-symbols-outlined text-[#009EE3]">check_circle</span>}
+                </button>
+
+                <button type="button" onClick={() => setGateway('rebill')}
+                  className={cn('w-full text-left p-md rounded-xl border-2 transition-all flex items-center gap-md',
+                    gateway === 'rebill' ? 'border-[#1B4FCC] bg-[#1B4FCC]/5' : 'border-outline-variant bg-surface-container-lowest')}>
+                  <div className="w-10 h-10 rounded-lg bg-[#1B4FCC] flex items-center justify-center shrink-0">
+                    <span className="text-white font-bold text-[11px] leading-none">RB</span>
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-label-md text-on-surface">Rebill</p>
+                    <p className="font-body-md text-on-surface-variant text-xs">Suscripciones y pagos recurrentes</p>
+                  </div>
+                  {gateway === 'rebill' && <span className="material-symbols-outlined text-[#1B4FCC]">check_circle</span>}
+                </button>
+              </div>
+
+              {/* Plan options */}
+              <div className="flex flex-col gap-sm">
+                <button type="button" onClick={() => setPlan('full')}
+                  className={cn('w-full text-left p-md rounded-xl border-2 transition-all',
+                    plan === 'full' ? 'border-primary bg-primary/5' : 'border-outline-variant bg-surface-container-lowest')}>
                   <div className="flex items-center justify-between">
                     <span className="font-label-md text-on-surface">Pago Completo</span>
                     <span className="font-headline-sm text-primary">$3,400</span>
                   </div>
                   <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pagá el total y asegurate el lugar de inmediato.</p>
                 </button>
-
-                {/* Deposit */}
-                <button
-                  type="button"
-                  onClick={() => setPlan('deposit')}
-                  className={cn(
-                    'w-full text-left p-md rounded-xl border-2 transition-all relative',
-                    plan === 'deposit'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-outline-variant bg-surface-container-lowest'
-                  )}
-                >
-                  <Badge className="absolute -top-2 right-md bg-primary text-white font-label-md text-xs">
-                    Recomendado
-                  </Badge>
+                <button type="button" onClick={() => setPlan('deposit')}
+                  className={cn('w-full text-left p-md rounded-xl border-2 transition-all relative',
+                    plan === 'deposit' ? 'border-primary bg-primary/5' : 'border-outline-variant bg-surface-container-lowest')}>
+                  <Badge className="absolute -top-2 right-md bg-primary text-white font-label-md text-xs">Recomendado</Badge>
                   <div className="flex items-center justify-between">
                     <span className="font-label-md text-on-surface">Reservar con Seña</span>
                     <span className="font-headline-sm text-primary">$850</span>
@@ -285,45 +296,66 @@ export default function Checkout({ navigate }) {
 
             {/* Step 2 – Payment Method */}
             <section className="flex flex-col gap-md">
-              <h2 className="font-headline-md text-on-surface">Paso 2 — Método de Pago</h2>
+              <h2 className="font-headline-md text-on-surface">Paso 2 — Plataforma de Pago</h2>
 
-              {/* Payment method selectors */}
+              {/* Gateway selectors */}
               <div className="grid grid-cols-2 gap-md">
-                {/* Mercado Pago */}
-                <button
-                  type="button"
-                  onClick={() => setPlan('full')}
-                  className={cn(
-                    'flex flex-col items-center gap-sm p-lg rounded-xl border-2 transition-all text-center',
-                    plan === 'full'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-outline-variant bg-surface-container-lowest hover:border-primary/40'
-                  )}
-                >
-                  <span className="material-symbols-outlined text-3xl text-primary">account_balance_wallet</span>
+                <button type="button" onClick={() => setGateway('mp')}
+                  className={cn('flex flex-col items-center gap-md p-lg rounded-xl border-2 transition-all text-center',
+                    gateway === 'mp' ? 'border-[#009EE3] bg-[#009EE3]/5' : 'border-outline-variant bg-surface-container-lowest hover:border-[#009EE3]/40')}>
+                  <div className="w-14 h-14 rounded-2xl bg-[#009EE3] flex items-center justify-center shadow-md">
+                    <span className="text-white font-extrabold text-[18px] tracking-tight">MP</span>
+                  </div>
                   <div>
                     <p className="font-label-md text-on-surface">Mercado Pago</p>
-                    <p className="font-body-md text-on-surface-variant text-sm">Pago Completo $3,400</p>
+                    <p className="font-body-md text-on-surface-variant text-sm">Tarjeta · Débito · Cuotas</p>
                   </div>
+                  {gateway === 'mp' && (
+                    <span className="material-symbols-outlined text-[#009EE3] text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                  )}
                 </button>
 
-                {/* Credit/Debit Card */}
-                <button
-                  type="button"
-                  onClick={() => setPlan('deposit')}
-                  className={cn(
-                    'flex flex-col items-center gap-sm p-lg rounded-xl border-2 transition-all text-center',
-                    plan === 'deposit'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-outline-variant bg-surface-container-lowest hover:border-primary/40'
-                  )}
-                >
-                  <span className="material-symbols-outlined text-3xl text-primary">credit_card</span>
-                  <div>
-                    <p className="font-label-md text-on-surface">Tarjeta de Crédito/Débito</p>
-                    <p className="font-body-md text-on-surface-variant text-sm">Reservar con Seña $850</p>
+                <button type="button" onClick={() => setGateway('rebill')}
+                  className={cn('flex flex-col items-center gap-md p-lg rounded-xl border-2 transition-all text-center',
+                    gateway === 'rebill' ? 'border-[#1B4FCC] bg-[#1B4FCC]/5' : 'border-outline-variant bg-surface-container-lowest hover:border-[#1B4FCC]/40')}>
+                  <div className="w-14 h-14 rounded-2xl bg-[#1B4FCC] flex items-center justify-center shadow-md">
+                    <span className="text-white font-extrabold text-[14px] tracking-wide">Rebill</span>
                   </div>
+                  <div>
+                    <p className="font-label-md text-on-surface">Rebill</p>
+                    <p className="font-body-md text-on-surface-variant text-sm">Suscripciones · Recurrente</p>
+                  </div>
+                  {gateway === 'rebill' && (
+                    <span className="material-symbols-outlined text-[#1B4FCC] text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                  )}
                 </button>
+              </div>
+
+              {/* Plan options */}
+              <div className="grid grid-cols-2 gap-md">
+                <button type="button" onClick={() => setPlan('full')}
+                  className={cn('text-left p-md rounded-xl border-2 transition-all',
+                    plan === 'full' ? 'border-primary bg-primary/5' : 'border-outline-variant bg-surface-container-lowest hover:border-primary/40')}>
+                  <p className="font-label-md text-on-surface">Pago Completo</p>
+                  <p className="font-headline-sm text-primary mt-xs">$3,400</p>
+                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pagá el total hoy.</p>
+                </button>
+                <button type="button" onClick={() => setPlan('deposit')}
+                  className={cn('text-left p-md rounded-xl border-2 transition-all relative',
+                    plan === 'deposit' ? 'border-primary bg-primary/5' : 'border-outline-variant bg-surface-container-lowest hover:border-primary/40')}>
+                  <Badge className="absolute -top-2 right-md bg-primary text-white font-label-md text-xs">Recomendado</Badge>
+                  <p className="font-label-md text-on-surface">Reservar con Seña</p>
+                  <p className="font-headline-sm text-primary mt-xs">$850</p>
+                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">10% ahora, el resto antes del viaje.</p>
+                </button>
+              </div>
+
+              {/* Redirect notice */}
+              <div className="flex items-start gap-sm p-md rounded-xl bg-surface-container border border-outline-variant/30">
+                <span className="material-symbols-outlined text-primary text-[18px] mt-[2px] shrink-0">info</span>
+                <p className="font-body-md text-on-surface-variant text-sm">
+                  Serás redirigido a <strong className="text-on-surface">{gateway === 'mp' ? 'Mercado Pago' : 'Rebill'}</strong> para completar el pago de forma segura.
+                </p>
               </div>
 
               {/* Card form */}

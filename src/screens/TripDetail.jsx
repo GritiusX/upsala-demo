@@ -201,8 +201,8 @@ export default function TripDetail({ navigate }) {
                 >
                   <AccordionTrigger className="hover:no-underline">
                     <div className="flex items-center gap-md text-left">
-                      <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
-                        <span className="font-label-md text-primary text-[11px]">{day.label.split(' ')[1] ?? day.label}</span>
+                      <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0">
+                        <span className="font-label-md text-white text-[11px]">{day.label.split(' ')[1] ?? day.label}</span>
                       </div>
                       <span className="font-headline-sm text-on-surface">{day.title}</span>
                     </div>
@@ -331,8 +331,8 @@ export default function TripDetail({ navigate }) {
                   >
                     <AccordionTrigger className="hover:no-underline">
                       <div className="flex items-center gap-md text-left">
-                        <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0">
-                          <span className="font-label-md text-primary text-[11px] text-center leading-tight px-1">
+                        <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shrink-0">
+                          <span className="font-label-md text-white text-[11px] text-center leading-tight px-1">
                             {day.label}
                           </span>
                         </div>

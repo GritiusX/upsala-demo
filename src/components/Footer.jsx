@@ -18,7 +18,7 @@ export default function Footer() {
       {/* ── CTA banner ── */}
       <div className="w-full px-margin-desktop py-[72px] flex flex-col md:flex-row items-center justify-between gap-xl">
         {/* Left */}
-        <div className="flex flex-col gap-md max-w-md">
+        <div className="flex flex-col gap-md flex-1 min-w-0">
           <h2 className="text-[2rem] font-bold leading-tight text-on-surface">
             Viví tu próxima aventura.
           </h2>

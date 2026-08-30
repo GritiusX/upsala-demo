@@ -462,7 +462,7 @@ export default function Checkout({ navigate }) {
       {/* ── SUCCESS MODAL ──────────────────────────────────────────────── */}
       {showConfirm && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-margin-mobile">
-          <div className="bg-surface-container-lowest w-full max-w-sm rounded-2xl p-lg flex flex-col items-center text-center gap-md shadow-2xl">
+          <div className="bg-surface-container-lowest w-full max-w-[384px] rounded-2xl p-lg flex flex-col items-center text-center gap-md shadow-2xl">
             {/* Checkmark */}
             <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
               <span

@@ -39,27 +39,31 @@ const faqs = [
 ]
 
 /* ── Desktop expedition cards ───────────────────────────────────── */
+const CHAPA_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCJ6kNUaFZ3BvfKty9DK8jA--RLPBb6Igo6KeLkIxpTS-fQyBLUEg7yTsXvxlJk2HglXnynKaJwuKFLCbiQCli8q9e8NRqjYfDVJukeAYsOLdAVS4CVRlTqeZHBkvQp8Nw2OmMf56XNJSsmav5AN9pjsqp3AhJSISjmqpMOmeZLR691quFUYu2s8HVBRm0p3DGG9XAmq4-dJfVNnXpnO6aZJsELuuqyE97GZiXQXlKKoMOBz8ddEX_W8w'
+const PUNTA_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBv9B2MpC3eFOlftIEta520YVq8s6HE5sF5HG9qBl9vBPTFmcoqK0Z5QRZtKkB1cqHdzlt8rsUF3hLtuYMMuWJ7OZQo1pWMNRlsjI0pETFCH9BJ3A3Tp8-MTyP7K7ptOIMZJJ0nxq_9diiRxtvjLCyHB0qTG129DOlyR1A3_wCeWZJHRhjGzOez7rybejBN7vr3TrKf7j09rRtlxKjA8js7W0HESERw0clWTSG21fBQHM2U15Dzs_xk8A'
+const LENHAS_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpygtKaAZVYaSRsCb3xkst7G9Tkf6JEmz4zewSmOKJnWeC7QfqLSlhvZRj_rk_Pe-k7RtPbieCzjhq5F9beKLzC3judrf3-A9UpGU9SrRi_yhG906jJunBXRpdhJPlE3W7rIqVaJhPcH7iAYmc7i2QK5GaFK9lbyHE0qK-vcDjiqp6WunYPFIeNHL3jrpVmrqzQbsEw353StX7rQqr2pXbOmIgfArkuN7dzxMBah4uS8ym6yoqmxIwPw'
+
 const deskCards = [
   {
-    img: CARD1_IMG, badge: 'Alta Demanda', badgeColor: 'bg-secondary w-2 h-2 rounded-full',
-    title: 'Glacier Core Traverse', rating: '4.9',
-    desc: 'Expedición técnica de trekking en hielo navegando las grietas más profundas del Campo de Hielo Patagónico Sur.',
-    difficulty: 'Avanzado', diffBars: [true, true, true, false],
-    price: '$3,200', stagger: '', diffColor: 'bg-primary',
+    img: CHAPA_IMG, badge: 'Alta Demanda', badgeColor: 'bg-secondary-container w-2 h-2 rounded-full',
+    title: 'Chapadmalal Surf Camp', rating: '4.9',
+    desc: 'Surf camp completo en la costa atlántica bonaerense. Clases, equipamiento, alojamiento frente al mar y las mejores olas del país.',
+    difficulty: 'Todos los niveles', diffBars: [true, true, false, false],
+    price: '$750', stagger: '', diffColor: 'bg-secondary-container',
   },
   {
-    img: CARD2_IMG, badge: 'Nueva Ruta', badgeColor: 'bg-primary w-2 h-2 rounded-full',
-    title: 'High Desert Solitude', rating: '5.0',
-    desc: 'Experimentá el aislamiento total en los Andes. Campamentos privados, observación astronómica y paisajes en silencio.',
+    img: PUNTA_IMG, badge: 'Nueva Ruta', badgeColor: 'bg-primary w-2 h-2 rounded-full',
+    title: 'Punta del Diablo Surf Trip', rating: '5.0',
+    desc: 'Las mejores olas de Uruguay en uno de los destinos más bohemios de Sudamérica. Surf, sol y comunidad en Rocha.',
     difficulty: 'Moderado', diffBars: [true, true, false, false],
-    price: '$4,150', stagger: 'md:-mt-8', diffColor: 'bg-primary',
+    price: '$900', stagger: 'md:-mt-8', diffColor: 'bg-primary',
   },
   {
-    img: CARD3_IMG, badge: null,
-    title: 'Fitz Roy Summit Push', rating: '4.8',
-    desc: 'Un ascenso exigente apuntando a los icónicos picos de granito. Requiere experiencia alpina previa y condición física óptima.',
-    difficulty: 'Experto', diffBars: [true, true, true, true],
-    price: '$5,800', stagger: 'lg:mt-8', diffColor: 'bg-secondary',
+    img: LENHAS_IMG, badge: null,
+    title: 'Las Leñas Snow Trip', rating: '4.8',
+    desc: 'El mejor resort de nieve de Argentina. Pistas desafiantes, après-ski de primer nivel y una semana épica en la montaña mendocina.',
+    difficulty: 'Avanzado', diffBars: [true, true, true, false],
+    price: '$1,200', stagger: 'lg:mt-8', diffColor: 'bg-primary',
   },
 ]
 
@@ -103,7 +107,7 @@ export default function Home({ navigate }) {
                 Temporada de Invierno 2024
               </span>
               <h1 className="font-headline-xl text-headline-xl text-on-primary mb-sm leading-tight">Experiencias de Aventura en Argentina</h1>
-              <p className="font-body-lg text-body-lg text-primary-fixed mb-lg max-w-lg opacity-90">Ski, Surf y Naturaleza. Descubrí los rincones más increíbles con nuestra curaduría premium.</p>
+              <p className="font-body-lg text-body-lg text-primary-fixed mb-lg max-w-[512px] opacity-90">Ski, Surf y Naturaleza. Descubrí los rincones más increíbles con nuestra curaduría premium.</p>
               <div className="w-full bg-surface p-xs rounded-xl shadow-xl flex flex-col gap-xs mb-lg">
                 <div className="flex items-center gap-sm px-4 py-3 bg-surface-container-lowest rounded-lg">
                   <span className="material-symbols-outlined text-outline">location_on</span>
@@ -243,9 +247,9 @@ export default function Home({ navigate }) {
                   <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-[2px]">Expedición</label>
                   <select className="bg-transparent border-none outline-none font-body-md text-on-surface w-full appearance-none cursor-pointer truncate">
                     <option value="">Elegí tu aventura</option>
-                    <option value="glacier">Glacier Core Traverse — $3,200</option>
-                    <option value="desert">High Desert Solitude — $4,150</option>
-                    <option value="fitzroy">Fitz Roy Summit Push — $5,800</option>
+                    <option value="chapadmalal">Chapadmalal Surf Camp — $750</option>
+                    <option value="puntadiablo">Punta del Diablo Surf Trip — $900</option>
+                    <option value="laslenhas">Las Leñas Snow Trip — $1,200</option>
                   </select>
                 </div>
               </div>
@@ -308,7 +312,7 @@ export default function Home({ navigate }) {
         <section className="w-full py-[120px] px-margin-desktop bg-surface">
           <div className="max-w-7xl mx-auto flex flex-col">
             <div className="flex flex-col md:flex-row justify-between items-end mb-xl">
-              <div className="max-w-xl">
+              <div className="max-w-[576px]">
                 <span className="font-label-md text-primary uppercase tracking-[0.1em] flex items-center gap-2 mb-xs">
                   <span className="w-8 h-px bg-primary" /> Rutas Curadas
                 </span>

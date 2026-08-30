@@ -23,8 +23,9 @@ const inventory = [
 
 export default function AdminDashboard() {
   return (
-    <main className="pt-16 pb-20 min-h-screen bg-surface">
-      <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+    <main className="pt-16 md:pt-20 pb-20 md:pb-0 min-h-screen bg-surface">
+      {/* Mobile header - hidden on desktop */}
+      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
         <div className="h-16 flex items-center justify-between px-margin-mobile">
           <div className="flex items-center gap-base">
             <img alt="Upsala Trips Logo" className="h-8 w-auto object-contain" src={LOGO} />
@@ -34,14 +35,14 @@ export default function AdminDashboard() {
         </div>
       </header>
 
-      <div className="flex flex-col w-full gap-lg px-margin-mobile py-lg pb-xl">
+      <div className="flex flex-col w-full gap-lg px-margin-mobile md:px-margin-desktop py-lg pb-xl md:max-w-[1440px] md:mx-auto">
         <div className="flex flex-col gap-sm">
           <h1 className="font-headline-lg-mobile text-on-surface">Analytics Overview</h1>
           <p className="font-body-md text-on-surface-variant">Real-time performance metrics and inventory status.</p>
         </div>
 
-        {/* KPI grid */}
-        <div className="grid grid-cols-2 gap-sm">
+        {/* KPI grid - 2 cols mobile, 4 cols desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-sm">
           {kpis.map(k => (
             <div key={k.label} className={`${k.bg} rounded-[24px] p-md flex flex-col gap-xs relative overflow-hidden group shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md`}>
               <span className={`material-symbols-outlined ${k.color} mb-xs`} style={{ fontVariationSettings: "'FILL' 1" }}>{k.icon}</span>
@@ -123,6 +124,37 @@ export default function AdminDashboard() {
           <button className="w-full py-md text-primary font-label-md hover:bg-surface-container-high transition-colors text-center border-t border-outline-variant/10">
             View All Inventory
           </button>
+        </div>
+
+        {/* Desktop-only upcoming expeditions table */}
+        <div className="hidden md:block bg-surface-container rounded-[24px] shadow-sm overflow-hidden">
+          <div className="p-md bg-surface-container-high flex justify-between items-center">
+            <h2 className="font-headline-sm text-on-surface">Upcoming Expeditions</h2>
+          </div>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b border-outline-variant/20 font-label-md text-on-surface-variant">
+                <th className="p-md font-normal">EXPEDITION</th>
+                <th className="p-md font-normal">DATE</th>
+                <th className="p-md font-normal">CAPACITY</th>
+                <th className="p-md font-normal">STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                {name:'Las Leñas Freeride', date:'Aug 12-19', cap:'12/15', status:'High Demand', statusColor:'text-error'},
+                {name:'Patagonia Ice Trek', date:'Oct 12-18', cap:'8/12', status:'Open', statusColor:'text-primary'},
+                {name:'Atacama Desert Trek', date:'Nov 5-12', cap:'15/15', status:'Sold Out', statusColor:'text-on-surface-variant'},
+              ].map(exp => (
+                <tr key={exp.name} className="border-b border-outline-variant/10 hover:bg-surface-container/50 transition-colors">
+                  <td className="p-md font-label-md text-on-surface">{exp.name}</td>
+                  <td className="p-md font-body-md text-on-surface-variant">{exp.date}</td>
+                  <td className="p-md font-body-md text-on-surface">{exp.cap}</td>
+                  <td className={`p-md font-label-md ${exp.statusColor}`}>{exp.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </main>

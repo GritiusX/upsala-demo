@@ -60,8 +60,9 @@ import { useState } from 'react'
 
 export default function Home({ navigate }) {
   return (
-    <main className="pt-16 pb-20 min-h-screen bg-surface">
-      <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+    <main className="pt-16 md:pt-20 pb-20 md:pb-0 min-h-screen bg-surface">
+      {/* Mobile header - hidden on desktop (TopNav takes over) */}
+      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
         <div className="h-16 flex items-center justify-between px-margin-mobile">
           <div className="flex items-center gap-base">
             <img alt="Upsala Trips Logo" className="h-8 w-auto object-contain" src={LOGO} />
@@ -71,12 +72,41 @@ export default function Home({ navigate }) {
         </div>
       </header>
 
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full md:max-w-[1440px] md:mx-auto">
         {/* Hero */}
-        <div className="relative w-full h-[600px] flex items-center justify-center p-margin-mobile"
+        <div className="relative w-full h-[600px] md:h-[85vh] flex items-center justify-center p-margin-mobile"
           style={{ backgroundImage: `url('${HERO}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="absolute inset-0 bg-gradient-to-b from-inverse-surface/40 to-inverse-surface/80" />
-          <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[800px] mt-12">
+
+          {/* Desktop headline - hidden on mobile */}
+          <div className="hidden md:flex absolute inset-0 flex-col items-start justify-center px-margin-desktop">
+            <h1 className="font-headline-xl text-on-primary max-w-2xl mb-md">Venture Beyond the Expected.</h1>
+            <p className="font-body-lg text-on-primary/80 max-w-xl mb-lg">Curated extreme expeditions across South America's most dramatic landscapes.</p>
+            {/* Desktop search bar */}
+            <div className="flex items-center bg-surface rounded-xl shadow-lg overflow-hidden w-full max-w-2xl">
+              <div className="flex-1 px-md py-sm border-r border-outline-variant/30">
+                <p className="font-label-md text-on-surface-variant text-xs mb-1">DESTINATION</p>
+                <p className="font-body-md text-on-surface">Explore all expeditions</p>
+              </div>
+              <div className="flex-1 px-md py-sm border-r border-outline-variant/30">
+                <p className="font-label-md text-on-surface-variant text-xs mb-1">DATES</p>
+                <p className="font-body-md text-on-surface">Select dates</p>
+              </div>
+              <div className="flex-1 px-md py-sm">
+                <p className="font-label-md text-on-surface-variant text-xs mb-1">TRAVELERS</p>
+                <p className="font-body-md text-on-surface">2 guests</p>
+              </div>
+              <button
+                onClick={() => navigate('trips')}
+                className="bg-secondary text-on-secondary font-label-md px-lg py-md m-sm rounded-lg whitespace-nowrap"
+              >
+                FIND EXPEDITION
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile search widget - hidden on desktop */}
+          <div className="md:hidden relative z-10 flex flex-col items-center text-center w-full max-w-[800px] mt-12">
             <span className="inline-flex items-center gap-xs px-3 py-1 rounded-full bg-surface/20 backdrop-blur-md text-on-primary font-label-md mb-sm shadow-sm">
               <span className="material-symbols-outlined text-[16px]">ac_unit</span>
               Temporada de Invierno 2024
@@ -109,7 +139,7 @@ export default function Home({ navigate }) {
         </div>
 
         {/* Featured trips */}
-        <section className="py-xl px-margin-mobile bg-surface">
+        <section className="py-xl px-margin-mobile md:px-margin-desktop bg-surface">
           <div className="max-w-[1200px] mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-lg gap-sm">
               <div>
@@ -121,7 +151,7 @@ export default function Home({ navigate }) {
                 <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
               </button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
               {trips.map(trip => (
                 <button
                   key={trip.id}
@@ -169,7 +199,7 @@ export default function Home({ navigate }) {
         </section>
 
         {/* Testimonials */}
-        <section className="py-xl px-margin-mobile bg-surface-container-low">
+        <section className="py-xl px-margin-mobile md:px-margin-desktop bg-surface-container-low">
           <div className="max-w-[1200px] mx-auto text-center mb-lg">
             <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">La Comunidad Upsala</h2>
             <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Experiencias reales de viajeros que confiaron en nosotros.</p>
@@ -194,7 +224,7 @@ export default function Home({ navigate }) {
         </section>
 
         {/* FAQ */}
-        <section className="py-xl px-margin-mobile bg-surface">
+        <section className="py-xl px-margin-mobile md:px-margin-desktop bg-surface">
           <div className="max-w-[800px] mx-auto">
             <div className="text-center mb-lg">
               <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Preguntas Frecuentes</h2>
@@ -207,18 +237,20 @@ export default function Home({ navigate }) {
         </section>
 
         {/* Footer */}
-        <footer className="bg-inverse-surface text-inverse-on-surface pt-xl pb-32 px-margin-mobile flex flex-col items-center text-center">
-          <div className="w-12 h-12 mb-sm bg-surface/10 rounded-full flex items-center justify-center">
-            <span className="material-symbols-outlined text-[24px]">landscape</span>
+        <footer className="bg-inverse-surface text-inverse-on-surface pt-xl pb-32 md:pb-xl px-margin-mobile md:px-margin-desktop flex flex-col items-center text-center">
+          <div className="w-full max-w-[1200px] mx-auto flex flex-col items-center">
+            <div className="w-12 h-12 mb-sm bg-surface/10 rounded-full flex items-center justify-center">
+              <span className="material-symbols-outlined text-[24px]">landscape</span>
+            </div>
+            <h3 className="font-headline-sm text-headline-sm mb-xs">Upsala Trips</h3>
+            <p className="font-body-md text-on-tertiary-container mb-lg max-w-sm">Curaduría de aventuras premium en el sur del mundo.</p>
+            <div className="flex gap-md mb-lg">
+              <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">mail</span></a>
+              <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">call</span></a>
+              <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">public</span></a>
+            </div>
+            <p className="font-body-md text-[12px] text-on-tertiary-container/50">© 2024 Upsala Trips. Todos los derechos reservados.</p>
           </div>
-          <h3 className="font-headline-sm text-headline-sm mb-xs">Upsala Trips</h3>
-          <p className="font-body-md text-on-tertiary-container mb-lg max-w-sm">Curaduría de aventuras premium en el sur del mundo.</p>
-          <div className="flex gap-md mb-lg">
-            <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">mail</span></a>
-            <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">call</span></a>
-            <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">public</span></a>
-          </div>
-          <p className="font-body-md text-[12px] text-on-tertiary-container/50">© 2024 Upsala Trips. Todos los derechos reservados.</p>
         </footer>
       </div>
     </main>

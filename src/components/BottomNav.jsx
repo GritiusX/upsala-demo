@@ -10,7 +10,7 @@ const activeScreens = { home: 'home', trips: 'trips', detail: 'trips', checkout:
 export default function BottomNav({ current, navigate }) {
   const active = activeScreens[current] || current
   return (
-    <nav className="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]">
+    <nav className="md:hidden fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]">
       <div className="flex justify-between items-center h-20 px-margin-mobile">
         {tabs.map(t => (
           <button

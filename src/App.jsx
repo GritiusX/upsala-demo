@@ -7,6 +7,7 @@ import Checkout from './screens/Checkout'
 import MyDashboard from './screens/MyDashboard'
 import AdminDashboard from './screens/AdminDashboard'
 import BottomNav from './components/BottomNav'
+import TopNav from './components/TopNav'
 
 export default function App() {
   const [screen, setScreen] = useState('home')
@@ -27,6 +28,7 @@ export default function App() {
 
   return (
     <div className="bg-surface min-h-screen font-body-md text-on-surface">
+      <TopNav current={screen} navigate={navigate} />
       {renderScreen()}
       <BottomNav current={screen} navigate={navigate} />
     </div>

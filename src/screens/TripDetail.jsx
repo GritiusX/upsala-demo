@@ -45,8 +45,9 @@ export default function TripDetail({ navigate }) {
   const [liked, setLiked] = useState(false)
 
   return (
-    <main className="pt-16 min-h-screen bg-surface">
-      <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+    <main className="pt-16 md:pt-20 min-h-screen bg-surface">
+      {/* Mobile header - hidden on desktop */}
+      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
         <div className="h-16 flex items-center px-margin-mobile gap-md">
           <button className="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onClick={() => navigate('trips')}>
             <span className="material-symbols-outlined">arrow_back</span>
@@ -59,7 +60,7 @@ export default function TripDetail({ navigate }) {
         </div>
       </header>
 
-      <div className="flex flex-col w-full pb-24">
+      <div className="flex flex-col w-full pb-24 md:pb-0">
         {/* Gallery */}
         <div className="relative w-full h-[400px] bg-surface-container-high overflow-hidden">
           <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out hover:scale-105"
@@ -74,156 +75,217 @@ export default function TripDetail({ navigate }) {
           </div>
         </div>
 
-        <div className="px-margin-mobile -mt-6 relative z-10">
-          {/* Header card */}
-          <div className="bg-surface-container-lowest rounded-[24px] p-md shadow-[0_10px_20px_rgba(0,0,0,0.04)] mb-xl">
-            <div className="flex flex-col gap-sm">
-              <div className="flex justify-between items-start">
-                <h1 className="font-headline-lg-mobile text-on-surface">Las Leñas Snow Trip</h1>
-                <button
-                  onClick={() => setLiked(l => !l)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm ${liked ? 'bg-error text-on-error' : 'bg-surface-container text-primary hover:bg-primary-container'}`}
-                >
-                  <span className="material-symbols-outlined" style={liked ? { fontVariationSettings: "'FILL' 1" } : {}}>favorite</span>
+        {/* Desktop 12-col grid layout */}
+        <div className="md:grid md:grid-cols-12 md:gap-gutter md:px-margin-desktop md:py-lg md:max-w-[1440px] md:mx-auto w-full">
+          {/* Left content - 8 cols desktop, full mobile */}
+          <div className="md:col-span-8 px-margin-mobile md:px-0 -mt-6 md:mt-0 relative z-10">
+            {/* Header card */}
+            <div className="bg-surface-container-lowest rounded-[24px] p-md shadow-[0_10px_20px_rgba(0,0,0,0.04)] mb-xl">
+              <div className="flex flex-col gap-sm">
+                <div className="flex justify-between items-start">
+                  <h1 className="font-headline-lg-mobile text-on-surface">Las Leñas Snow Trip</h1>
+                  <button
+                    onClick={() => setLiked(l => !l)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm ${liked ? 'bg-error text-on-error' : 'bg-surface-container text-primary hover:bg-primary-container'}`}
+                  >
+                    <span className="material-symbols-outlined" style={liked ? { fontVariationSettings: "'FILL' 1" } : {}}>favorite</span>
+                  </button>
+                </div>
+                <div className="flex flex-wrap items-center gap-md text-on-surface-variant font-body-md">
+                  <div className="flex items-center gap-xs">
+                    <span className="material-symbols-outlined text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                    <span className="font-headline-sm text-on-surface text-[18px]">4.9</span>
+                    <span className="text-on-surface-variant">(24 reseñas)</span>
+                  </div>
+                  <div className="flex items-center gap-xs">
+                    <span className="material-symbols-outlined text-[20px]">location_on</span>
+                    <span>Mendoza, Argentina</span>
+                  </div>
+                  <div className="flex items-center gap-xs">
+                    <span className="material-symbols-outlined text-[20px]">schedule</span>
+                    <span>7 días / 6 noches</span>
+                  </div>
+                </div>
+                <div className="mt-sm flex items-center gap-sm">
+                  <span className="font-label-md text-on-surface-variant uppercase tracking-wider text-[12px]">Dificultad</span>
+                  <div className="flex gap-xs">
+                    {[1,2,3,4].map(i => <div key={i} className={`w-6 h-1.5 rounded-full ${i<=2 ? 'bg-primary' : 'bg-primary/20'}`} />)}
+                  </div>
+                  <span className="font-label-md text-on-surface-variant text-[12px]">Intermedio</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Description */}
+            <section className="mb-xl">
+              <h2 className="font-headline-sm text-on-surface mb-sm">La Experiencia</h2>
+              <div className="bg-surface-container rounded-xl p-md">
+                <p className="font-body-md text-on-surface-variant leading-relaxed">
+                  Sumérgete en la inmensidad de la Cordillera de los Andes con esta expedición premium a Las Leñas. Diseñado para aventureros que buscan combinar la adrenalina del esquí de alta montaña con el confort excepcional. Disfruta de pistas fuera de serie, nieve polvo inigualable y paisajes que te dejarán sin aliento.
+                </p>
+                <button className="mt-sm font-label-md text-primary flex items-center gap-xs hover:text-on-primary-fixed-variant transition-colors">
+                  <span>Leer más</span>
+                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </button>
               </div>
-              <div className="flex flex-wrap items-center gap-md text-on-surface-variant font-body-md">
-                <div className="flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="font-headline-sm text-on-surface text-[18px]">4.9</span>
-                  <span className="text-on-surface-variant">(24 reseñas)</span>
-                </div>
-                <div className="flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-[20px]">location_on</span>
-                  <span>Mendoza, Argentina</span>
-                </div>
-                <div className="flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-[20px]">schedule</span>
-                  <span>7 días / 6 noches</span>
+            </section>
+
+            {/* Itinerary */}
+            <section className="mb-xl">
+              <h2 className="font-headline-sm text-on-surface mb-md">Itinerario</h2>
+              <div className="flex flex-col gap-sm">
+                {days.map(d => <DayItem key={d.label} {...d} />)}
+              </div>
+            </section>
+
+            {/* Includes / Not includes */}
+            <section className="mb-xl grid grid-cols-1 md:grid-cols-2 gap-md">
+              <div className="bg-primary-fixed/20 rounded-xl p-md">
+                <h3 className="font-headline-sm text-[18px] text-on-surface mb-sm flex items-center gap-xs">
+                  <span className="material-symbols-outlined text-primary">check_circle</span> Qué incluye
+                </h3>
+                <ul className="flex flex-col gap-sm font-body-md text-on-surface-variant">
+                  {['Alojamiento 6 noches (Hotel 4*)', 'Pases de ski para 7 días', 'Clases grupales (Nivel intermedio)', 'Traslados in/out Mendoza'].map(item => (
+                    <li key={item} className="flex items-start gap-sm">
+                      <span className="material-symbols-outlined text-primary text-[20px] mt-0.5">check</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-error-container/20 rounded-xl p-md">
+                <h3 className="font-headline-sm text-[18px] text-on-surface mb-sm flex items-center gap-xs">
+                  <span className="material-symbols-outlined text-error">cancel</span> No incluye
+                </h3>
+                <ul className="flex flex-col gap-sm font-body-md text-on-surface-variant">
+                  {['Alquiler de equipo de ski/snowboard', 'Vuelos hacia/desde Mendoza', 'Comidas no especificadas'].map(item => (
+                    <li key={item} className="flex items-start gap-sm">
+                      <span className="material-symbols-outlined text-error text-[20px] mt-0.5">close</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+
+            {/* Guide */}
+            <section className="mb-xl">
+              <h2 className="font-headline-sm text-on-surface mb-md">Tu Guía</h2>
+              <div className="bg-surface-container-lowest rounded-[24px] p-md shadow-sm flex items-center gap-md">
+                <img className="w-20 h-20 rounded-full object-cover shadow-sm" src={GUIDE_IMG} alt="Juan García" />
+                <div>
+                  <h3 className="font-headline-sm text-[20px] text-on-surface">Juan García</h3>
+                  <p className="font-body-md text-on-surface-variant flex items-center gap-xs mt-xs">
+                    <span className="material-symbols-outlined text-[18px]">snowboarding</span>
+                    15 años de experiencia
+                  </p>
                 </div>
               </div>
-              <div className="mt-sm flex items-center gap-sm">
-                <span className="font-label-md text-on-surface-variant uppercase tracking-wider text-[12px]">Dificultad</span>
-                <div className="flex gap-xs">
-                  {[1,2,3,4].map(i => <div key={i} className={`w-6 h-1.5 rounded-full ${i<=2 ? 'bg-primary' : 'bg-primary/20'}`} />)}
+            </section>
+
+            {/* Map */}
+            <section className="mb-xl">
+              <h2 className="font-headline-sm text-on-surface mb-md">Ubicación</h2>
+              <div className="relative w-full h-[250px] rounded-xl overflow-hidden shadow-sm">
+                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${MAP_IMG}')` }} />
+                <div className="absolute bottom-md left-md bg-surface-container-lowest/90 backdrop-blur-sm rounded-lg p-sm shadow-md">
+                  <span className="font-label-md text-on-surface flex items-center gap-xs">
+                    <span className="material-symbols-outlined text-primary text-[18px]">location_on</span>
+                    Las Leñas Resort
+                  </span>
                 </div>
-                <span className="font-label-md text-on-surface-variant text-[12px]">Intermedio</span>
+              </div>
+            </section>
+
+            {/* Reviews */}
+            <section className="mb-xl">
+              <div className="flex items-center justify-between mb-md">
+                <h2 className="font-headline-sm text-on-surface">Reseñas</h2>
+                <button className="font-label-md text-primary">Ver todas</button>
+              </div>
+              <div className="flex overflow-x-auto gap-md pb-md snap-x">
+                {reviews.map(r => (
+                  <div key={r.name} className="min-w-[280px] bg-surface-container-lowest rounded-xl p-md shadow-sm snap-center">
+                    <div className="flex items-center gap-sm mb-sm">
+                      <img className="w-10 h-10 rounded-full object-cover" src={r.img} alt={r.name} />
+                      <div>
+                        <p className="font-label-md text-on-surface">{r.name}</p>
+                        <div className="flex text-secondary-container">
+                          {[1,2,3,4,5].map(i => (
+                            <span key={i} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: i <= Math.floor(r.stars) ? "'FILL' 1" : "'FILL' 0" }}>
+                              {i <= r.stars ? (i === Math.ceil(r.stars) && r.stars % 1 !== 0 ? 'star_half' : 'star') : 'star'}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="font-body-md text-on-surface-variant text-sm line-clamp-3">{r.text}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          {/* Desktop sticky booking sidebar - 4 cols, hidden on mobile */}
+          <div className="hidden md:block md:col-span-4">
+            <div className="sticky top-24 bg-surface-container-lowest rounded-2xl p-md shadow-xl flex flex-col gap-md">
+              <div className="flex justify-between items-end border-b border-surface-container-highest pb-sm">
+                <div className="flex flex-col">
+                  <span className="font-label-md text-on-surface-variant line-through">$3,200</span>
+                  <div className="flex items-baseline gap-xs">
+                    <span className="font-headline-lg text-primary">$2,850</span>
+                    <span className="font-body-md text-on-surface-variant">/ person</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-xs text-secondary bg-secondary-fixed px-sm py-xs rounded-lg">
+                  <span className="material-symbols-outlined text-sm">local_fire_department</span>
+                  <span className="font-label-md">High Demand</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-sm">
+                <div className="flex justify-between items-center py-xs">
+                  <span className="font-body-md text-on-surface-variant">Next Availability</span>
+                  <span className="font-label-md text-on-surface">Aug 12 - Aug 19</span>
+                </div>
+                <div className="flex justify-between items-center py-xs">
+                  <span className="font-body-md text-on-surface-variant">Group Size</span>
+                  <span className="font-label-md text-on-surface">3 spots left</span>
+                </div>
+              </div>
+              <div className="w-full bg-surface-container rounded-lg p-sm flex items-center justify-between cursor-pointer">
+                <div className="flex items-center gap-sm text-on-surface">
+                  <span className="material-symbols-outlined text-primary">calendar_month</span>
+                  <span className="font-body-md">Select Dates</span>
+                </div>
+                <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+              </div>
+              <div className="w-full bg-surface-container rounded-lg p-sm flex items-center justify-between cursor-pointer">
+                <div className="flex items-center gap-sm text-on-surface">
+                  <span className="material-symbols-outlined text-primary">person</span>
+                  <span className="font-body-md">2 Guests</span>
+                </div>
+                <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+              </div>
+              <button onClick={() => navigate('checkout')} className="w-full bg-secondary text-on-secondary font-headline-sm py-sm rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                Secure Spot
+              </button>
+              <p className="text-center font-label-md text-on-surface-variant text-xs">No charge until confirmation.</p>
+              <div className="pt-sm border-t border-surface-container-highest flex items-center justify-center gap-md text-on-surface-variant">
+                <div className="flex items-center gap-xs">
+                  <span className="material-symbols-outlined text-sm">verified_user</span>
+                  <span className="text-xs">Secure Booking</span>
+                </div>
+                <div className="flex items-center gap-xs">
+                  <span className="material-symbols-outlined text-sm">event_busy</span>
+                  <span className="text-xs">Free Cancellation (30d)</span>
+                </div>
               </div>
             </div>
           </div>
-
-          {/* Description */}
-          <section className="mb-xl">
-            <h2 className="font-headline-sm text-on-surface mb-sm">La Experiencia</h2>
-            <div className="bg-surface-container rounded-xl p-md">
-              <p className="font-body-md text-on-surface-variant leading-relaxed">
-                Sumérgete en la inmensidad de la Cordillera de los Andes con esta expedición premium a Las Leñas. Diseñado para aventureros que buscan combinar la adrenalina del esquí de alta montaña con el confort excepcional. Disfruta de pistas fuera de serie, nieve polvo inigualable y paisajes que te dejarán sin aliento.
-              </p>
-              <button className="mt-sm font-label-md text-primary flex items-center gap-xs hover:text-on-primary-fixed-variant transition-colors">
-                <span>Leer más</span>
-                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-              </button>
-            </div>
-          </section>
-
-          {/* Itinerary */}
-          <section className="mb-xl">
-            <h2 className="font-headline-sm text-on-surface mb-md">Itinerario</h2>
-            <div className="flex flex-col gap-sm">
-              {days.map(d => <DayItem key={d.label} {...d} />)}
-            </div>
-          </section>
-
-          {/* Includes / Not includes */}
-          <section className="mb-xl grid grid-cols-1 md:grid-cols-2 gap-md">
-            <div className="bg-primary-fixed/20 rounded-xl p-md">
-              <h3 className="font-headline-sm text-[18px] text-on-surface mb-sm flex items-center gap-xs">
-                <span className="material-symbols-outlined text-primary">check_circle</span> Qué incluye
-              </h3>
-              <ul className="flex flex-col gap-sm font-body-md text-on-surface-variant">
-                {['Alojamiento 6 noches (Hotel 4*)', 'Pases de ski para 7 días', 'Clases grupales (Nivel intermedio)', 'Traslados in/out Mendoza'].map(item => (
-                  <li key={item} className="flex items-start gap-sm">
-                    <span className="material-symbols-outlined text-primary text-[20px] mt-0.5">check</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-error-container/20 rounded-xl p-md">
-              <h3 className="font-headline-sm text-[18px] text-on-surface mb-sm flex items-center gap-xs">
-                <span className="material-symbols-outlined text-error">cancel</span> No incluye
-              </h3>
-              <ul className="flex flex-col gap-sm font-body-md text-on-surface-variant">
-                {['Alquiler de equipo de ski/snowboard', 'Vuelos hacia/desde Mendoza', 'Comidas no especificadas'].map(item => (
-                  <li key={item} className="flex items-start gap-sm">
-                    <span className="material-symbols-outlined text-error text-[20px] mt-0.5">close</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          {/* Guide */}
-          <section className="mb-xl">
-            <h2 className="font-headline-sm text-on-surface mb-md">Tu Guía</h2>
-            <div className="bg-surface-container-lowest rounded-[24px] p-md shadow-sm flex items-center gap-md">
-              <img className="w-20 h-20 rounded-full object-cover shadow-sm" src={GUIDE_IMG} alt="Juan García" />
-              <div>
-                <h3 className="font-headline-sm text-[20px] text-on-surface">Juan García</h3>
-                <p className="font-body-md text-on-surface-variant flex items-center gap-xs mt-xs">
-                  <span className="material-symbols-outlined text-[18px]">snowboarding</span>
-                  15 años de experiencia
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* Map */}
-          <section className="mb-xl">
-            <h2 className="font-headline-sm text-on-surface mb-md">Ubicación</h2>
-            <div className="relative w-full h-[250px] rounded-xl overflow-hidden shadow-sm">
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${MAP_IMG}')` }} />
-              <div className="absolute bottom-md left-md bg-surface-container-lowest/90 backdrop-blur-sm rounded-lg p-sm shadow-md">
-                <span className="font-label-md text-on-surface flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-primary text-[18px]">location_on</span>
-                  Las Leñas Resort
-                </span>
-              </div>
-            </div>
-          </section>
-
-          {/* Reviews */}
-          <section className="mb-xl">
-            <div className="flex items-center justify-between mb-md">
-              <h2 className="font-headline-sm text-on-surface">Reseñas</h2>
-              <button className="font-label-md text-primary">Ver todas</button>
-            </div>
-            <div className="flex overflow-x-auto gap-md pb-md snap-x">
-              {reviews.map(r => (
-                <div key={r.name} className="min-w-[280px] bg-surface-container-lowest rounded-xl p-md shadow-sm snap-center">
-                  <div className="flex items-center gap-sm mb-sm">
-                    <img className="w-10 h-10 rounded-full object-cover" src={r.img} alt={r.name} />
-                    <div>
-                      <p className="font-label-md text-on-surface">{r.name}</p>
-                      <div className="flex text-secondary-container">
-                        {[1,2,3,4,5].map(i => (
-                          <span key={i} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: i <= Math.floor(r.stars) ? "'FILL' 1" : "'FILL' 0" }}>
-                            {i <= r.stars ? (i === Math.ceil(r.stars) && r.stars % 1 !== 0 ? 'star_half' : 'star') : 'star'}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <p className="font-body-md text-on-surface-variant text-sm line-clamp-3">{r.text}</p>
-                </div>
-              ))}
-            </div>
-          </section>
         </div>
 
-        {/* Sticky booking */}
-        <div className="fixed bottom-0 left-0 right-0 bg-surface-container-lowest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.08)] p-md z-40 pb-safe">
+        {/* Mobile sticky booking bar - hidden on desktop */}
+        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-lowest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.08)] p-md z-40 pb-safe">
           <div className="max-w-[768px] mx-auto flex items-center justify-between">
             <div className="flex flex-col">
               <span className="font-headline-md text-on-surface">$1200 <span className="font-body-md text-on-surface-variant">/ persona</span></span>

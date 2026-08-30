@@ -406,8 +406,8 @@ export default function Checkout({ navigate }) {
               {/* Summary body */}
               <div className="p-lg flex flex-col gap-md">
                 <div>
-                  <h3 className="font-headline-sm text-on-surface">Fitz Roy Trek</h3>
-                  <p className="font-body-md text-on-surface-variant">El Chaltén, Argentina</p>
+                  <h3 className="font-headline-sm text-on-surface">Las Leñas Snow Trip</h3>
+                  <p className="font-body-md text-on-surface-variant">Mendoza, Argentina</p>
                 </div>
 
                 <div className="flex flex-col gap-xs">

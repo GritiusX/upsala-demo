@@ -18,9 +18,9 @@ const kpis = [
 ]
 
 const expeditions = [
-  { img: TRIP1_IMG, name: 'Perito Moreno Traverse', date: 'Nov 12', spots: '18/20', revenue: '$32,400', status: 'Confirmado' },
-  { img: TRIP2_IMG, name: 'Fitz Roy Summit Push', date: 'Nov 18', spots: '12/15', revenue: '$87,000', status: 'Confirmado' },
-  { img: TRIP3_IMG, name: 'Lake Argentino Kayak', date: 'Dec 01', spots: '8/12', revenue: '$11,400', status: 'Abierto' },
+  { img: TRIP1_IMG, name: 'Chapadmalal Surf Camp', date: '10 Nov', spots: '18/20', revenue: '$32,400', status: 'Confirmado' },
+  { img: TRIP2_IMG, name: 'Las Leñas Snow Trip', date: '15 Jul', spots: '12/15', revenue: '$87,000', status: 'Confirmado' },
+  { img: TRIP3_IMG, name: 'Punta del Diablo Surf Trip', date: '12 Oct', spots: '8/12', revenue: '$11,400', status: 'Abierto' },
 ]
 
 const chartData = [65000, 72000, 68000, 95000, 88000, 124500]

@@ -104,7 +104,7 @@ export default function TripDetail({ navigate }) {
             <div className="flex items-center gap-base flex-1 min-w-0">
               <img src={LOGO} alt="Logo" className="h-6 w-auto shrink-0" />
               <span className="font-label-md text-on-surface truncate">
-                Las Leñas Freeride Circuit
+                Las Leñas Snow Trip
               </span>
             </div>
             <img
@@ -148,7 +148,7 @@ export default function TripDetail({ navigate }) {
         <div className="px-margin-mobile py-lg pb-24 flex flex-col gap-lg">
           {/* Title block */}
           <div className="flex flex-col gap-sm">
-            <h1 className="font-headline-lg text-on-surface">Las Leñas Freeride Circuit</h1>
+            <h1 className="font-headline-lg text-on-surface">Las Leñas Snow Trip</h1>
             <p className="font-body-md text-on-surface-variant">Mendoza, Argentina</p>
             <div className="flex items-center gap-sm">
               <StarRating stars={4.9} />
@@ -269,7 +269,7 @@ export default function TripDetail({ navigate }) {
 
             {/* Title block */}
             <div className="flex flex-col gap-sm">
-              <h1 className="font-headline-lg text-on-surface">Las Leñas Freeride Circuit</h1>
+              <h1 className="font-headline-lg text-on-surface">Las Leñas Snow Trip</h1>
               <p className="font-body-lg text-on-surface-variant">Mendoza, Argentina</p>
               <div className="flex items-center gap-sm">
                 <StarRating stars={4.9} size={20} />

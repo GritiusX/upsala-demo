@@ -5,7 +5,7 @@ const LOGO = 'https://lh3.googleusercontent.com/aida/AEtjO1V3YTd0EZhkovLBfRz0CmD
 const IMG1 = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCaV0JGHHOtYHrMQPiFo9YVqRlCMjpWgPOG-VNGrpB-aZo3IAOhq56uJoZo8LrNrA8-qVu0fyiwah6mg1BkwsbcExWyhy7wo9GkMSx-3LydPlGk_NzH-intwu5-_bc7rbSfEhDwIvKquXiNDfiaJQiYIHZ4LGoTMdMacLiPBzJDkiarebFoi0dC3QQDBhCeqfcJ9MlvewoN7IHAPEA7FJEE6KwScf8Re5REcbEDVRALLi7izcFAYo5xYg'
 const IMG2 = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCdu0Jncvq051USWK0M5Y-EQo6BeZ_PhVMx8_-Dluci_Rdl_l8Zw5qRt6VBKjPgiIpVDWru1H1zSv4eT_FJ9Fzr3SnCBLU0M4I-zRTna1F3if7JURXuc22I_sbBBir-bcb_L7W82UqizILVtodYVmNI0WeSLjk3rMHuFUo81FNfDucliERFh5mgC9aiYByOcsTmbCAn9dAjnJXY5_SD62yLs5kheya_o4Y_tyze_9iK1UU600xYSSLcqg'
 
-const DESTINOS = ['Las Leñas Snow Trip', 'Patagonia Ice Trek', 'Punta del Diablo Surf', 'Chapadmalal Surf Camp', 'Fitz Roy Summit Push']
+const DESTINOS = ['Las Leñas Snow Trip', 'Punta del Diablo Surf Trip', 'Chapadmalal Surf Camp']
 const RECURSOS  = ['Cómo funciona', 'Protocolo de seguridad', 'Guías y expertos', 'Blog de aventuras', 'Preguntas frecuentes']
 const EMPRESA   = ['Sobre nosotros', 'Prensa', 'Trabaja con nosotros', 'Contacto', 'Términos y condiciones']
 

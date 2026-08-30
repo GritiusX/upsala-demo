@@ -1,259 +1,490 @@
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
+import Footer from '../components/Footer'
 
 const LOGO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCIZThyURbLNJntYqPuQvOAuvya3orzxFpi_w9ghGDaCk5yRoK-lDecvkiqqf4oLJSyeMzm2753hAHMFeUls5PCnbUguUf6t9XLF2vqgPp7aydZbjPMAJugicO1w7BTAQPqcK75k_KWJ3YbBLlObuJZsFIL0jf_QMRf0beqJhtWLa9KHGohORxhG2TOb_UYBYGaOtBdgG2DWb5Fs7bmgiZo6k0zO4KfWbaSgkU5cMCV1XEVk8g4mNSzhg'
 const PROFILE = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCheYdsipuktbVlX2BhtCH4yMCb36Wb9zyFxPbyT4VZnfR8GvujMu8CP6O_6c65y8Qzduyt2AiWXKQMq9efrp5noWo3qB32W-psprfXXnKI201YthVa3guEHHbdbksN7CyXuQmIbKT48iFnxwAvbLAcVssl07ztWXvEhvcO7xu9Pk9odT0J53dmjpGX6NelfC89MAC0MI88cMvUT5z3n9fXAOWfhsLtWqdfdv3SozR3ontT0FJMFCrV_Q'
-const TRIP_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0wPt8O6EHTOlqEUuS_uIf8XFE6AzhEhe6MXem7AYYaTzvdlQDSt5hJNT2MSALJni7zlyDxiAoQnOowlmuHQFpKTv_JR0cXV348gYFQAOWSwjv-KPkPXVKUdv2cFcrLHSSfRv96D5SYFPVSJLyFjr385tQIkDtDJ8SGbrPzdJqgzy4PYUEfxuB2kWyXB3kI5xlgZb3UFHKpkiVMUoLFDcq3ARJphyZRLrhHgT4IgdOlulqpBXYJ2yZcQ'
 const CHECKOUT_HERO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAfJ5s7hVXcqsp059dApfeVNBDcFfCwNGVyaoOUPdeQP31BYceX0aOxr7AZN89DZ7OcokcFfJfqU0c0oZakat6i_EwmdT1gug_TYR3iznoFDd4YFAKzuppBympkhwKKHQ3hjwVP0TsnAWwI4ZHSZXWBlv10JJZIG97-DQ70Qu28ChOt9wVBRxtDJv5aiatVkgnPPJE2r1ayJkkDx17TjEjUaEOxAMxBjRDBKfCWK56iIXubbykTCIlC-g'
 const SUMMARY_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDNRDHbd6ppGTNu70zEBMQfQaeSWJ3zKZeSdBJutkJBusjCSZMJlkTIHmB6kqh5x31CBrz_Bxd7azTctkMIHUoes5S8U5zGueBshH-J0CCCSPdrwcVSme5MW38GSxy_RPu_lJdI05k820wULAMXvWgLnEI4TLkIjH5emfK7bsKxmazjHNfxH4WELibQ6KBcT6QJ-u3b9UZ--LyFUIps8wW9fz9gjgZ4-FIZiJV5GCjFaMC7E-Ux84wmig'
-
-const plans = [
-  { id: 'full', label: 'Pago Completo', sub: 'Asegura tu lugar de inmediato.', price: '$1,380', color: 'primary' },
-  { id: 'half', label: 'Seña (50%)', sub: 'Reserva ahora, paga el resto 30 días antes del viaje.', price: '$690', color: 'primary' },
-  { id: 'sub', label: 'Suscripción Mensual', sub: 'Plan de 12 cuotas. Ahorra un 20% en el total ($1,104).', price: '$92/mes', old: '$115/mes', badge: 'Recomendado -20%', color: 'secondary' },
-]
+const TRIP_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0wPt8O6EHTOlqEUuS_uIf8XFE6AzhEhe6MXem7AYYaTzvdlQDSt5hJNT2MSALJni7zlyDxiAoQnOowlmuHQFpKTv_JR0cXV348gYFQAOWSwjv-KPkPXVKUdv2cFcrLHSSfRv96D5SYFPVSJLyFjr385tQIkDtDJ8SGbrPzdJqgzy4PYUEfxuB2kWyXB3kI5xlgZb3UFHKpkiVMUoLFDcq3ARJphyZRLrhHgT4IgdOlulqpBXYJ2yZcQ'
 
 export default function Checkout({ navigate }) {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [cardNumber, setCardNumber] = useState('')
+  const [expiry, setExpiry] = useState('')
+  const [cvv, setCvv] = useState('')
   const [plan, setPlan] = useState('full')
-  const [exp, setExp] = useState('')
-  const [showModal, setShowModal] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setShowModal(true)
+    setShowConfirm(true)
   }
 
   return (
-    <main className="pt-16 md:pt-0 min-h-screen bg-surface">
-      {/* Mobile header - hidden on desktop */}
-      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
-        <div className="h-16 flex items-center px-margin-mobile gap-md">
-          <button className="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onClick={() => navigate('detail')}>
-            <span className="material-symbols-outlined">arrow_back</span>
-          </button>
-          <div className="flex items-center gap-base flex-1">
-            <img alt="Logo" className="h-6 w-auto" src={LOGO} />
-            <span className="font-headline-sm text-headline-sm text-primary truncate">Booking Checkout</span>
-          </div>
-          <img alt="Profile" className="w-8 h-8 rounded-full object-cover" src={PROFILE} />
-        </div>
-      </header>
+    <main className="min-h-screen bg-surface-container-low">
 
-      {/* Desktop page header */}
-      <div className="hidden md:block relative w-full h-64 bg-surface-container overflow-hidden rounded-b-3xl">
-        <div className="absolute inset-0 bg-cover bg-center opacity-60"
-          style={{ backgroundImage: `url('${CHECKOUT_HERO}')` }} />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-        <div className="absolute bottom-md left-margin-desktop">
-          <p className="font-label-md text-primary tracking-widest uppercase mb-xs">Step 3 of 3</p>
-          <h1 className="font-headline-xl text-on-surface">Secure Checkout</h1>
-        </div>
-      </div>
+      {/* ── MOBILE LAYOUT ──────────────────────────────────────────────── */}
+      <div className="md:hidden">
 
-      {/* Main content area */}
-      <div className="w-full md:max-w-[1440px] md:mx-auto md:px-margin-desktop md:py-xl md:grid md:grid-cols-12 md:gap-gutter px-margin-mobile">
-        {/* Left col - form */}
-        <div className="md:col-span-8 flex flex-col gap-lg">
-          <div className="flex flex-col gap-base pt-lg md:pt-0 text-center md:text-left">
-            <h1 className="md:hidden font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Completa tu Aventura</h1>
-            <p className="font-body-md text-body-md text-on-surface-variant">Solo unos pasos más para asegurar tu lugar en la nieve.</p>
-          </div>
-
-          {/* Step 1: Summary */}
-          <section className="flex flex-col gap-md">
-            <div className="flex items-center gap-base">
-              <div className="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md">1</div>
-              <h2 className="font-headline-sm text-headline-sm text-on-surface">Resumen de la Expedición</h2>
+        {/* Fixed mobile header */}
+        <header className="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl border-b border-outline-variant">
+          <div className="h-16 flex items-center px-margin-mobile gap-md">
+            <button
+              className="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors"
+              onClick={() => navigate('detail')}
+            >
+              <span className="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div className="flex items-center gap-sm flex-1 min-w-0">
+              <img src={LOGO} alt="Upsala Logo" className="h-6 w-auto shrink-0" />
+              <span className="font-headline-sm text-on-surface truncate">Checkout</span>
             </div>
-            <div className="bg-surface-container rounded-[24px] p-md flex flex-col gap-md shadow-sm">
-              <div className="flex gap-4 items-center">
-                <div className="w-20 h-20 rounded-xl bg-cover bg-center shrink-0" style={{ backgroundImage: `url('${TRIP_IMG}')` }} />
-                <div className="flex flex-col gap-xs flex-1 min-w-0">
-                  <span className="font-label-md text-label-md text-secondary">Nieve & Adrenalina</span>
-                  <h3 className="font-headline-sm text-headline-sm text-on-surface truncate">Las Leñas Snow Trip</h3>
-                  <div className="flex items-center gap-xs text-on-surface-variant font-body-md">
-                    <span className="material-symbols-outlined text-[18px]">calendar_month</span>
-                    <span>Julio 15-22, 2026</span>
-                  </div>
+            <img
+              src={PROFILE}
+              alt="Profile"
+              className="w-9 h-9 rounded-full object-cover shrink-0"
+            />
+          </div>
+        </header>
+
+        {/* Mobile content */}
+        <div className="pt-16 pb-24 px-margin-mobile flex flex-col gap-lg">
+
+          {/* Progress indicator */}
+          <div className="flex items-center justify-center gap-xs pt-lg">
+            {[1, 2, 3].map((step) => (
+              <div key={step} className="flex items-center gap-xs">
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <span className="font-label-md text-white text-sm">{step}</span>
                 </div>
+                {step < 3 && (
+                  <div className="w-8 h-0.5 bg-primary" />
+                )}
               </div>
-              <div className="h-px w-full bg-outline-variant/30" />
-              <div className="flex justify-between items-end">
-                <span className="font-body-lg text-body-lg text-on-surface-variant">Total Estimado</span>
-                <span className="font-headline-md text-headline-md text-primary">$1,380 <span className="text-body-md font-body-md text-on-surface-variant align-baseline">USD</span></span>
-              </div>
-            </div>
-          </section>
+            ))}
+          </div>
+          <p className="text-center font-body-md text-on-surface-variant -mt-sm">Step 3 of 3</p>
 
-          {/* Step 2: Payment plan */}
+          {/* Step 1 – Your Details */}
           <section className="flex flex-col gap-md">
-            <div className="flex items-center gap-base">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-label-md text-label-md transition-colors ${plan !== 'full' ? 'bg-primary text-on-primary' : 'bg-surface-container-high text-on-surface'}`}>2</div>
-              <h2 className="font-headline-sm text-headline-sm text-on-surface">Plan de Pago</h2>
-            </div>
-            <div className="flex flex-col gap-sm">
-              {plans.map(p => (
-                <label key={p.id} className={`relative flex p-md rounded-xl cursor-pointer hover:-translate-y-[2px] transition-all shadow-[0_4px_20px_rgba(0,0,0,0.02)] border-[1.5px] ${plan === p.id ? `border-${p.color} bg-${p.color === 'secondary' ? 'secondary-fixed/20' : 'primary-fixed/20'}` : 'border-transparent bg-surface-container'}`}>
-                  {p.badge && (
-                    <div className={`absolute top-0 right-0 bg-secondary text-on-secondary px-3 py-1 rounded-bl-lg font-label-md text-[10px] uppercase tracking-wider`}>{p.badge}</div>
-                  )}
-                  <input
-                    type="radio" name="payment_plan" value={p.id} checked={plan === p.id}
-                    onChange={() => setPlan(p.id)} className="sr-only"
+            <h2 className="font-headline-sm text-on-surface">Step 1 — Your Details</h2>
+            <form className="flex flex-col gap-md" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-2 gap-sm">
+                <div className="flex flex-col gap-xs">
+                  <Label htmlFor="m-firstName" className="font-label-md text-on-surface">First Name</Label>
+                  <Input
+                    id="m-firstName"
+                    placeholder="Jane"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
                   />
-                  <div className="flex-1 flex flex-col gap-xs pr-8 mt-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-label-md text-label-md text-on-surface">{p.label}</span>
-                      <div className="flex flex-col items-end">
-                        {p.old && <span className="font-body-md text-body-md text-on-surface-variant line-through text-[12px]">{p.old}</span>}
-                        <span className={`font-headline-sm text-headline-sm text-${p.color}`}>{p.price}</span>
-                      </div>
-                    </div>
-                    <p className="font-body-md text-body-md text-on-surface-variant">{p.sub}</p>
-                  </div>
-                  <div className={`w-5 h-5 rounded-full border-[2px] absolute right-md top-md flex items-center justify-center transition-colors ${plan === p.id ? `border-${p.color} bg-${p.color}` : 'border-outline-variant'}`}>
-                    {plan === p.id && <div className="w-2 h-2 rounded-full bg-on-primary" />}
-                  </div>
-                </label>
-              ))}
-            </div>
-          </section>
-
-          {/* Step 3: Form */}
-          <section className="flex flex-col gap-md pb-safe md:pb-xl">
-            <div className="flex items-center gap-base">
-              <div className="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-label-md text-label-md">3</div>
-              <h2 className="font-headline-sm text-headline-sm text-on-surface">Datos del Pasajero</h2>
-            </div>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-md">
-              {[
-                { label: 'Nombre Completo', type: 'text', icon: 'person', placeholder: 'Ej: Juan Pérez' },
-                { label: 'Correo Electrónico', type: 'email', icon: 'mail', placeholder: 'tu@email.com' },
-                { label: 'Teléfono', type: 'tel', icon: 'phone_iphone', placeholder: '+54 9 11 1234-5678' },
-              ].map(f => (
-                <div key={f.label} className="flex flex-col gap-sm">
-                  <label className="font-label-md text-label-md text-on-surface">{f.label}</label>
-                  <div className="relative">
-                    <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">{f.icon}</span>
-                    <input required type={f.type} placeholder={f.placeholder}
-                      className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-[40px] pr-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50" />
-                  </div>
                 </div>
-              ))}
+                <div className="flex flex-col gap-xs">
+                  <Label htmlFor="m-lastName" className="font-label-md text-on-surface">Last Name</Label>
+                  <Input
+                    id="m-lastName"
+                    placeholder="Doe"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-xs">
+                <Label htmlFor="m-email" className="font-label-md text-on-surface">Email</Label>
+                <Input
+                  id="m-email"
+                  type="email"
+                  placeholder="jane@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="flex flex-col gap-xs">
+                <Label htmlFor="m-phone" className="font-label-md text-on-surface">Phone</Label>
+                <Input
+                  id="m-phone"
+                  type="tel"
+                  placeholder="+1 555 000 0000"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
 
+              {/* Step 2 – Payment */}
+              <h2 className="font-headline-sm text-on-surface mt-sm">Step 2 — Payment</h2>
+
+              {/* Payment option cards */}
               <div className="flex flex-col gap-sm">
-                <label className="font-label-md text-label-md text-on-surface">Nivel de Experiencia en Nieve</label>
-                <div className="grid grid-cols-3 gap-xs">
-                  {['Principiante', 'Intermedio', 'Avanzado'].map(level => (
-                    <label key={level} className="relative cursor-pointer text-center">
-                      <input type="radio" name="experience" value={level} checked={exp === level} onChange={() => setExp(level)} className="sr-only" />
-                      <div className={`py-sm px-xs rounded-lg border font-body-md text-body-md transition-colors ${exp === level ? 'border-primary bg-primary-fixed text-on-primary-fixed' : 'border-transparent bg-surface-container text-on-surface-variant'}`}>
-                        {level}
-                      </div>
-                    </label>
-                  ))}
+                {/* Full Payment */}
+                <button
+                  type="button"
+                  onClick={() => setPlan('full')}
+                  className={cn(
+                    'w-full text-left p-md rounded-xl border-2 transition-all',
+                    plan === 'full'
+                      ? 'border-primary bg-primary/5'
+                      : 'border-outline-variant bg-surface-container-lowest'
+                  )}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-label-md text-on-surface">Full Payment</span>
+                    <span className="font-headline-sm text-primary">$3,400</span>
+                  </div>
+                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pay in full and secure your spot immediately.</p>
+                </button>
+
+                {/* Deposit */}
+                <button
+                  type="button"
+                  onClick={() => setPlan('deposit')}
+                  className={cn(
+                    'w-full text-left p-md rounded-xl border-2 transition-all relative',
+                    plan === 'deposit'
+                      ? 'border-primary bg-primary/5'
+                      : 'border-outline-variant bg-surface-container-lowest'
+                  )}
+                >
+                  <Badge className="absolute -top-2 right-md bg-primary text-white font-label-md text-xs">
+                    Recommended
+                  </Badge>
+                  <div className="flex items-center justify-between">
+                    <span className="font-label-md text-on-surface">Reserve with Deposit</span>
+                    <span className="font-headline-sm text-primary">$850</span>
+                  </div>
+                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pay 10% now, the rest before your trip.</p>
+                </button>
+              </div>
+
+              {/* Card fields */}
+              <div className="flex flex-col gap-sm">
+                <div className="flex flex-col gap-xs">
+                  <Label htmlFor="m-card" className="font-label-md text-on-surface">Card Number</Label>
+                  <Input
+                    id="m-card"
+                    placeholder="1234 5678 9012 3456"
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                    maxLength={19}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-sm">
+                  <div className="flex flex-col gap-xs">
+                    <Label htmlFor="m-expiry" className="font-label-md text-on-surface">Expiry</Label>
+                    <Input
+                      id="m-expiry"
+                      placeholder="MM/YY"
+                      value={expiry}
+                      onChange={(e) => setExpiry(e.target.value)}
+                      maxLength={5}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Label htmlFor="m-cvv" className="font-label-md text-on-surface">CVV</Label>
+                    <Input
+                      id="m-cvv"
+                      placeholder="123"
+                      value={cvv}
+                      onChange={(e) => setCvv(e.target.value)}
+                      maxLength={4}
+                    />
+                  </div>
                 </div>
               </div>
 
-              <label className="flex gap-sm items-start cursor-pointer mt-sm">
-                <input required type="checkbox" className="mt-1 w-5 h-5 rounded border-outline-variant checked:bg-primary checked:border-primary transition-colors focus:outline-none" />
-                <span className="font-body-md text-body-md text-on-surface-variant">
-                  Acepto los <span className="text-primary underline">Términos y Condiciones</span> y la Política de Cancelación de Upsala Trips.
-                </span>
-              </label>
-
-              <div className="flex flex-col gap-sm mt-lg">
-                <button type="submit" className="w-full bg-[#009EE3] hover:bg-[#008ACA] text-white rounded-xl py-4 px-md font-label-md text-label-md flex items-center justify-center gap-sm transition-all shadow-[0_4px_12px_rgba(0,158,227,0.2)] hover:-translate-y-[2px]">
-                  <span className="material-symbols-outlined">payments</span>
-                  Pagar con Mercado Pago
-                </button>
-                <button type="submit" className="w-full bg-[#3D3AFA] hover:bg-[#2B29CC] text-white rounded-xl py-4 px-md font-label-md text-label-md flex items-center justify-center gap-sm transition-all shadow-[0_4px_12px_rgba(61,58,250,0.2)] hover:-translate-y-[2px]">
-                  <span className="material-symbols-outlined">credit_card</span>
-                  Suscripción vía Rebill
-                </button>
-              </div>
+              <Button type="submit" className="w-full" size="lg">
+                Complete Booking
+              </Button>
             </form>
           </section>
         </div>
+      </div>
 
-        {/* Right col - order summary (desktop only) */}
-        <div className="hidden md:block md:col-span-4">
-          <div className="sticky top-[100px] bg-surface-container-lowest rounded-2xl shadow-xl overflow-hidden">
-            {/* Trip image */}
-            <div className="h-48 relative w-full overflow-hidden">
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${SUMMARY_IMG}')` }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/20 to-transparent" />
-            </div>
-            {/* Summary content */}
-            <div className="p-md flex flex-col gap-md">
-              <div>
-                <p className="font-label-md text-primary tracking-widest uppercase text-xs mb-1">Expedition</p>
-                <h3 className="font-headline-sm text-on-surface">Las Leñas Snow Trip</h3>
-              </div>
-              <div className="flex flex-col gap-sm p-sm bg-surface-container-low rounded-xl">
-                <div className="flex items-center gap-sm">
-                  <span className="material-symbols-outlined text-outline">calendar_month</span>
+      {/* ── DESKTOP LAYOUT ─────────────────────────────────────────────── */}
+      <div className="hidden md:block pt-0">
+
+        {/* Hero banner */}
+        <div className="relative w-full h-64 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${CHECKOUT_HERO}')` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 px-margin-desktop pb-lg">
+            <p className="font-label-md text-white/70 uppercase tracking-widest mb-xs">Step 3 of 3</p>
+            <h1 className="font-headline-xl text-white">Secure Checkout</h1>
+          </div>
+        </div>
+
+        {/* 12-col grid */}
+        <div className="max-w-[1440px] mx-auto px-margin-desktop py-xl grid grid-cols-12 gap-gutter">
+
+          {/* Left 8 cols */}
+          <div className="col-span-8 flex flex-col gap-xl">
+
+            {/* Step 1 – Traveler Details */}
+            <section className="flex flex-col gap-md">
+              <h2 className="font-headline-md text-on-surface">Step 1 — Traveler Details</h2>
+              <Card className="bg-surface-container-lowest border-outline-variant shadow-sm">
+                <CardContent className="p-lg">
+                  <form className="grid grid-cols-2 gap-md">
+                    <div className="flex flex-col gap-xs">
+                      <Label htmlFor="d-firstName" className="font-label-md text-on-surface">First Name</Label>
+                      <Input
+                        id="d-firstName"
+                        placeholder="Jane"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-xs">
+                      <Label htmlFor="d-lastName" className="font-label-md text-on-surface">Last Name</Label>
+                      <Input
+                        id="d-lastName"
+                        placeholder="Doe"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-span-2 flex flex-col gap-xs">
+                      <Label htmlFor="d-email" className="font-label-md text-on-surface">Email</Label>
+                      <Input
+                        id="d-email"
+                        type="email"
+                        placeholder="jane@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-span-2 flex flex-col gap-xs">
+                      <Label htmlFor="d-phone" className="font-label-md text-on-surface">Phone</Label>
+                      <Input
+                        id="d-phone"
+                        type="tel"
+                        placeholder="+1 555 000 0000"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Step 2 – Payment Method */}
+            <section className="flex flex-col gap-md">
+              <h2 className="font-headline-md text-on-surface">Step 2 — Payment Method</h2>
+
+              {/* Payment method selectors */}
+              <div className="grid grid-cols-2 gap-md">
+                {/* Mercado Pago */}
+                <button
+                  type="button"
+                  onClick={() => setPlan('full')}
+                  className={cn(
+                    'flex flex-col items-center gap-sm p-lg rounded-xl border-2 transition-all text-center',
+                    plan === 'full'
+                      ? 'border-primary bg-primary/5'
+                      : 'border-outline-variant bg-surface-container-lowest hover:border-primary/40'
+                  )}
+                >
+                  <span className="material-symbols-outlined text-3xl text-primary">account_balance_wallet</span>
                   <div>
-                    <span className="font-body-md text-on-surface">Julio 15-22, 2026</span>
-                    <span className="font-label-md text-on-surface-variant text-xs block">7 Days</span>
+                    <p className="font-label-md text-on-surface">Mercado Pago</p>
+                    <p className="font-body-md text-on-surface-variant text-sm">Full Payment $3,400</p>
+                  </div>
+                </button>
+
+                {/* Credit/Debit Card */}
+                <button
+                  type="button"
+                  onClick={() => setPlan('deposit')}
+                  className={cn(
+                    'flex flex-col items-center gap-sm p-lg rounded-xl border-2 transition-all text-center',
+                    plan === 'deposit'
+                      ? 'border-primary bg-primary/5'
+                      : 'border-outline-variant bg-surface-container-lowest hover:border-primary/40'
+                  )}
+                >
+                  <span className="material-symbols-outlined text-3xl text-primary">credit_card</span>
+                  <div>
+                    <p className="font-label-md text-on-surface">Credit / Debit Card</p>
+                    <p className="font-body-md text-on-surface-variant text-sm">Reserve with Deposit $850</p>
+                  </div>
+                </button>
+              </div>
+
+              {/* Card form */}
+              <Card className="bg-surface-container-lowest border-outline-variant shadow-sm">
+                <CardContent className="p-lg">
+                  <div className="grid grid-cols-2 gap-md">
+                    <div className="col-span-2 flex flex-col gap-xs">
+                      <Label htmlFor="d-card" className="font-label-md text-on-surface">Card Number</Label>
+                      <Input
+                        id="d-card"
+                        placeholder="1234 5678 9012 3456"
+                        value={cardNumber}
+                        onChange={(e) => setCardNumber(e.target.value)}
+                        maxLength={19}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-xs">
+                      <Label htmlFor="d-expiry" className="font-label-md text-on-surface">Expiry</Label>
+                      <Input
+                        id="d-expiry"
+                        placeholder="MM/YY"
+                        value={expiry}
+                        onChange={(e) => setExpiry(e.target.value)}
+                        maxLength={5}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-xs">
+                      <Label htmlFor="d-cvv" className="font-label-md text-on-surface">CVV</Label>
+                      <Input
+                        id="d-cvv"
+                        placeholder="123"
+                        value={cvv}
+                        onChange={(e) => setCvv(e.target.value)}
+                        maxLength={4}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Price breakdown */}
+                  <div className="mt-lg flex flex-col gap-xs">
+                    <div className="flex justify-between font-body-md text-on-surface-variant">
+                      <span>Base Price</span>
+                      <span>$3,400</span>
+                    </div>
+                    <div className="flex justify-between font-body-md text-on-surface-variant">
+                      <span>Fees</span>
+                      <span>$245</span>
+                    </div>
+                    <div className="flex justify-between font-body-md text-on-surface-variant">
+                      <span>Insurance</span>
+                      <span>$150</span>
+                    </div>
+                    <Separator className="my-xs" />
+                    <div className="flex justify-between font-label-md text-on-surface font-semibold">
+                      <span>Total</span>
+                      <span>$3,795</span>
+                    </div>
+                    <p className="font-body-md text-on-surface-variant text-sm text-right">
+                      10% deposit = $379.50
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Button className="w-full" size="lg" onClick={handleSubmit}>
+                Complete Booking
+              </Button>
+            </section>
+          </div>
+
+          {/* Right 4 cols – sticky trip summary */}
+          <div className="col-span-4">
+            <div className="sticky top-32 bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md">
+              {/* Summary image */}
+              <div
+                className="h-[200px] w-full bg-cover bg-center"
+                style={{ backgroundImage: `url('${SUMMARY_IMG}')` }}
+              />
+
+              {/* Summary body */}
+              <div className="p-lg flex flex-col gap-md">
+                <div>
+                  <h3 className="font-headline-sm text-on-surface">Fitz Roy Trek</h3>
+                  <p className="font-body-md text-on-surface-variant">El Chaltén, Argentina</p>
+                </div>
+
+                <div className="flex flex-col gap-xs">
+                  <div className="flex items-center gap-sm font-body-md text-on-surface-variant">
+                    <span className="material-symbols-outlined text-[18px]">calendar_month</span>
+                    <span>Nov 12 - Nov 18 · 7 Days</span>
+                  </div>
+                  <div className="flex items-center gap-sm font-body-md text-on-surface-variant">
+                    <span className="material-symbols-outlined text-[18px]">group</span>
+                    <span>2 Travelers</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-sm">
-                  <span className="material-symbols-outlined text-outline">group</span>
-                  <span className="font-body-md text-on-surface">2 Adults</span>
+
+                <Separator />
+
+                {/* Price breakdown */}
+                <div className="flex flex-col gap-xs">
+                  <div className="flex justify-between font-body-md text-on-surface-variant">
+                    <span>Base Price</span>
+                    <span>$3,400</span>
+                  </div>
+                  <div className="flex justify-between font-body-md text-on-surface-variant">
+                    <span>Equipment Fees</span>
+                    <span>$245</span>
+                  </div>
+                  <div className="flex justify-between font-body-md text-on-surface-variant">
+                    <span>Travel Insurance</span>
+                    <span>$150</span>
+                  </div>
+                  <Separator className="my-xs" />
+                  <div className="flex justify-between font-label-md text-on-surface font-bold">
+                    <span>Total</span>
+                    <span>$3,795</span>
+                  </div>
                 </div>
-              </div>
-              <div className="w-full h-px bg-outline-variant/30" />
-              <div className="flex flex-col gap-xs">
-                <div className="flex justify-between">
-                  <span className="font-body-md text-on-surface-variant">Base Price (2x)</span>
-                  <span className="font-body-md text-on-surface">$2,760.00</span>
+
+                {/* Deposit highlight */}
+                <div className="bg-primary/10 rounded-xl p-sm">
+                  <p className="font-body-md text-primary text-sm text-center">
+                    Today's payment (10% deposit):{' '}
+                    <span className="font-semibold">$379.50</span>
+                  </p>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-body-md text-on-surface-variant">Taxes & Fees</span>
-                  <span className="font-body-md text-on-surface">$138.00</span>
-                </div>
-              </div>
-              <div className="w-full h-px bg-outline-variant/30" />
-              <div className="flex justify-between items-end">
-                <span className="font-label-md text-on-surface-variant">Total</span>
-                <span className="font-headline-md text-primary">$2,898</span>
               </div>
             </div>
           </div>
         </div>
+
+        <Footer />
       </div>
 
-      {/* Success Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-[100] bg-on-surface/80 backdrop-blur-sm flex items-center justify-center p-margin-mobile">
-          <div className="bg-surface w-full max-w-sm rounded-[24px] p-lg flex flex-col items-center text-center gap-md relative overflow-hidden shadow-2xl animate-[slideUp_0.4s_ease-out]">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 pointer-events-none" />
-            <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mb-sm relative z-10">
-              <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping opacity-50" />
-              <span className="material-symbols-outlined text-[40px] text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-            </div>
-            <div className="flex flex-col gap-xs relative z-10">
-              <h3 className="font-headline-sm text-headline-sm text-on-surface">¡RESERVA CONFIRMADA!</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant">Tu lugar en la nieve está asegurado. Preparate para la aventura.</p>
-            </div>
-            <div className="bg-surface-container rounded-lg py-sm px-md w-full border border-outline-variant/30 relative z-10">
-              <span className="block font-label-md text-[12px] text-on-surface-variant uppercase tracking-wider mb-1">Código de Reserva</span>
-              <span className="font-headline-sm text-headline-sm text-primary tracking-widest">UP-001-2026</span>
-            </div>
-            <div className="flex flex-col gap-sm w-full mt-sm relative z-10">
-              <button
-                onClick={() => { setShowModal(false); navigate('my-trips') }}
-                className="w-full bg-primary text-on-primary rounded-lg py-3 px-md font-label-md text-label-md shadow-md hover:-translate-y-1 transition-transform"
+      {/* ── SUCCESS MODAL ──────────────────────────────────────────────── */}
+      {showConfirm && (
+        <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-margin-mobile">
+          <div className="bg-surface-container-lowest w-full max-w-sm rounded-2xl p-lg flex flex-col items-center text-center gap-md shadow-2xl">
+            {/* Checkmark */}
+            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
+              <span
+                className="material-symbols-outlined text-primary text-5xl"
+                style={{ fontVariationSettings: "'FILL' 1" }}
               >
-                Ir a Mi Dashboard
-              </button>
-              <button
-                onClick={() => { setShowModal(false); navigate('detail') }}
-                className="w-full bg-transparent text-primary border border-primary rounded-lg py-3 px-md font-label-md text-label-md hover:bg-primary/5 transition-colors"
-              >
-                Ver Itinerario
-              </button>
+                check_circle
+              </span>
             </div>
+
+            <div className="flex flex-col gap-xs">
+              <h3 className="font-headline-md text-on-surface">Booking Confirmed!</h3>
+              <p className="font-body-md text-on-surface-variant">Your expedition is secured. Get ready for adventure.</p>
+            </div>
+
+            <Button
+              className="w-full"
+              size="lg"
+              onClick={() => { setShowConfirm(false); navigate('my-trips') }}
+            >
+              View My Trips
+            </Button>
           </div>
         </div>
       )}

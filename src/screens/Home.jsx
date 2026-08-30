@@ -1,27 +1,28 @@
-const LOGO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCIZThyURbLNJntYqPuQvOAuvya3orzxFpi_w9ghGDaCk5yRoK-lDecvkiqqf4oLJSyeMzm2753hAHMFeUls5PCnbUguUf6t9XLF2vqgPp7aydZbjPMAJugicO1w7BTAQPqcK75k_KWJ3YbBLlObuJZsFIL0jf_QMRf0beqJhtWLa9KHGohORxhG2TOb_UYBYGaOtBdgG2DWb5Fs7bmgiZo6k0zO4KfWbaSgkU5cMCV1XEVk8g4mNSzhg'
-const PROFILE = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCheYdsipuktbVlX2BhtCH4yMCb36Wb9zyFxPbyT4VZnfR8GvujMu8CP6O_6c65y8Qzduyt2AiWXKQMq9efrp5noWo3qB32W-psprfXXnKI201YthVa3guEHHbdbksN7CyXuQmIbKT48iFnxwAvbLAcVssl07ztWXvEhvcO7xu9Pk9odT0J53dmjpGX6NelfC89MAC0MI88cMvUT5z3n9fXAOWfhsLtWqdfdv3SozR3ontT0FJMFCrV_Q'
-const HERO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuApKEUUOxgHG5zjAfTTmTwAba_IP08zQsyP35DnymH6fBRuNCFcFa4sMc0Ipe4A9yyyeE8Nmw-lQfWnraIZq0SSfrJW3dnOJM2_8Aq3WhGNxrpDKngr_cOANEr_0inCmd-lPuWLa6GJmH1xWeWO8EPMo6RDIaVz6ppE73MGp_-dOShurU8QIFZIuvyb_Xes3hadM7xnx-X1-LNNPPMF2_qb1uQMJOI0PwYWQ9duYDpWvCTMnig2Xra6Uw'
+import { useState } from 'react'
+import Footer from '../components/Footer'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
-const trips = [
-  {
-    id: 'laslenhas',
-    label: 'Ski', labelIcon: 'downhill_skiing', labelColor: 'text-primary',
-    badge: 'Últimos 2 cupos', badgePulse: true,
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpygtKaAZVYaSRsCb3xkst7G9Tkf6JEmz4zewSmOKJnWeC7QfqLSlhvZRj_rk_Pe-k7RtPbieCzjhq5F9beKLzC3judrf3-A9UpGU9SrRi_yhG906jJunBXRpdhJPlE3W7rIqVaJhPcH7iAYmc7i2QK5GaFK9lbyHE0qK-vcDjiqp6WunYPFIeNHL3jrpVmrqzQbsEw353StX7rQqr2pXbOmIgfArkuN7dzxMBah4uS8ym6yoqmxIwPw',
-    location: 'Mendoza, Arg', title: 'Las Leñas Snow Trip', price: '$1,200',
-  },
-  {
-    id: 'puntadiablo',
-    label: 'Surf', labelIcon: 'surfing', labelColor: 'text-secondary-container',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBv9B2MpC3eFOlftIEta520YVq8s6HE5sF5HG9qBl9vBPTFmcoqK0Z5QRZtKkB1cqHdzlt8rsUF3hLtuYMMuWJ7OZQo1pWMNRlsjI0pETFCH9BJ3A3Tp8-MTyP7K7ptOIMZJJ0nxq_9diiRxtvjLCyHB0qTG129DOlyR1A3_wCeWZJHRhjGzOez7rybejBN7vr3TrKf7j09rRtlxKjA8js7W0HESERw0clWTSG21fBQHM2U15Dzs_xk8A',
-    location: 'Rocha, UY', title: 'Punta del Diablo Surf Trip', price: '$900',
-  },
-  {
-    id: 'chapadmalal',
-    label: 'Surf', labelIcon: 'surfing', labelColor: 'text-secondary-container',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCJ6kNUaFZ3BvfKty9DK8jA--RLPBb6Igo6KeLkIxpTS-fQyBLUEg7yTsXvxlJk2HglXnynKaJwuKFLCbiQCli8q9e8NRqjYfDVJukeAYsOLdAVS4CVRlTqeZHBkvQp8Nw2OmMf56XNJSsmav5AN9pjsqp3AhJSISjmqpMOmeZLR691quFUYu2s8HVBRm0p3DGG9XAmq4-dJfVNnXpnO6aZJsELuuqyE97GZiXQXlKKoMOBz8ddEX_W8w',
-    location: 'Buenos Aires, Arg', title: 'Chapadmalal Surf Camp', price: '$750',
-  },
+/* ── Mobile image URLs ─────────────────────────────────────────── */
+const LOGO_MOB   = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCIZThyURbLNJntYqPuQvOAuvya3orzxFpi_w9ghGDaCk5yRoK-lDecvkiqqf4oLJSyeMzm2753hAHMFeUls5PCnbUguUf6t9XLF2vqgPp7aydZbjPMAJugicO1w7BTAQPqcK75k_KWJ3YbBLlObuJZsFIL0jf_QMRf0beqJhtWLa9KHGohORxhG2TOb_UYBYGaOtBdgG2DWb5Fs7bmgiZo6k0zO4KfWbaSgkU5cMCV1XEVk8g4mNSzhg'
+const PROFILE_MOB = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCheYdsipuktbVlX2BhtCH4yMCb36Wb9zyFxPbyT4VZnfR8GvujMu8CP6O_6c65y8Qzduyt2AiWXKQMq9efrp5noWo3qB32W-psprfXXnKI201YthVa3guEHHbdbksN7CyXuQmIbKT48iFnxwAvbLAcVssl07ztWXvEhvcO7xu9Pk9odT0J53dmjpGX6NelfC89MAC0MI88cMvUT5z3n9fXAOWfhsLtWqdfdv3SozR3ontT0FJMFCrV_Q'
+const HERO_MOB   = 'https://lh3.googleusercontent.com/aida-public/AB6AXuApKEUUOxgHG5zjAfTTmTwAba_IP08zQsyP35DnymH6fBRuNCFcFa4sMc0Ipe4A9yyyeE8Nmw-lQfWnraIZq0SSfrJW3dnOJM2_8Aq3WhGNxrpDKngr_cOANEr_0inCmd-lPuWLa6GJmH1xWeWO8EPMo6RDIaVz6ppE73MGp_-dOShurU8QIFZIuvyb_Xes3hadM7xnx-X1-LNNPPMF2_qb1uQMJOI0PwYWQ9duYDpWvCTMnig2Xra6Uw'
+
+/* ── Desktop image URLs ─────────────────────────────────────────── */
+const HERO_DESK  = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDM2Sl0i1I72vrJJgz6yQAcypkcm5OoReKKJSFEhSb3GH4EcFhT_iDPGgvhMzMIfBEcNKc8CqxwPDGmhhWzLnZAVaOZsKACpmxmWvID9PQd-aqLcLjQOvc-1Q-OACj2wZlfmLT4Ff2DpgUKrsi5a80L9qUfejSDAkOy-1_KfaVjYAhRrf6Ddfh1rul8-0zJ_9iXNKBm_1z8bZMPEitwfiqHY2XwVMYXuihrrfkGLtTZMFBJWStGrQC9Wg'
+const LOGO_DESK  = 'https://lh3.googleusercontent.com/aida/AEtjO1V3YTd0EZhkovLBfRz0CmDVthaA9Z4aeBDSUw2ZzBnuWsPOlvmvLEPNGhJ_sth1cExJc0OREnOQ8NnLkY_TET_RhnqzpRlNGnEALLPU5ThblHV1lrKoZGWVwNqJn8VyRjamH9uxct0pF1SwPW1BtsU4lLB0oBsWR-OVk58DEjdhtoxQNb83zTVpi9LhdL-STQHEg0A14UpAYIQB2tXfQBr2QAyrBBKcrsJElajTFhYa-WTWixTO81Dy_gbq'
+const PARTNER1   = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRq_C7DAxrLAmWqQD8pGetZgPQR1e56WNwxmzF_dSpwP06sfDASOKnCcsPQQsMi4w2HyjOM1cMWx311m19jwf8UsNjFeMt9yrUZHruuGDn6vEh48f0k4Zlb9IHdHFz1ojSmY0dQRfpfC5oDrWuCzkAQ5Z9GGVCbiGK61CsoTMx-CLdZJeHyzubdhazw30sNJ9QZZ8zVF0TfUeZDYYTyUwC-y2YYm0zib9FRm7fzGx-_Q29-F6HADNPiQ'
+const PARTNER2   = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMzQypVdnHz1xJP3f-NADhWCjmiN0p1atxQACgDNux0lZ9Zy8lhMnTv245neOeolJc_vOzQgnmzz2fkiGLKgAhr98ho7KVQpRDKzrAyfmlSbX4ifWqCInSAKoRIRwA27QlxtVOxFJKFaYD-YPuNB36jNnYvymLecHyDYKFpi-zgIUK7B0T2aTsz1GTgftS5DR4XygFOFgs0FTEiDuCtqYYTlLocuE414vyaeGZxgXspIfVA9aQ'
+const PARTNER3   = 'https://lh3.googleusercontent.com/aida-public/AB6AXuD8W50Y2-etUvhpjdXwUBHGBqqKobaaPIxEf9ofvYS2hSTy8GhupTpVQsXIr-ih59dJLJI4MYQqbXVBhNDP695GtRO7Rp83x9pilVZhxn6g3ubR5fjOYnGIzHefRj7Lx5hlX1nUNf4oDZnDUAFjGFjf7KOzZVD1HHXrLrmWdCdIr86G-_5k9h8B6ybU3PAxekPZS26RTKSThwgfTJuJx4oF940pMWGuQvESUSfBppITlf1wwGPJJiZIjw'
+const CARD1_IMG  = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCaV0JGHHOtYHrMQPiFo9YVqRlCMjpWgPOG-VNGrpB-aZo3IAOhq56uJoZo8LrNrA8-qVu0fyiwah6mg1BkwsbcExWyhy7wo9GkMSx-3LydPlGk_NzH-intwu5-_bc7rbSfEhDwIvKquXiNDfiaJQiYIHZ4LGoTMdMacLiPBzJDkiarebFoi0dC3QQDBhCeqfcJ9MlvewoN7IHAPEA7FJEE6KwScf8Re5REcbEDVRALLi7izcFAYo5xYg'
+const CARD2_IMG  = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCdu0Jncvq051USWK0M5Y-EQo6BeZ_PhVMx8_-Dluci_Rdl_l8Zw5qRt6VBKjPgiIpVDWru1H1zSv4eT_FJ9Fzr3SnCBLU0M4I-zRTna1F3if7JURXuc22I_sbBBir-bcb_L7W82UqizILVtodYVmNI0WeSLjk3rMHuFUo81FNfDucliERFh5mgC9aiYByOcsTmbCAn9dAjnJXY5_SD62yLs5kheya_o4Y_tyze_9iK1UU600xYSSLcqg'
+const CARD3_IMG  = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhomfFa9pgqWHTgirl1AvZRG3WQNGK-8ab7tQn59qlvMK4ICbQ8Kr-Num_PN-JAMnFGJt6NVTqBhdqv6JsA52FORXqaPWYQvahOxLQUY_0WoHYjfj7CUGpZBKv27Nixw43h-9No0DyhiLDw2RocuYGSACznBoQAkwuUkjcP_mc5Rgt9KMfKDzUp8msDUEHiu3BNtpG-DtQXvd6Uh0LY7EukEsBrx7bZx4ELRlPS9Opj_q09dajmfyM2g'
+
+/* ── Mobile data ────────────────────────────────────────────────── */
+const mobileTrips = [
+  { id: 'laslenhas', label: 'Ski', labelIcon: 'downhill_skiing', labelColor: 'text-primary', badge: 'Últimos 2 cupos', badgePulse: true, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpygtKaAZVYaSRsCb3xkst7G9Tkf6JEmz4zewSmOKJnWeC7QfqLSlhvZRj_rk_Pe-k7RtPbieCzjhq5F9beKLzC3judrf3-A9UpGU9SrRi_yhG906jJunBXRpdhJPlE3W7rIqVaJhPcH7iAYmc7i2QK5GaFK9lbyHE0qK-vcDjiqp6WunYPFIeNHL3jrpVmrqzQbsEw353StX7rQqr2pXbOmIgfArkuN7dzxMBah4uS8ym6yoqmxIwPw', location: 'Mendoza, Arg', title: 'Las Leñas Snow Trip', price: '$1,200' },
+  { id: 'puntadiablo', label: 'Surf', labelIcon: 'surfing', labelColor: 'text-secondary-container', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBv9B2MpC3eFOlftIEta520YVq8s6HE5sF5HG9qBl9vBPTFmcoqK0Z5QRZtKkB1cqHdzlt8rsUF3hLtuYMMuWJ7OZQo1pWMNRlsjI0pETFCH9BJ3A3Tp8-MTyP7K7ptOIMZJJ0nxq_9diiRxtvjLCyHB0qTG129DOlyR1A3_wCeWZJHRhjGzOez7rybejBN7vr3TrKf7j09rRtlxKjA8js7W0HESERw0clWTSG21fBQHM2U15Dzs_xk8A', location: 'Rocha, UY', title: 'Punta del Diablo Surf Trip', price: '$900' },
+  { id: 'chapadmalal', label: 'Surf', labelIcon: 'surfing', labelColor: 'text-secondary-container', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCJ6kNUaFZ3BvfKty9DK8jA--RLPBb6Igo6KeLkIxpTS-fQyBLUEg7yTsXvxlJk2HglXnynKaJwuKFLCbiQCli8q9e8NRqjYfDVJukeAYsOLdAVS4CVRlTqeZHBkvQp8Nw2OmMf56XNJSsmav5AN9pjsqp3AhJSISjmqpMOmeZLR691quFUYu2s8HVBRm0p3DGG9XAmq4-dJfVNnXpnO6aZJsELuuqyE97GZiXQXlKKoMOBz8ddEX_W8w', location: 'Buenos Aires, Arg', title: 'Chapadmalal Surf Camp', price: '$750' },
 ]
 
 const reviews = [
@@ -36,128 +37,108 @@ const faqs = [
   { q: '¿Puedo cancelar mi reserva?', a: 'Sí, podés cancelar. Ofrecemos reembolso completo si cancelás con al menos 30 días de anticipación. Para cancelaciones entre 15 y 29 días, retenemos el 50%.' },
 ]
 
+/* ── Desktop expedition cards ───────────────────────────────────── */
+const deskCards = [
+  {
+    img: CARD1_IMG, badge: 'High Demand', badgeColor: 'bg-secondary w-2 h-2 rounded-full',
+    title: 'Glacier Core Traverse', rating: '4.9',
+    desc: 'A highly technical ice-trekking expedition navigating the deepest crevasses of the Southern Patagonian Ice Field.',
+    difficulty: 'Advanced', diffBars: [true, true, true, false],
+    price: '$3,200', stagger: '', diffColor: 'bg-primary',
+  },
+  {
+    img: CARD2_IMG, badge: 'New Route', badgeColor: 'bg-primary w-2 h-2 rounded-full',
+    title: 'High Desert Solitude', rating: '5.0',
+    desc: 'Experience complete isolation in the high Andes. Private camps, astronomical observation, and silent landscapes.',
+    difficulty: 'Moderate', diffBars: [true, true, false, false],
+    price: '$4,150', stagger: 'md:-mt-8', diffColor: 'bg-primary',
+  },
+  {
+    img: CARD3_IMG, badge: null,
+    title: 'Fitz Roy Summit Push', rating: '4.8',
+    desc: 'A demanding ascent targeting the iconic granite spires. Requires previous alpine experience and peak physical condition.',
+    difficulty: 'Expert', diffBars: [true, true, true, true],
+    price: '$5,800', stagger: 'lg:mt-8', diffColor: 'bg-secondary',
+  },
+]
+
 function FAQ({ q, a }) {
   const [open, setOpen] = useState(false)
   return (
     <div>
-      <button
-        onClick={() => setOpen(o => !o)}
-        className="w-full text-left bg-surface-container-lowest p-md rounded-xl flex items-center justify-between group focus:outline-none shadow-sm"
-      >
+      <button onClick={() => setOpen(o => !o)} className="w-full text-left bg-surface-container-lowest p-md rounded-xl flex items-center justify-between group focus:outline-none shadow-sm">
         <span className="font-headline-sm text-headline-sm text-on-surface">{q}</span>
         <span className="material-symbols-outlined text-outline group-hover:text-primary transition-colors">{open ? 'remove' : 'add'}</span>
       </button>
-      {open && (
-        <div className="px-md pb-md pt-xs text-on-surface-variant font-body-md bg-surface-container-lowest -mt-2 rounded-b-xl shadow-sm">
-          {a}
-        </div>
-      )}
+      {open && <div className="px-md pb-md pt-xs text-on-surface-variant font-body-md bg-surface-container-lowest -mt-2 rounded-b-xl shadow-sm">{a}</div>}
     </div>
   )
 }
 
-import { useState } from 'react'
-
 export default function Home({ navigate }) {
   return (
-    <main className="pt-16 md:pt-20 pb-20 md:pb-0 min-h-screen bg-surface">
-      {/* Mobile header - hidden on desktop (TopNav takes over) */}
-      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
-        <div className="h-16 flex items-center justify-between px-margin-mobile">
-          <div className="flex items-center gap-base">
-            <img alt="Upsala Trips Logo" className="h-8 w-auto object-contain" src={LOGO} />
-            <span className="font-headline-sm text-headline-sm text-primary">Home</span>
+    <main className="min-h-screen bg-surface">
+
+      {/* ══════════════════ MOBILE ══════════════════ */}
+      <div className="md:hidden">
+        <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
+          <div className="h-16 flex items-center justify-between px-margin-mobile">
+            <div className="flex items-center gap-base">
+              <img alt="Upsala Trips Logo" className="h-8 w-auto object-contain" src={LOGO_MOB} />
+              <span className="font-headline-sm text-headline-sm text-primary">Home</span>
+            </div>
+            <img alt="Profile" className="w-8 h-8 rounded-full object-cover shadow-sm" src={PROFILE_MOB} />
           </div>
-          <img alt="Profile" className="w-8 h-8 rounded-full object-cover shadow-sm" src={PROFILE} />
-        </div>
-      </header>
+        </header>
 
-      <div className="flex flex-col w-full md:max-w-[1440px] md:mx-auto">
-        {/* Hero */}
-        <div className="relative w-full h-[600px] md:h-[85vh] flex items-center justify-center p-margin-mobile"
-          style={{ backgroundImage: `url('${HERO}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-          <div className="absolute inset-0 bg-gradient-to-b from-inverse-surface/40 to-inverse-surface/80" />
-
-          {/* Desktop headline - hidden on mobile */}
-          <div className="hidden md:flex absolute inset-0 flex-col items-start justify-center px-margin-desktop">
-            <h1 className="font-headline-xl text-on-primary max-w-2xl mb-md">Venture Beyond the Expected.</h1>
-            <p className="font-body-lg text-on-primary/80 max-w-xl mb-lg">Curated extreme expeditions across South America's most dramatic landscapes.</p>
-            {/* Desktop search bar */}
-            <div className="flex items-center bg-surface rounded-xl shadow-lg overflow-hidden w-full max-w-2xl">
-              <div className="flex-1 px-md py-sm border-r border-outline-variant/30">
-                <p className="font-label-md text-on-surface-variant text-xs mb-1">DESTINATION</p>
-                <p className="font-body-md text-on-surface">Explore all expeditions</p>
+        <div className="pt-16 pb-20 flex flex-col w-full">
+          {/* Hero */}
+          <div className="relative w-full h-[600px] flex items-center justify-center p-margin-mobile"
+            style={{ backgroundImage: `url('${HERO_MOB}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className="absolute inset-0 bg-gradient-to-b from-inverse-surface/40 to-inverse-surface/80" />
+            <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[800px] mt-12">
+              <span className="inline-flex items-center gap-xs px-3 py-1 rounded-full bg-surface/20 backdrop-blur-md text-on-primary font-label-md mb-sm shadow-sm">
+                <span className="material-symbols-outlined text-[16px]">ac_unit</span>
+                Temporada de Invierno 2024
+              </span>
+              <h1 className="font-headline-xl text-headline-xl text-on-primary mb-sm leading-tight">Experiencias de Aventura en Argentina</h1>
+              <p className="font-body-lg text-body-lg text-primary-fixed mb-lg max-w-lg opacity-90">Ski, Surf y Naturaleza. Descubrí los rincones más increíbles con nuestra curaduría premium.</p>
+              <div className="w-full bg-surface p-xs rounded-xl shadow-xl flex flex-col gap-xs mb-lg">
+                <div className="flex items-center gap-sm px-4 py-3 bg-surface-container-lowest rounded-lg">
+                  <span className="material-symbols-outlined text-outline">location_on</span>
+                  <input className="w-full bg-transparent border-none outline-none text-on-surface font-body-md placeholder:text-outline-variant" placeholder="¿A dónde querés ir?" type="text" />
+                </div>
+                <div className="flex items-center gap-sm px-4 py-3 bg-surface-container-lowest rounded-lg">
+                  <span className="material-symbols-outlined text-outline">calendar_month</span>
+                  <select className="w-full bg-transparent border-none outline-none text-on-surface font-body-md appearance-none cursor-pointer">
+                    <option disabled defaultValue="">Mes del viaje</option>
+                    <option>Julio 2024</option>
+                    <option>Agosto 2024</option>
+                    <option>Septiembre 2024</option>
+                  </select>
+                </div>
+                <Button variant="default" onClick={() => navigate('trips')} className="w-full px-6 py-4 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-xs">
+                  <span>Explorar</span>
+                  <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+                </Button>
               </div>
-              <div className="flex-1 px-md py-sm border-r border-outline-variant/30">
-                <p className="font-label-md text-on-surface-variant text-xs mb-1">DATES</p>
-                <p className="font-body-md text-on-surface">Select dates</p>
-              </div>
-              <div className="flex-1 px-md py-sm">
-                <p className="font-label-md text-on-surface-variant text-xs mb-1">TRAVELERS</p>
-                <p className="font-body-md text-on-surface">2 guests</p>
-              </div>
-              <button
-                onClick={() => navigate('trips')}
-                className="bg-secondary text-on-secondary font-label-md px-lg py-md m-sm rounded-lg whitespace-nowrap"
-              >
-                FIND EXPEDITION
-              </button>
             </div>
           </div>
 
-          {/* Mobile search widget - hidden on desktop */}
-          <div className="md:hidden relative z-10 flex flex-col items-center text-center w-full max-w-[800px] mt-12">
-            <span className="inline-flex items-center gap-xs px-3 py-1 rounded-full bg-surface/20 backdrop-blur-md text-on-primary font-label-md mb-sm shadow-sm">
-              <span className="material-symbols-outlined text-[16px]">ac_unit</span>
-              Temporada de Invierno 2024
-            </span>
-            <h1 className="font-headline-xl text-headline-xl text-on-primary mb-sm leading-tight">Experiencias de Aventura en Argentina</h1>
-            <p className="font-body-lg text-body-lg text-primary-fixed mb-lg max-w-lg opacity-90">Ski, Surf y Naturaleza. Descubrí los rincones más increíbles con nuestra curaduría premium.</p>
-            <div className="w-full bg-surface p-xs rounded-xl shadow-xl flex flex-col gap-xs mb-lg sm:flex-row sm:items-center">
-              <div className="flex-1 flex items-center gap-sm px-4 py-3 bg-surface-container-lowest rounded-lg">
-                <span className="material-symbols-outlined text-outline">location_on</span>
-                <input className="w-full bg-transparent border-none outline-none text-on-surface font-body-md placeholder:text-outline-variant" placeholder="¿A dónde querés ir?" type="text" />
-              </div>
-              <div className="flex-1 flex items-center gap-sm px-4 py-3 bg-surface-container-lowest rounded-lg">
-                <span className="material-symbols-outlined text-outline">calendar_month</span>
-                <select className="w-full bg-transparent border-none outline-none text-on-surface font-body-md appearance-none cursor-pointer">
-                  <option disabled defaultValue="">Mes del viaje</option>
-                  <option>Julio 2024</option>
-                  <option>Agosto 2024</option>
-                  <option>Septiembre 2024</option>
-                </select>
-              </div>
-              <button
-                onClick={() => navigate('trips')}
-                className="w-full sm:w-auto px-6 py-4 bg-secondary text-on-secondary font-label-md rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-xs"
-              >
-                <span>Explorar</span>
-                <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Featured trips */}
-        <section className="py-xl px-margin-mobile md:px-margin-desktop bg-surface">
-          <div className="max-w-[1200px] mx-auto">
+          {/* Featured trips */}
+          <section className="py-xl px-margin-mobile bg-surface">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-lg gap-sm">
               <div>
                 <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Destinos Destacados</h2>
                 <p className="font-body-md text-body-md text-on-surface-variant">Próximas salidas confirmadas con cupos limitados.</p>
               </div>
-              <button onClick={() => navigate('trips')} className="inline-flex items-center gap-xs text-primary font-label-md hover:text-primary-container transition-colors">
-                Ver todos los trips
-                <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-              </button>
+              <Button variant="link" onClick={() => navigate('trips')} className="inline-flex items-center gap-xs font-label-md p-0 h-auto">
+                Ver todos los trips <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+              </Button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
-              {trips.map(trip => (
-                <button
-                  key={trip.id}
-                  onClick={() => navigate('detail')}
-                  className="group relative flex flex-col bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_10px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_14px_28px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 h-[420px] text-left"
-                >
+            <div className="flex flex-col gap-md">
+              {mobileTrips.map(trip => (
+                <button key={trip.id} onClick={() => navigate('detail')} className="group relative flex flex-col bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_10px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_14px_28px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 h-[420px] text-left">
                   <div className="absolute top-4 left-4 z-20 flex gap-xs">
                     <span className="inline-flex items-center gap-1 px-3 py-1 bg-surface/90 backdrop-blur-md rounded-full text-on-surface font-label-md shadow-sm">
                       <span className={`material-symbols-outlined text-[14px] ${trip.labelColor}`} style={{ fontVariationSettings: "'FILL' 1" }}>{trip.labelIcon}</span>
@@ -166,9 +147,7 @@ export default function Home({ navigate }) {
                   </div>
                   {trip.badge && (
                     <div className="absolute top-4 right-4 z-20">
-                      <span className={`inline-flex items-center px-3 py-1 bg-error/90 backdrop-blur-md rounded-full text-on-error font-label-md shadow-sm ${trip.badgePulse ? 'animate-pulse' : ''}`}>
-                        {trip.badge}
-                      </span>
+                      <span className={`inline-flex items-center px-3 py-1 bg-error/90 backdrop-blur-md rounded-full text-on-error font-label-md shadow-sm ${trip.badgePulse ? 'animate-pulse' : ''}`}>{trip.badge}</span>
                     </div>
                   )}
                   <div className="w-full h-[60%] relative" style={{ backgroundImage: `url('${trip.img}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
@@ -195,37 +174,35 @@ export default function Home({ navigate }) {
                 </button>
               ))}
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Testimonials */}
-        <section className="py-xl px-margin-mobile md:px-margin-desktop bg-surface-container-low">
-          <div className="max-w-[1200px] mx-auto text-center mb-lg">
-            <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">La Comunidad Upsala</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Experiencias reales de viajeros que confiaron en nosotros.</p>
-          </div>
-          <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-md">
-            {reviews.map(r => (
-              <div key={r.name} className="bg-surface p-md rounded-2xl shadow-sm flex flex-col gap-sm">
-                <div className="flex text-secondary-container">
-                  {[1,2,3,4,5].map(i => <span key={i} className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>)}
-                </div>
-                <p className="font-body-lg text-body-lg text-on-surface flex-1">{r.text}</p>
-                <div className="flex items-center gap-sm mt-xs">
-                  <img className="w-12 h-12 rounded-full object-cover" src={r.img} alt={r.name} />
-                  <div>
-                    <p className="font-label-md text-label-md text-on-surface">{r.name}</p>
-                    <p className="font-body-md text-[14px] text-on-surface-variant">{r.sub}</p>
+          {/* Testimonials */}
+          <section className="py-xl px-margin-mobile bg-surface-container-low">
+            <div className="text-center mb-lg">
+              <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">La Comunidad Upsala</h2>
+              <p className="font-body-md text-body-md text-on-surface-variant">Experiencias reales de viajeros que confiaron en nosotros.</p>
+            </div>
+            <div className="flex flex-col gap-md">
+              {reviews.map(r => (
+                <div key={r.name} className="bg-surface p-md rounded-2xl shadow-sm flex flex-col gap-sm">
+                  <div className="flex text-secondary-container">
+                    {[1,2,3,4,5].map(i => <span key={i} className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>)}
+                  </div>
+                  <p className="font-body-lg text-body-lg text-on-surface flex-1">{r.text}</p>
+                  <div className="flex items-center gap-sm mt-xs">
+                    <img className="w-12 h-12 rounded-full object-cover" src={r.img} alt={r.name} />
+                    <div>
+                      <p className="font-label-md text-label-md text-on-surface">{r.name}</p>
+                      <p className="font-body-md text-[14px] text-on-surface-variant">{r.sub}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
 
-        {/* FAQ */}
-        <section className="py-xl px-margin-mobile md:px-margin-desktop bg-surface">
-          <div className="max-w-[800px] mx-auto">
+          {/* FAQ */}
+          <section className="py-xl px-margin-mobile bg-surface">
             <div className="text-center mb-lg">
               <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Preguntas Frecuentes</h2>
               <p className="font-body-md text-body-md text-on-surface-variant">Todo lo que necesitás saber antes de empacar.</p>
@@ -233,25 +210,148 @@ export default function Home({ navigate }) {
             <div className="flex flex-col gap-xs">
               {faqs.map(f => <FAQ key={f.q} q={f.q} a={f.a} />)}
             </div>
+          </section>
+
+          <footer className="bg-inverse-surface text-inverse-on-surface pt-xl pb-4 px-margin-mobile flex flex-col items-center text-center">
+            <div className="flex flex-col items-center">
+              <h3 className="font-headline-sm text-headline-sm mb-xs">Upsala Trips</h3>
+              <p className="font-body-md text-on-tertiary-container mb-lg max-w-sm">Curaduría de aventuras premium en el sur del mundo.</p>
+              <p className="font-body-md text-[12px] text-on-tertiary-container/50">© 2024 Upsala Trips. Todos los derechos reservados.</p>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+      {/* ══════════════════ DESKTOP ══════════════════ */}
+      <div className="hidden md:block pt-20">
+        {/* Hero */}
+        <section className="relative h-[85vh] w-full flex items-center overflow-hidden -mt-20">
+          <div className="absolute inset-0 z-0">
+            <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('${HERO_DESK}')` }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-surface/60" />
+          </div>
+          <div className="relative z-10 w-full max-w-7xl px-margin-desktop pt-20 flex flex-col items-start mt-xl gap-lg">
+            <div className="max-w-2xl space-y-md">
+              <h1 className="font-headline-xl text-on-surface leading-tight drop-shadow-md">
+                Venture Beyond the <span className="text-primary block">Expected.</span>
+              </h1>
+              <p className="font-body-lg text-on-surface-variant drop-shadow-sm">
+                Curated expeditions to the rawest corners of Patagonia and the Andes. Expert guides, premium logistics, unfiltered nature.
+              </p>
+            </div>
+            {/* Search widget */}
+            <div className="w-full max-w-4xl bg-surface/95 backdrop-blur-xl rounded-2xl p-sm shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex items-center gap-sm">
+              <div className="flex-1 bg-surface-container rounded-xl flex items-center px-md py-sm hover:bg-surface-container-high transition-colors">
+                <span className="material-symbols-outlined text-primary mr-sm">location_on</span>
+                <div className="flex flex-col w-full">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider">Destination</label>
+                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/50 w-full" placeholder="Where to next?" type="text" />
+                </div>
+              </div>
+              <div className="w-px h-12 bg-outline-variant/30" />
+              <div className="flex-1 bg-surface-container rounded-xl flex items-center px-md py-sm hover:bg-surface-container-high transition-colors">
+                <span className="material-symbols-outlined text-primary mr-sm">calendar_today</span>
+                <div className="flex flex-col w-full">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider">Dates</label>
+                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/50 w-full" placeholder="Select timeframe" type="text" />
+                </div>
+              </div>
+              <div className="w-px h-12 bg-outline-variant/30" />
+              <div className="flex-1 bg-surface-container rounded-xl flex items-center px-md py-sm hover:bg-surface-container-high transition-colors">
+                <span className="material-symbols-outlined text-primary mr-sm">group</span>
+                <div className="flex flex-col w-full">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider">Travelers</label>
+                  <select className="bg-transparent border-none outline-none font-body-md text-on-surface w-full appearance-none">
+                    <option>2 Explorers</option>
+                    <option>1 Explorer</option>
+                    <option>3-4 Explorers</option>
+                    <option>Group (5+)</option>
+                  </select>
+                </div>
+              </div>
+              <Button variant="secondary" size="lg" onClick={() => navigate('trips')} className="px-xl rounded-xl hover:-translate-y-0.5 whitespace-nowrap shadow-[0_4px_12px_rgba(253,101,30,0.3)]">
+                FIND EXPEDITION
+              </Button>
+            </div>
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="bg-inverse-surface text-inverse-on-surface pt-xl pb-32 md:pb-xl px-margin-mobile md:px-margin-desktop flex flex-col items-center text-center">
-          <div className="w-full max-w-[1200px] mx-auto flex flex-col items-center">
-            <div className="w-12 h-12 mb-sm bg-surface/10 rounded-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-[24px]">landscape</span>
-            </div>
-            <h3 className="font-headline-sm text-headline-sm mb-xs">Upsala Trips</h3>
-            <p className="font-body-md text-on-tertiary-container mb-lg max-w-sm">Curaduría de aventuras premium en el sur del mundo.</p>
-            <div className="flex gap-md mb-lg">
-              <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">mail</span></a>
-              <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">call</span></a>
-              <a href="#" className="text-on-tertiary-container"><span className="material-symbols-outlined">public</span></a>
-            </div>
-            <p className="font-body-md text-[12px] text-on-tertiary-container/50">© 2024 Upsala Trips. Todos los derechos reservados.</p>
+        {/* Logo bar */}
+        <section className="w-full py-lg bg-surface-container-lowest border-y border-outline-variant/20 flex flex-col items-center justify-center">
+          <p className="font-label-md text-on-surface-variant mb-md uppercase tracking-[0.2em]">Trusted by Adventure Partners Worldwide</p>
+          <div className="flex flex-wrap items-center justify-center gap-xl opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <img alt="Upsala Trips" className="h-12 w-auto object-contain" src={LOGO_DESK} />
+            <img className="h-10 w-auto object-contain" src={PARTNER1} alt="Partner" />
+            <img className="h-8 w-auto object-contain" src={PARTNER2} alt="Partner" />
+            <img className="h-10 w-auto object-contain" src={PARTNER3} alt="Partner" />
           </div>
-        </footer>
+        </section>
+
+        {/* Featured Expeditions */}
+        <section className="w-full py-[120px] px-margin-desktop bg-surface">
+          <div className="max-w-7xl mx-auto flex flex-col">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-xl">
+              <div className="max-w-xl">
+                <span className="font-label-md text-primary uppercase tracking-[0.1em] flex items-center gap-2 mb-xs">
+                  <span className="w-8 h-px bg-primary" /> Curated Routes
+                </span>
+                <h2 className="font-headline-lg text-on-surface">Signature Expeditions</h2>
+                <p className="font-body-lg text-on-surface-variant mt-sm">Our most sought-after itineraries, balancing extreme landscapes with refined comfort.</p>
+              </div>
+              <Button variant="outline" onClick={() => navigate('trips')} className="mt-md md:mt-0 px-lg font-label-md flex items-center gap-2 border-primary/20 text-primary hover:bg-primary/5">
+                VIEW ALL EXPEDITIONS <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+              {deskCards.map(c => (
+                <article key={c.title} className={`group bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col relative ${c.stagger}`}>
+                  {c.badge && (
+                    <div className="absolute top-4 left-4 z-10">
+                      <Badge className="bg-surface/90 backdrop-blur-md text-on-surface font-label-md text-xs shadow-sm flex items-center gap-1 rounded-full px-3 py-1">
+                        <span className={c.badgeColor} /> {c.badge}
+                      </Badge>
+                    </div>
+                  )}
+                  <div className="h-64 w-full relative overflow-hidden">
+                    <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: `url('${c.img}')` }} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/20 to-transparent" />
+                  </div>
+                  <div className="p-md flex flex-col flex-1 relative bg-surface-container-lowest -mt-12 rounded-t-[24px]">
+                    <div className="flex justify-between items-start mb-sm">
+                      <h3 className="font-headline-sm text-on-surface leading-tight">{c.title}</h3>
+                      <div className="bg-surface-container px-2 py-1 rounded-md flex items-center gap-1">
+                        <span className="material-symbols-outlined text-[16px] text-primary">star</span>
+                        <span className="font-label-md text-sm text-on-surface">{c.rating}</span>
+                      </div>
+                    </div>
+                    <p className="font-body-md text-on-surface-variant flex-1 line-clamp-3 mb-md">{c.desc}</p>
+                    <div className="w-full mb-md">
+                      <div className="flex justify-between font-label-md text-xs text-on-surface-variant mb-1">
+                        <span>Difficulty</span><span className="text-on-surface">{c.difficulty}</span>
+                      </div>
+                      <div className="w-full h-1.5 flex gap-1">
+                        {c.diffBars.map((filled, i) => (
+                          <div key={i} className={`flex-1 ${filled ? c.diffColor : 'bg-surface-container-high'} ${i === 0 ? 'rounded-l-full' : ''} ${i === 3 ? 'rounded-r-full' : ''}`} />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center pt-md border-t border-outline-variant/20">
+                      <div>
+                        <span className="font-label-md text-xs text-on-surface-variant block">FROM</span>
+                        <span className="font-headline-sm text-on-surface">{c.price}</span>
+                      </div>
+                      <Button variant="default" size="sm" onClick={() => navigate('detail')} className="font-label-md flex items-center gap-1">
+                        Ver Detalles <span className="material-symbols-outlined text-[18px]">east</span>
+                      </Button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Footer />
       </div>
     </main>
   )

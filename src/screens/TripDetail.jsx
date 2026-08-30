@@ -1,308 +1,490 @@
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import { cn } from '@/lib/utils'
+import Footer from '../components/Footer'
 
-const LOGO = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCIZThyURbLNJntYqPuQvOAuvya3orzxFpi_w9ghGDaCk5yRoK-lDecvkiqqf4oLJSyeMzm2753hAHMFeUls5PCnbUguUf6t9XLF2vqgPp7aydZbjPMAJugicO1w7BTAQPqcK75k_KWJ3YbBLlObuJZsFIL0jf_QMRf0beqJhtWLa9KHGohORxhG2TOb_UYBYGaOtBdgG2DWb5Fs7bmgiZo6k0zO4KfWbaSgkU5cMCV1XEVk8g4mNSzhg'
-const PROFILE = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCheYdsipuktbVlX2BhtCH4yMCb36Wb9zyFxPbyT4VZnfR8GvujMu8CP6O_6c65y8Qzduyt2AiWXKQMq9efrp5noWo3qB32W-psprfXXnKI201YthVa3guEHHbdbksN7CyXuQmIbKT48iFnxwAvbLAcVssl07ztWXvEhvcO7xu9Pk9odT0J53dmjpGX6NelfC89MAC0MI88cMvUT5z3n9fXAOWfhsLtWqdfdv3SozR3ontT0FJMFCrV_Q'
-const HERO_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBIhP_bCnUd-sWMD9qmBYap9DMt-mLCYbgTsJ7gcxcQJWvUmeq4BaamBHxySDoh82BLvGVZzJ8H7sgzToNo-OZVNhcLEdPs9kCAuKq5j-p8SDpE-tVqQvKCoS2h-icSnaExuetcj23xY71HBRo2Yr5NsAnmzs3rBgmf6mWka3_pPEODaEiQMxdo8P3sEtf6vPG5-sNgVWNBY_507iZJeAYeWFqX0BRQUlkWwgIr-YQiEW_PVZeHz_sGeQ'
-const GUIDE_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuC3LUub_0K1xYYE8EUbSSzqH9uE41e1cFSc-8LKFniO18igITex3MHKabYD8JOz4XnB73uug7_nRKUAFJjA-UNOiYV99SJ7avYTeqRWR-CTcYWAIPqoACjqe1MHf7CRSQz0UJBHvqje3WJO0y7Kut30lTHSY-sxg19w2URjxrvZd5DSJD_LZgcm88Fj2IOyLq5Nt5m_hjj-EwoGFntnMwmSTu3ewo-COa6-hZjs2eAPpIPqCNHTIN_FLg'
-const MAP_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDd_HwFlJKPv2_nHeamkFhuRiNeyZvhF6-BVNbLJ9MWHBfRBY_wT2J5M_tYCGjX9XFq9uEuNpvfDvduqXkcxMTfzCKkF5p7zmTi7vh8tM3dMTtDQERtVMEUgP9-oPQfIIcBvfbhSL68cisCRNCGPLLPjTWPidjfD7ResG6fOnczDJ9B9EbDHUNMCAK1ISqEhHgTP1j_0DsKxveQzWACj2pKo-PJ1pR_ecNppPMwuvgF18G0FNYGraKQxA'
+const LOGO =
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuCIZThyURbLNJntYqPuQvOAuvya3orzxFpi_w9ghGDaCk5yRoK-lDecvkiqqf4oLJSyeMzm2753hAHMFeUls5PCnbUguUf6t9XLF2vqgPp7aydZbjPMAJugicO1w7BTAQPqcK75k_KWJ3YbBLlObuJZsFIL0jf_QMRf0beqJhtWLa9KHGohORxhG2TOb_UYBYGaOtBdgG2DWb5Fs7bmgiZo6k0zO4KfWbaSgkU5cMCV1XEVk8g4mNSzhg'
+const PROFILE =
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuCheYdsipuktbVlX2BhtCH4yMCb36Wb9zyFxPbyT4VZnfR8GvujMu8CP6O_6c65y8Qzduyt2AiWXKQMq9efrp5noWo3qB32W-psprfXXnKI201YthVa3guEHHbdbksN7CyXuQmIbKT48iFnxwAvbLAcVssl07ztWXvEhvcO7xu9Pk9odT0J53dmjpGX6NelfC89MAC0MI88cMvUT5z3n9fXAOWfhsLtWqdfdv3SozR3ontT0FJMFCrV_Q'
+const HERO_IMG =
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuBIhP_bCnUd-sWMD9qmBYap9DMt-mLCYbgTsJ7gcxcQJWvUmeq4BaamBHxySDoh82BLvGVZzJ8H7sgzToNo-OZVNhcLEdPs9kCAuKq5j-p8SDpE-tVqQvKCoS2h-icSnaExuetcj23xY71HBRo2Yr5NsAnmzs3rBgmf6mWka3_pPEODaEiQMxdo8P3sEtf6vPG5-sNgVWNBY_507iZJeAYeWFqX0BRQUlkWwgIr-YQiEW_PVZeHz_sGeQ'
+const GUIDE_IMG =
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuC3LUub_0K1xYYE8EUbSSzqH9uE41e1cFSc-8LKFniO18igITex3MHKabYD8JOz4XnB73uug7_nRKUAFJjA-UNOiYV99SJ7avYTeqRWR-CTcYWAIPqoACjqe1MHf7CRSQz0UJBHvqje3WJO0y7Kut30lTHSY-sxg19w2URjxrvZd5DSJD_LZgcm88Fj2IOyLq5Nt5m_hjj-EwoGFntnMwmSTu3ewo-COa6-hZjs2eAPpIPqCNHTIN_FLg'
 
 const reviews = [
-  { name: 'María L.', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAyq3ykWD45i8jaiRPP8CG88CnnKZZLR4W16LHAIvSzicm-PUJJwu1fBakAH1YSymSkuz7jfv8ZAJxS6S2TAg71swpznncFTqwiK0-gE9Or1RCs2mJWcpJVqA7q0Jq7m_vmTNvacg_Jtju_uASZKhaU5WeE6WLEenie0qqSFaTqFnSfQrWt0onLmWtLCigBvHgNgecv5DCgA95A7pjLJJsZ8fOPOKQ2X_nUaKyNrYrLf1U00oF47pSPnw', stars: 5, text: 'Increíble experiencia. La nieve estaba perfecta y la organización de Juan fue impecable. Definitivamente volveré el próximo año.' },
-  { name: 'Carlos D.', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDpfENsYSI9qX3EZKrvPmh5q7wWYDqb7oP35Wv9LFqHsHDpgnVsSLNLZcfEASS79UORuZWJqrbKxQDCU82mWzbxKZcCJhlckJuWX_GSBwcPp9-9T7o6XNYAQAqzHWnl_hPw2PUYo3N9Ve0I3DrEcpGZ-Bvvg7y5sWSvBwY3M_hM-xRQLRRTpYaeHfKYXQYlQ-NFTF2YwCYb2IS2sSLwc2tfYyuynkA6scQMipmo1DC-IKaX98GHlMxwxw', stars: 4.5, text: 'El hotel muy cómodo y las clases de ski me ayudaron muchísimo a mejorar mi técnica en fuera de pista.' },
-  { name: 'Ana & Pablo', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCF1WAmZcwsa5koWqvg2qud-6Je5CF9Z1qI69EUtyoX6cjCBbHR4ydha7lr9ohMvjcd5ew9PT25IYtvPBR8Jbr9OXC_yDVB2Hzmady8rwLPJcke8QCs0Fe67NEZS2jpF7Mz8Yz2d332fBCjSxBdqiOUiF75X_79u2Ou-wvXAdFwl86pK2Jw4uSe98Z-tM3HpwWFz_65bAb5vG5er94wviLRDo9tmv1tTmqDXgc3ATjGZC7BpvB1PqtBWg', stars: 5, text: 'Un viaje de lujo. Los paisajes son insuperables y la atención a los detalles hace que valga cada centavo.' },
+  {
+    name: 'María L.',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAyq3ykWD45i8jaiRPP8CG88CnnKZZLR4W16LHAIvSzicm-PUJJwu1fBakAH1YSymSkuz7jfv8ZAJxS6S2TAg71swpznncFTqwiK0-gE9Or1RCs2mJWcpJVqA7q0Jq7m_vmTNvacg_Jtju_uASZKhaU5WeE6WLEenie0qqSFaTqFnSfQrWt0onLmWtLCigBvHgNgecv5DCgA95A7pjLJJsZ8fOPOKQ2X_nUaKyNrYrLf1U00oF47pSPnw',
+    stars: 5,
+    text: 'Increíble experiencia. La nieve estaba perfecta y la organización fue impecable.',
+  },
+  {
+    name: 'Carlos D.',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDpfENsYSI9qX3EZKrvPmh5q7wWYDqb7oP35Wv9LFqHsHDpgnVsSLNLZcfEASS79UORuZWJqrbKxQDCU82mWzbxKZcCJhlckJuWX_GSBwcPp9-9T7o6XNYAQAqzHWnl_hPw2PUYo3N9Ve0I3DrEcpGZ-Bvvg7y5sWSvBwY3M_hM-xRQLRRTpYaeHfKYXQYlQ-NFTF2YwCYb2IS2sSLwc2tfYyuynkA6scQMipmo1DC-IKaX98GHlMxwxw',
+    stars: 4.5,
+    text: 'El hotel muy cómodo y las clases de ski me ayudaron muchísimo a mejorar mi técnica.',
+  },
+  {
+    name: 'Ana & Pablo',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCF1WAmZcwsa5koWqvg2qud-6Je5CF9Z1qI69EUtyoX6cjCBbHR4ydha7lr9ohMvjcd5ew9PT25IYtvPBR8Jbr9OXC_yDVB2Hzmady8rwLPJcke8QCs0Fe67NEZS2jpF7Mz8Yz2d332fBCjSxBdqiOUiF75X_79u2Ou-wvXAdFwl86pK2Jw4uSe98Z-tM3HpwWFz_65bAb5vG5er94wviLRDo9tmv1tTmqDXgc3ATjGZC7BpvB1PqtBWg',
+    stars: 5,
+    text: 'Un viaje de lujo. Los paisajes insuperables y la atención al detalle hacen que valga cada centavo.',
+  },
 ]
 
 const days = [
-  { label: 'D1', title: 'Llegada y Bienvenida', desc: 'Recepción en el aeropuerto de Mendoza, traslado privado al resort en Las Leñas. Check-in, prueba de equipo y cena de bienvenida con el equipo de guías.' },
-  { label: 'D2', title: 'Clínica de Esquí y Primeras Bajadas', desc: 'Mañana dedicada a perfeccionar la técnica con instructores certificados. Tarde libre para explorar las pistas principales.' },
-  { label: 'D3-7', title: 'Exploración Alpina', desc: 'Días intensos de esquí, incluyendo la famosa bajada de \'Marte\' y expediciones fuera de pista si las condiciones lo permiten. Despedida y traslado de regreso.' },
+  {
+    label: 'Day 1',
+    title: 'Arrival & Welcome',
+    desc: 'Private transfer from Mendoza airport to Las Leñas resort. Equipment fitting, welcome dinner with the guide team.',
+  },
+  {
+    label: 'Days 2-3',
+    title: 'Ski Clinic & First Descents',
+    desc: 'Morning technique sessions with certified instructors. Afternoon free to explore main slopes at your own pace.',
+  },
+  {
+    label: 'Days 4-6',
+    title: 'Alpine Exploration',
+    desc: 'Intense ski days including the legendary "Marte" run and off-piste expeditions weather permitting. Farewell dinner.',
+  },
 ]
 
-function DayItem({ label, title, desc }) {
-  const [open, setOpen] = useState(false)
-  const isFirst = label === 'D1'
+function StarRating({ stars, size = 18 }) {
   return (
-    <div className="bg-surface-container-lowest rounded-xl p-md shadow-sm">
-      <div className="flex items-center justify-between cursor-pointer" onClick={() => setOpen(o => !o)}>
-        <div className="flex items-center gap-md">
-          <div className={`w-12 h-12 rounded-full flex items-center justify-center font-headline-sm text-[16px] ${isFirst ? 'bg-primary-container text-on-primary-container' : 'bg-surface-variant text-on-surface-variant'}`}>
-            {label}
-          </div>
-          <h3 className="font-headline-sm text-[18px] text-on-surface">{title}</h3>
-        </div>
-        <span className={`material-symbols-outlined text-on-surface-variant transition-transform duration-300 ${open ? 'rotate-180' : ''}`}>expand_more</span>
-      </div>
-      {open && (
-        <div className="pt-md mt-md border-t border-surface-variant">
-          <p className="font-body-md text-on-surface-variant">{desc}</p>
-        </div>
-      )}
+    <div className="flex items-center gap-xs">
+      {[1, 2, 3, 4, 5].map((i) => {
+        const filled = i <= Math.floor(stars)
+        const half = !filled && i === Math.ceil(stars) && stars % 1 !== 0
+        return (
+          <span
+            key={i}
+            className="material-symbols-outlined text-secondary-container"
+            style={{
+              fontSize: size,
+              fontVariationSettings: filled ? "'FILL' 1" : half ? "'FILL' 0" : "'FILL' 0",
+            }}
+          >
+            {half ? 'star_half' : 'star'}
+          </span>
+        )
+      })}
     </div>
   )
 }
 
 export default function TripDetail({ navigate }) {
-  const [liked, setLiked] = useState(false)
+  const [travelers, setTravelers] = useState(2)
+  const [departure, setDeparture] = useState('Jul 15')
 
   return (
-    <main className="pt-16 md:pt-20 min-h-screen bg-surface">
-      {/* Mobile header - hidden on desktop */}
-      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe">
-        <div className="h-16 flex items-center px-margin-mobile gap-md">
-          <button className="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onClick={() => navigate('trips')}>
-            <span className="material-symbols-outlined">arrow_back</span>
-          </button>
-          <div className="flex items-center gap-base flex-1">
-            <img alt="Logo" className="h-6 w-auto" src={LOGO} />
-            <span className="font-headline-sm text-headline-sm text-primary truncate">Trip Detail</span>
+    <>
+      {/* ─────────────────────────────────────────────
+          MOBILE LAYOUT
+      ───────────────────────────────────────────── */}
+      <div className="md:hidden min-h-screen bg-surface-container-low">
+        {/* Fixed header */}
+        <header className="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-sm">
+          <div className="h-14 flex items-center px-margin-mobile gap-gap-sm">
+            <button
+              className="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors"
+              onClick={() => navigate('trips')}
+            >
+              <span className="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div className="flex items-center gap-base flex-1 min-w-0">
+              <img src={LOGO} alt="Logo" className="h-6 w-auto shrink-0" />
+              <span className="font-label-md text-on-surface truncate">
+                Las Leñas Freeride Circuit
+              </span>
+            </div>
+            <img
+              src={PROFILE}
+              alt="Profile"
+              className="w-8 h-8 rounded-full object-cover shrink-0"
+            />
           </div>
-          <img alt="Profile" className="w-8 h-8 rounded-full object-cover" src={PROFILE} />
-        </div>
-      </header>
+        </header>
 
-      <div className="flex flex-col w-full pb-24 md:pb-0">
-        {/* Gallery */}
-        <div className="relative w-full h-[400px] bg-surface-container-high overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out hover:scale-105"
-            style={{ backgroundImage: `url('${HERO_IMG}')` }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-          <div className="absolute top-md right-md bg-inverse-surface/80 backdrop-blur-md rounded-full px-sm py-xs flex items-center gap-xs shadow-md">
-            <span className="material-symbols-outlined text-inverse-on-surface text-[18px]">ac_unit</span>
-            <span className="font-label-md text-inverse-on-surface">-5°C / 120cm Nieve</span>
+        {/* Hero image */}
+        <div className="relative w-full h-[400px] overflow-hidden mt-14">
+          <img
+            src={HERO_IMG}
+            alt="Las Leñas"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+
+          {/* Weather chip */}
+          <div className="absolute top-gap-md right-gap-md flex items-center gap-xs bg-black/60 backdrop-blur-sm rounded-full px-sm py-xs">
+            <span className="material-symbols-outlined text-white text-[16px]">ac_unit</span>
+            <span className="font-label-md text-white text-[12px]">-5°C / 120cm Powder</span>
           </div>
-          <div className="absolute bottom-md left-0 right-0 flex justify-center gap-base">
-            {[0,1,2,3].map(i => <div key={i} className={`w-2 h-2 rounded-full ${i===0 ? 'bg-on-primary' : 'bg-on-primary/50'}`} />)}
+
+          {/* Dot indicators */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-xs">
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className={cn(
+                  'w-2 h-2 rounded-full',
+                  i === 0 ? 'bg-white' : 'bg-white/40'
+                )}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Desktop 12-col grid layout */}
-        <div className="md:grid md:grid-cols-12 md:gap-gutter md:px-margin-desktop md:py-lg md:max-w-[1440px] md:mx-auto w-full">
-          {/* Left content - 8 cols desktop, full mobile */}
-          <div className="md:col-span-8 px-margin-mobile md:px-0 -mt-6 md:mt-0 relative z-10">
-            {/* Header card */}
-            <div className="bg-surface-container-lowest rounded-[24px] p-md shadow-[0_10px_20px_rgba(0,0,0,0.04)] mb-xl">
-              <div className="flex flex-col gap-sm">
-                <div className="flex justify-between items-start">
-                  <h1 className="font-headline-lg-mobile text-on-surface">Las Leñas Snow Trip</h1>
-                  <button
-                    onClick={() => setLiked(l => !l)}
-                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm ${liked ? 'bg-error text-on-error' : 'bg-surface-container text-primary hover:bg-primary-container'}`}
+        {/* Content */}
+        <div className="px-margin-mobile py-lg pb-24 flex flex-col gap-lg">
+          {/* Title block */}
+          <div className="flex flex-col gap-sm">
+            <h1 className="font-headline-lg text-on-surface">Las Leñas Freeride Circuit</h1>
+            <p className="font-body-md text-on-surface-variant">Mendoza, Argentina</p>
+            <div className="flex items-center gap-sm">
+              <StarRating stars={4.9} />
+              <span className="font-body-md text-on-surface font-semibold">4.9</span>
+            </div>
+            <p className="font-headline-md text-primary">$2,850 <span className="font-body-md text-on-surface-variant">per person</span></p>
+          </div>
+
+          {/* Badge row */}
+          <div className="flex flex-wrap gap-sm">
+            <Badge variant="secondary">7 Days</Badge>
+            <Badge variant="secondary" className="animate-pulse">High Demand</Badge>
+            <Badge variant="secondary">Expert Level</Badge>
+          </div>
+
+          {/* Description */}
+          <p className="font-body-md text-on-surface-variant leading-relaxed">
+            Immerse yourself in the vast expanse of the Andes with this premium freeride expedition
+            to Las Leñas. Designed for adventurers seeking world-class powder skiing combined with
+            exceptional mountain hospitality. Explore legendary off-piste terrain, pristine alpine
+            bowls, and breathtaking Andean landscapes under the guidance of expert local guides.
+          </p>
+
+          {/* Guide */}
+          <div className="flex flex-col gap-sm">
+            <h2 className="font-headline-sm text-on-surface">Your Guide</h2>
+            <div className="flex items-center gap-md bg-surface-container-lowest rounded-2xl p-md shadow-sm">
+              <img
+                src={GUIDE_IMG}
+                alt="Tomas Alarcon"
+                className="w-16 h-16 rounded-full object-cover shrink-0"
+              />
+              <div>
+                <p className="font-headline-sm text-on-surface">Tomas Alarcon</p>
+                <p className="font-body-md text-on-surface-variant">Mountain Guide · 12 Years Exp.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Itinerary */}
+          <div className="flex flex-col gap-sm">
+            <h2 className="font-headline-sm text-on-surface">Itinerary</h2>
+            <Accordion type="single" collapsible className="flex flex-col gap-sm">
+              {days.map((day, idx) => (
+                <AccordionItem
+                  key={day.label}
+                  value={`day-${idx}`}
+                  className="bg-surface-container-lowest rounded-xl px-md shadow-sm border-0"
+                >
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex items-center gap-md text-left">
+                      <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+                        <span className="font-label-md text-primary text-[11px]">{day.label.split(' ')[1] ?? day.label}</span>
+                      </div>
+                      <span className="font-headline-sm text-on-surface">{day.title}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="font-body-md text-on-surface-variant pb-md">
+                    {day.desc}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+
+          {/* Reviews */}
+          <div className="flex flex-col gap-sm">
+            <h2 className="font-headline-sm text-on-surface">Reviews</h2>
+            <div className="flex flex-col gap-sm">
+              {reviews.map((r) => (
+                <div
+                  key={r.name}
+                  className="bg-surface-container-lowest rounded-xl p-md shadow-sm flex flex-col gap-sm"
+                >
+                  <div className="flex items-center gap-sm">
+                    <img src={r.img} alt={r.name} className="w-10 h-10 rounded-full object-cover" />
+                    <div>
+                      <p className="font-label-md text-on-surface">{r.name}</p>
+                      <StarRating stars={r.stars} size={14} />
+                    </div>
+                  </div>
+                  <p className="font-body-md text-on-surface-variant">{r.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom sticky CTA */}
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.1)] px-margin-mobile py-md">
+          <Button variant="default" size="lg" className="w-full" onClick={() => navigate('checkout')}>
+            Secure Your Spot – $2,850
+          </Button>
+        </div>
+      </div>
+
+      {/* ─────────────────────────────────────────────
+          DESKTOP LAYOUT
+      ───────────────────────────────────────────── */}
+      <div className="hidden md:block pt-20 bg-surface-container-low min-h-screen">
+        <div className="max-w-[1440px] mx-auto px-margin-desktop py-lg grid grid-cols-12 gap-gutter">
+
+          {/* ── Left column (8 cols) ── */}
+          <div className="col-span-8 flex flex-col gap-lg">
+
+            {/* Hero */}
+            <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-md">
+              <img src={HERO_IMG} alt="Las Leñas" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <div className="absolute top-gap-md right-gap-md">
+                <Badge className="flex items-center gap-xs bg-black/60 text-white border-0 backdrop-blur-sm">
+                  <span className="material-symbols-outlined text-[14px]">ac_unit</span>
+                  120cm Powder
+                </Badge>
+              </div>
+            </div>
+
+            {/* Title block */}
+            <div className="flex flex-col gap-sm">
+              <h1 className="font-headline-lg text-on-surface">Las Leñas Freeride Circuit</h1>
+              <p className="font-body-lg text-on-surface-variant">Mendoza, Argentina</p>
+              <div className="flex items-center gap-sm">
+                <StarRating stars={4.9} size={20} />
+                <span className="font-body-lg text-on-surface font-semibold">4.9</span>
+                <span className="font-body-md text-on-surface-variant">/ 42 reviews</span>
+              </div>
+            </div>
+
+            <Separator className="border-outline-variant" />
+
+            {/* About */}
+            <div className="flex flex-col gap-sm">
+              <h2 className="font-headline-md text-on-surface">About This Expedition</h2>
+              <p className="font-body-lg text-on-surface-variant leading-relaxed">
+                Las Leñas is one of South America's premier freeride destinations, boasting over
+                3,000 meters of vertical and reliably dry Andean powder. This expedition places
+                you at the heart of the mountain's most coveted terrain — from wide open alpine
+                bowls to steep chutes accessible only with a certified guide.
+              </p>
+              <p className="font-body-lg text-on-surface-variant leading-relaxed">
+                Each day is crafted to maximize your time on snow while ensuring safety and
+                comfort. Evenings are reserved for immersive mountain culture: shared meals,
+                route briefings, and the camaraderie that only high-altitude adventure fosters.
+                This is skiing as it was meant to be experienced.
+              </p>
+            </div>
+
+            {/* Difficulty meter */}
+            <div className="flex flex-col gap-sm">
+              <h2 className="font-headline-sm text-on-surface">Difficulty</h2>
+              <div className="flex items-center gap-md">
+                <div className="flex gap-xs">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        'w-8 h-2 rounded-full',
+                        i <= 3 ? 'bg-primary' : 'bg-surface-container-high'
+                      )}
+                    />
+                  ))}
+                </div>
+                <span className="font-body-md text-on-surface-variant">Advanced / Expert</span>
+              </div>
+            </div>
+
+            <Separator className="border-outline-variant" />
+
+            {/* Itinerary accordion */}
+            <div className="flex flex-col gap-sm">
+              <h2 className="font-headline-md text-on-surface">Itinerary</h2>
+              <Accordion type="single" collapsible className="flex flex-col gap-sm">
+                {days.map((day, idx) => (
+                  <AccordionItem
+                    key={day.label}
+                    value={`day-desktop-${idx}`}
+                    className="bg-surface-container-lowest rounded-xl px-md shadow-sm border-0"
                   >
-                    <span className="material-symbols-outlined" style={liked ? { fontVariationSettings: "'FILL' 1" } : {}}>favorite</span>
-                  </button>
-                </div>
-                <div className="flex flex-wrap items-center gap-md text-on-surface-variant font-body-md">
-                  <div className="flex items-center gap-xs">
-                    <span className="material-symbols-outlined text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                    <span className="font-headline-sm text-on-surface text-[18px]">4.9</span>
-                    <span className="text-on-surface-variant">(24 reseñas)</span>
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="flex items-center gap-md text-left">
+                        <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+                          <span className="font-label-md text-primary text-[11px] text-center leading-tight px-1">
+                            {day.label}
+                          </span>
+                        </div>
+                        <span className="font-headline-sm text-on-surface">{day.title}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="font-body-md text-on-surface-variant pb-md pl-[64px]">
+                      {day.desc}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
+            <Separator className="border-outline-variant" />
+
+            {/* Guide card */}
+            <div className="flex flex-col gap-sm">
+              <h2 className="font-headline-md text-on-surface">Your Guide</h2>
+              <div className="bg-surface-container-lowest rounded-2xl p-md shadow-sm flex items-start gap-md">
+                <img
+                  src={GUIDE_IMG}
+                  alt="Tomas Alarcon"
+                  className="w-24 h-24 rounded-full object-cover shrink-0"
+                />
+                <div className="flex flex-col gap-sm flex-1">
+                  <div>
+                    <h3 className="font-headline-sm text-on-surface">Tomas Alarcon</h3>
+                    <p className="font-body-md text-on-surface-variant">Mountain Guide · 12 Years Exp.</p>
                   </div>
-                  <div className="flex items-center gap-xs">
-                    <span className="material-symbols-outlined text-[20px]">location_on</span>
-                    <span>Mendoza, Argentina</span>
+                  <p className="font-body-md text-on-surface-variant leading-relaxed">
+                    Tomas grew up in the Mendoza foothills and has spent over a decade guiding
+                    expeditions in Las Leñas and beyond. Certified by the Argentine Mountain Guide
+                    Association, he brings deep terrain knowledge, calm leadership, and an
+                    infectious passion for the mountains to every trip.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-xs text-secondary-container font-body-md">
+                      <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                      <span className="font-label-md text-on-surface">4.9 Rating</span>
+                    </div>
+                    <Button variant="outline">Message Guide</Button>
                   </div>
-                  <div className="flex items-center gap-xs">
-                    <span className="material-symbols-outlined text-[20px]">schedule</span>
-                    <span>7 días / 6 noches</span>
-                  </div>
-                </div>
-                <div className="mt-sm flex items-center gap-sm">
-                  <span className="font-label-md text-on-surface-variant uppercase tracking-wider text-[12px]">Dificultad</span>
-                  <div className="flex gap-xs">
-                    {[1,2,3,4].map(i => <div key={i} className={`w-6 h-1.5 rounded-full ${i<=2 ? 'bg-primary' : 'bg-primary/20'}`} />)}
-                  </div>
-                  <span className="font-label-md text-on-surface-variant text-[12px]">Intermedio</span>
                 </div>
               </div>
             </div>
 
-            {/* Description */}
-            <section className="mb-xl">
-              <h2 className="font-headline-sm text-on-surface mb-sm">La Experiencia</h2>
-              <div className="bg-surface-container rounded-xl p-md">
-                <p className="font-body-md text-on-surface-variant leading-relaxed">
-                  Sumérgete en la inmensidad de la Cordillera de los Andes con esta expedición premium a Las Leñas. Diseñado para aventureros que buscan combinar la adrenalina del esquí de alta montaña con el confort excepcional. Disfruta de pistas fuera de serie, nieve polvo inigualable y paisajes que te dejarán sin aliento.
-                </p>
-                <button className="mt-sm font-label-md text-primary flex items-center gap-xs hover:text-on-primary-fixed-variant transition-colors">
-                  <span>Leer más</span>
-                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </button>
-              </div>
-            </section>
-
-            {/* Itinerary */}
-            <section className="mb-xl">
-              <h2 className="font-headline-sm text-on-surface mb-md">Itinerario</h2>
-              <div className="flex flex-col gap-sm">
-                {days.map(d => <DayItem key={d.label} {...d} />)}
-              </div>
-            </section>
-
-            {/* Includes / Not includes */}
-            <section className="mb-xl grid grid-cols-1 md:grid-cols-2 gap-md">
-              <div className="bg-primary-fixed/20 rounded-xl p-md">
-                <h3 className="font-headline-sm text-[18px] text-on-surface mb-sm flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-primary">check_circle</span> Qué incluye
-                </h3>
-                <ul className="flex flex-col gap-sm font-body-md text-on-surface-variant">
-                  {['Alojamiento 6 noches (Hotel 4*)', 'Pases de ski para 7 días', 'Clases grupales (Nivel intermedio)', 'Traslados in/out Mendoza'].map(item => (
-                    <li key={item} className="flex items-start gap-sm">
-                      <span className="material-symbols-outlined text-primary text-[20px] mt-0.5">check</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-error-container/20 rounded-xl p-md">
-                <h3 className="font-headline-sm text-[18px] text-on-surface mb-sm flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-error">cancel</span> No incluye
-                </h3>
-                <ul className="flex flex-col gap-sm font-body-md text-on-surface-variant">
-                  {['Alquiler de equipo de ski/snowboard', 'Vuelos hacia/desde Mendoza', 'Comidas no especificadas'].map(item => (
-                    <li key={item} className="flex items-start gap-sm">
-                      <span className="material-symbols-outlined text-error text-[20px] mt-0.5">close</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-
-            {/* Guide */}
-            <section className="mb-xl">
-              <h2 className="font-headline-sm text-on-surface mb-md">Tu Guía</h2>
-              <div className="bg-surface-container-lowest rounded-[24px] p-md shadow-sm flex items-center gap-md">
-                <img className="w-20 h-20 rounded-full object-cover shadow-sm" src={GUIDE_IMG} alt="Juan García" />
-                <div>
-                  <h3 className="font-headline-sm text-[20px] text-on-surface">Juan García</h3>
-                  <p className="font-body-md text-on-surface-variant flex items-center gap-xs mt-xs">
-                    <span className="material-symbols-outlined text-[18px]">snowboarding</span>
-                    15 años de experiencia
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* Map */}
-            <section className="mb-xl">
-              <h2 className="font-headline-sm text-on-surface mb-md">Ubicación</h2>
-              <div className="relative w-full h-[250px] rounded-xl overflow-hidden shadow-sm">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${MAP_IMG}')` }} />
-                <div className="absolute bottom-md left-md bg-surface-container-lowest/90 backdrop-blur-sm rounded-lg p-sm shadow-md">
-                  <span className="font-label-md text-on-surface flex items-center gap-xs">
-                    <span className="material-symbols-outlined text-primary text-[18px]">location_on</span>
-                    Las Leñas Resort
-                  </span>
-                </div>
-              </div>
-            </section>
+            <Separator className="border-outline-variant" />
 
             {/* Reviews */}
-            <section className="mb-xl">
-              <div className="flex items-center justify-between mb-md">
-                <h2 className="font-headline-sm text-on-surface">Reseñas</h2>
-                <button className="font-label-md text-primary">Ver todas</button>
-              </div>
-              <div className="flex overflow-x-auto gap-md pb-md snap-x">
-                {reviews.map(r => (
-                  <div key={r.name} className="min-w-[280px] bg-surface-container-lowest rounded-xl p-md shadow-sm snap-center">
-                    <div className="flex items-center gap-sm mb-sm">
-                      <img className="w-10 h-10 rounded-full object-cover" src={r.img} alt={r.name} />
+            <div className="flex flex-col gap-md">
+              <h2 className="font-headline-md text-on-surface">Reviews</h2>
+              <div className="grid grid-cols-3 gap-md">
+                {reviews.map((r) => (
+                  <div
+                    key={r.name}
+                    className="bg-surface-container-lowest rounded-xl p-md shadow-sm flex flex-col gap-sm"
+                  >
+                    <div className="flex items-center gap-sm">
+                      <img src={r.img} alt={r.name} className="w-10 h-10 rounded-full object-cover" />
                       <div>
                         <p className="font-label-md text-on-surface">{r.name}</p>
-                        <div className="flex text-secondary-container">
-                          {[1,2,3,4,5].map(i => (
-                            <span key={i} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: i <= Math.floor(r.stars) ? "'FILL' 1" : "'FILL' 0" }}>
-                              {i <= r.stars ? (i === Math.ceil(r.stars) && r.stars % 1 !== 0 ? 'star_half' : 'star') : 'star'}
-                            </span>
-                          ))}
-                        </div>
+                        <StarRating stars={r.stars} size={14} />
                       </div>
                     </div>
-                    <p className="font-body-md text-on-surface-variant text-sm line-clamp-3">{r.text}</p>
+                    <p className="font-body-md text-on-surface-variant leading-relaxed">{r.text}</p>
                   </div>
                 ))}
               </div>
-            </section>
+            </div>
           </div>
 
-          {/* Desktop sticky booking sidebar - 4 cols, hidden on mobile */}
-          <div className="hidden md:block md:col-span-4">
-            <div className="sticky top-24 bg-surface-container-lowest rounded-2xl p-md shadow-xl flex flex-col gap-md">
-              <div className="flex justify-between items-end border-b border-surface-container-highest pb-sm">
-                <div className="flex flex-col">
-                  <span className="font-label-md text-on-surface-variant line-through">$3,200</span>
-                  <div className="flex items-baseline gap-xs">
-                    <span className="font-headline-lg text-primary">$2,850</span>
-                    <span className="font-body-md text-on-surface-variant">/ person</span>
+          {/* ── Right column (4 cols) – sticky price card ── */}
+          <div className="col-span-4">
+            <div className="sticky top-32 flex flex-col gap-md">
+              <div className="bg-surface-container-lowest rounded-2xl p-md shadow-md flex flex-col gap-md">
+
+                {/* Price + high demand */}
+                <div className="flex items-end justify-between">
+                  <div>
+                    <p className="font-headline-md text-on-surface">$2,850</p>
+                    <p className="font-body-md text-on-surface-variant">per person</p>
+                  </div>
+                  <Badge variant="secondary" className="animate-pulse">High Demand</Badge>
+                </div>
+
+                <Separator className="border-outline-variant" />
+
+                {/* Departure date select */}
+                <div className="flex flex-col gap-xs">
+                  <label className="font-label-md text-on-surface-variant">Departure Date</label>
+                  <select
+                    value={departure}
+                    onChange={(e) => setDeparture(e.target.value)}
+                    className="w-full rounded-lg border border-outline-variant bg-surface-container px-sm py-xs font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <option>Jul 15</option>
+                    <option>Aug 12</option>
+                    <option>Sep 10</option>
+                  </select>
+                </div>
+
+                {/* Travelers stepper */}
+                <div className="flex flex-col gap-xs">
+                  <label className="font-label-md text-on-surface-variant">Travelers</label>
+                  <div className="flex items-center gap-sm">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setTravelers((t) => Math.max(1, t - 1))}
+                    >
+                      <span className="material-symbols-outlined">remove</span>
+                    </Button>
+                    <span className="font-headline-sm text-on-surface w-8 text-center">{travelers}</span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setTravelers((t) => t + 1)}
+                    >
+                      <span className="material-symbols-outlined">add</span>
+                    </Button>
                   </div>
                 </div>
-                <div className="flex items-center gap-xs text-secondary bg-secondary-fixed px-sm py-xs rounded-lg">
-                  <span className="material-symbols-outlined text-sm">local_fire_department</span>
-                  <span className="font-label-md">High Demand</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-sm">
-                <div className="flex justify-between items-center py-xs">
-                  <span className="font-body-md text-on-surface-variant">Next Availability</span>
-                  <span className="font-label-md text-on-surface">Aug 12 - Aug 19</span>
-                </div>
-                <div className="flex justify-between items-center py-xs">
-                  <span className="font-body-md text-on-surface-variant">Group Size</span>
-                  <span className="font-label-md text-on-surface">3 spots left</span>
-                </div>
-              </div>
-              <div className="w-full bg-surface-container rounded-lg p-sm flex items-center justify-between cursor-pointer">
-                <div className="flex items-center gap-sm text-on-surface">
-                  <span className="material-symbols-outlined text-primary">calendar_month</span>
-                  <span className="font-body-md">Select Dates</span>
-                </div>
-                <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-              </div>
-              <div className="w-full bg-surface-container rounded-lg p-sm flex items-center justify-between cursor-pointer">
-                <div className="flex items-center gap-sm text-on-surface">
-                  <span className="material-symbols-outlined text-primary">person</span>
-                  <span className="font-body-md">2 Guests</span>
-                </div>
-                <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-              </div>
-              <button onClick={() => navigate('checkout')} className="w-full bg-secondary text-on-secondary font-headline-sm py-sm rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                Secure Spot
-              </button>
-              <p className="text-center font-label-md text-on-surface-variant text-xs">No charge until confirmation.</p>
-              <div className="pt-sm border-t border-surface-container-highest flex items-center justify-center gap-md text-on-surface-variant">
-                <div className="flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-sm">verified_user</span>
-                  <span className="text-xs">Secure Booking</span>
-                </div>
-                <div className="flex items-center gap-xs">
-                  <span className="material-symbols-outlined text-sm">event_busy</span>
-                  <span className="text-xs">Free Cancellation (30d)</span>
+
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() => navigate('checkout')}
+                >
+                  Secure Your Spot
+                </Button>
+
+                <Separator className="border-outline-variant" />
+
+                {/* Trust indicators */}
+                <div className="flex flex-col gap-sm">
+                  {[
+                    { icon: 'replay', label: '100% Refundable · 30 days' },
+                    { icon: 'lock', label: 'Secure Payment' },
+                    { icon: 'support_agent', label: 'Expert Support 24/7' },
+                  ].map(({ icon, label }) => (
+                    <div key={label} className="flex items-center gap-sm text-on-surface-variant">
+                      <span className="material-symbols-outlined text-[18px] text-primary">{icon}</span>
+                      <span className="font-body-md">{label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Mobile sticky booking bar - hidden on desktop */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-lowest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.08)] p-md z-40 pb-safe">
-          <div className="max-w-[768px] mx-auto flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="font-headline-md text-on-surface">$1200 <span className="font-body-md text-on-surface-variant">/ persona</span></span>
-              <span className="font-label-md text-error flex items-center gap-xs">
-                <span className="material-symbols-outlined text-[16px]">local_fire_department</span>
-                Quedan 3 lugares
-              </span>
-            </div>
-            <button
-              onClick={() => navigate('checkout')}
-              className="bg-secondary-container text-on-secondary-container font-headline-sm text-[16px] px-lg py-sm rounded-lg shadow-md hover:bg-secondary transition-colors hover:text-on-secondary"
-            >
-              Reservar Ahora
-            </button>
-          </div>
-        </div>
+        <Footer />
       </div>
-    </main>
+    </>
   )
 }

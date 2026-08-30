@@ -223,9 +223,9 @@ export default function Home({ navigate }) {
       </div>
 
       {/* ══════════════════ DESKTOP ══════════════════ */}
-      <div className="hidden md:block pt-20">
+      <div className="hidden md:block">
         {/* Hero — full width, texto grande abajo */}
-        <section className="relative w-full min-h-screen flex flex-col justify-end overflow-hidden -mt-20">
+        <section className="relative w-full min-h-screen flex flex-col justify-end overflow-hidden">
           {/* Imagen de fondo */}
           <div className="absolute inset-0 z-0">
             <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('${HERO_DESK}')` }} />

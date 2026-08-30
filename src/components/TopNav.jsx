@@ -3,13 +3,58 @@ const PROFILE = 'https://lh3.googleusercontent.com/aida/AEtjO1VwpW4s1q-CpKW7l9Nj
 
 const TAB_MAP = { home: 'home', trips: 'trips', detail: 'trips', checkout: 'trips', 'my-trips': 'my-trips', admin: 'admin' }
 
-export default function TopNav({ current, navigate }) {
+export default function TopNav({ current, navigate, overlay = false }) {
   const active = TAB_MAP[current] ?? 'home'
   const links = [
-    { label: 'INICIO', tab: 'home', screen: 'home' },
-    { label: 'VIAJES', tab: 'trips', screen: 'trips' },
-    { label: 'MI DASHBOARD', tab: 'my-trips', screen: 'my-trips' },
+    { label: 'Inicio', tab: 'home', screen: 'home' },
+    { label: 'Viajes', tab: 'trips', screen: 'trips' },
+    { label: 'Mi Dashboard', tab: 'my-trips', screen: 'my-trips' },
   ]
+
+  if (overlay) {
+    return (
+      <header className="hidden md:block fixed top-0 w-full z-50">
+        <div className="h-20 w-full px-margin-desktop flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-base cursor-pointer" onClick={() => navigate('home')}>
+            <img alt="Upsala Trips" className="h-8 w-auto object-contain" src={LOGO} />
+            <span className="font-headline-sm text-white uppercase tracking-tight drop-shadow">Upsala Trips</span>
+          </div>
+
+          {/* Pill nav */}
+          <nav className="flex items-center">
+            <div className="flex items-center gap-1 rounded-full bg-white/10 px-1 py-1 ring-1 ring-white/15 backdrop-blur-md">
+              {links.map(l => (
+                <button key={l.tab} onClick={() => navigate(l.screen)}
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${
+                    active === l.tab
+                      ? 'bg-white/20 text-white'
+                      : 'text-white/75 hover:text-white hover:bg-white/10'
+                  }`}>
+                  {l.label}
+                </button>
+              ))}
+              {current === 'admin' && (
+                <button onClick={() => navigate('admin')}
+                  className="px-4 py-2 text-sm font-medium rounded-full bg-white/20 text-white">
+                  Admin
+                </button>
+              )}
+              <button onClick={() => navigate('my-trips')}
+                className="ml-1 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-white/90 transition-colors">
+                Mi Cuenta
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </button>
+            </div>
+          </nav>
+
+          {/* Profile */}
+          <img alt="Profile" className="w-10 h-10 rounded-full object-cover ring-2 ring-white/30 shadow-lg" src={PROFILE} />
+        </div>
+      </header>
+    )
+  }
+
   return (
     <header className="hidden md:block fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
       <div className="h-20 w-full px-margin-desktop flex items-center justify-between">

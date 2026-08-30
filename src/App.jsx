@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <div className="bg-surface min-h-screen font-body-md text-on-surface">
-      <TopNav current={screen} navigate={navigate} />
+      <TopNav current={screen} navigate={navigate} overlay={screen === 'home'} />
       {renderScreen()}
       <BottomNav current={screen} navigate={navigate} />
     </div>

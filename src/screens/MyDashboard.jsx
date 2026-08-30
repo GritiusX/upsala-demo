@@ -16,14 +16,14 @@ const TRIP_BG =
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const documents = [
-  { name: 'Medical Clearance', status: 'ACTION REQUIRED', statusColor: 'text-secondary', icon: 'description', action: 'Upload' },
-  { name: 'Liability Waiver', status: 'COMPLETED', statusColor: 'text-green-600', icon: 'task_alt', action: 'Download' },
-  { name: 'Expedition Route Map', status: 'AVAILABLE', statusColor: 'text-primary', icon: 'map', action: 'Download' },
+  { name: 'Apto Médico', status: 'ACCIÓN REQUERIDA', statusColor: 'text-secondary', icon: 'description', action: 'Subir' },
+  { name: 'Renuncia de Responsabilidad', status: 'COMPLETADO', statusColor: 'text-green-600', icon: 'task_alt', action: 'Descargar' },
+  { name: 'Mapa de Ruta', status: 'DISPONIBLE', statusColor: 'text-primary', icon: 'map', action: 'Descargar' },
 ]
 
 const mobileTrips = [
-  { title: 'Patagonia Ice Trek', date: 'Oct 12 - Oct 18', location: 'El Chaltén', status: 'CONFIRMED', img: TRIP_BG, days: 14 },
-  { title: 'Las Leñas Snow Trip', date: 'Jul 15 - Jul 22', location: 'Mendoza', status: 'PENDING', img: TRIP_BG, days: 47 },
+  { title: 'Patagonia Ice Trek', date: 'Oct 12 - Oct 18', location: 'El Chaltén', status: 'CONFIRMADO', img: TRIP_BG, days: 14 },
+  { title: 'Las Leñas Snow Trip', date: 'Jul 15 - Jul 22', location: 'Mendoza', status: 'PENDIENTE', img: TRIP_BG, days: 47 },
 ]
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -38,7 +38,7 @@ export default function MyDashboard() {
         <header className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-margin-mobile bg-surface-container-lowest/90 backdrop-blur border-b border-outline-variant">
           <div className="flex items-center gap-sm">
             <img src={LOGO} alt="Upsala Trips Logo" className="h-8 w-auto object-contain" />
-            <span className="font-headline-sm text-on-surface">My Dashboard</span>
+            <span className="font-headline-sm text-on-surface">Mi Dashboard</span>
           </div>
           <img src={PROFILE} alt="Profile" className="w-9 h-9 rounded-full object-cover ring-2 ring-outline-variant" />
         </header>
@@ -47,17 +47,17 @@ export default function MyDashboard() {
         <main className="pt-16 pb-24 px-margin-mobile flex flex-col gap-lg">
           {/* Welcome banner */}
           <section className="pt-md">
-            <p className="font-headline-sm text-on-surface">Welcome back, Juan!</p>
-            <p className="font-body-md text-on-surface-variant">Explorer since 2022</p>
+            <p className="font-headline-sm text-on-surface">¡Bienvenido de vuelta, Juan!</p>
+            <p className="font-body-md text-on-surface-variant">Explorador desde 2022</p>
           </section>
 
           {/* Credits card */}
           <Card className="bg-primary text-on-primary rounded-2xl p-md border-0">
             <div className="flex items-center justify-between mb-sm">
-              <span className="font-label-md opacity-80">Explorer Pass</span>
-              <Badge className="bg-on-primary/20 text-on-primary border-0">Tier: Gold</Badge>
+              <span className="font-label-md opacity-80">Pase Explorador</span>
+              <Badge className="bg-on-primary/20 text-on-primary border-0">Nivel: Oro</Badge>
             </div>
-            <p className="font-headline-md mb-xs">2,450 <span className="font-body-md opacity-70">/ 3,000 credits</span></p>
+            <p className="font-headline-md mb-xs">2.450 <span className="font-body-md opacity-70">/ 3.000 créditos</span></p>
             {/* Progress bar */}
             <div className="w-full h-2 rounded-full bg-on-primary/30 overflow-hidden">
               <div className="h-full rounded-full bg-on-primary" style={{ width: '80%' }} />
@@ -66,7 +66,7 @@ export default function MyDashboard() {
 
           {/* Upcoming Trips */}
           <section className="flex flex-col gap-sm">
-            <p className="font-label-md text-on-surface-variant uppercase tracking-wider">Upcoming Trips</p>
+            <p className="font-label-md text-on-surface-variant uppercase tracking-wider">Próximos Viajes</p>
             {mobileTrips.map((trip) => (
               <Card key={trip.title} className="overflow-hidden rounded-2xl border-0 shadow-sm">
                 {/* Background image with gradient overlay */}
@@ -91,10 +91,10 @@ export default function MyDashboard() {
                   <div className="absolute bottom-0 left-0 right-0 p-md text-on-primary">
                     <p className="font-headline-sm">{trip.title}</p>
                     <p className="font-body-md opacity-80">{trip.date} · {trip.location}</p>
-                    <p className="font-label-md mt-xs opacity-70">Days until departure: {trip.days}</p>
+                    <p className="font-label-md mt-xs opacity-70">Días para partir: {trip.days}</p>
                     <div className="mt-sm">
                       <Button variant="outline" className="text-on-primary border-on-primary/50 hover:bg-on-primary/10">
-                        VIEW ITINERARY
+                        VER ITINERARIO
                       </Button>
                     </div>
                   </div>
@@ -107,7 +107,7 @@ export default function MyDashboard() {
 
           {/* Travel Documents */}
           <section className="flex flex-col gap-sm">
-            <p className="font-label-md text-on-surface-variant uppercase tracking-wider">Travel Documents</p>
+            <p className="font-label-md text-on-surface-variant uppercase tracking-wider">Documentos de Viaje</p>
             {documents.map((doc) => (
               <div key={doc.name} className="flex items-center gap-sm py-sm">
                 <span className="material-symbols-outlined text-on-surface-variant">{doc.icon}</span>
@@ -131,12 +131,12 @@ export default function MyDashboard() {
         {/* Page header */}
         <div className="px-margin-desktop py-lg flex items-center justify-between">
           <div>
-            <h1 className="font-headline-xl text-on-surface">Welcome back, Juan</h1>
-            <p className="font-body-md text-on-surface-variant mt-xs">Explorer Since 2022 · Gold Member</p>
+            <h1 className="font-headline-xl text-on-surface">¡Bienvenido de vuelta, Juan!</h1>
+            <p className="font-body-md text-on-surface-variant mt-xs">Explorador desde 2022 · Miembro Oro</p>
           </div>
           <Button variant="outline" className="gap-xs border-outline-variant text-on-surface">
             <span className="material-symbols-outlined text-[18px]">export_notes</span>
-            Export
+            Exportar
           </Button>
         </div>
 
@@ -154,7 +154,7 @@ export default function MyDashboard() {
 
             {/* CONFIRMED badge — top left */}
             <div className="absolute top-md left-md">
-              <Badge className="bg-green-600 text-white border-0">CONFIRMED</Badge>
+              <Badge className="bg-green-600 text-white border-0">CONFIRMADO</Badge>
             </div>
 
             {/* Content overlay — bottom */}
@@ -164,7 +164,7 @@ export default function MyDashboard() {
 
               {/* Countdown row */}
               <div className="flex gap-sm mt-sm">
-                {[['14', 'DAYS'], ['08', 'HRS'], ['45', 'MIN']].map(([val, label], i) => (
+                {[['14', 'DÍAS'], ['08', 'HS'], ['45', 'MIN']].map(([val, label], i) => (
                   <div
                     key={label}
                     className="flex items-center gap-sm"
@@ -179,7 +179,7 @@ export default function MyDashboard() {
               </div>
 
               <Button className="mt-sm bg-on-primary/20 border border-on-primary/40 text-on-primary hover:bg-on-primary/30">
-                VIEW ITINERARY
+                VER ITINERARIO
               </Button>
             </div>
           </Card>
@@ -188,15 +188,15 @@ export default function MyDashboard() {
           <Card className="col-span-4 bg-primary text-on-primary rounded-3xl p-md h-96 flex flex-col justify-between border-0 shadow-sm">
             {/* Top */}
             <div className="flex flex-col gap-sm">
-              <Badge className="bg-on-primary/20 text-on-primary border-0 w-fit">GOLD TIER</Badge>
-              <p className="font-headline-sm">Explorer Pass</p>
+              <Badge className="bg-on-primary/20 text-on-primary border-0 w-fit">NIVEL ORO</Badge>
+              <p className="font-headline-sm">Pase Explorador</p>
               <p className="font-body-md opacity-80">Juan M.</p>
             </div>
 
             {/* Middle */}
             <div className="flex flex-col gap-xs">
               <p className="font-headline-xl leading-none">2,450</p>
-              <p className="font-body-md opacity-70">/ 3,000 credits</p>
+              <p className="font-body-md opacity-70">/ 3.000 créditos</p>
               {/* Progress bar */}
               <div className="w-full h-2 rounded-full bg-on-primary/30 overflow-hidden mt-xs">
                 <div className="h-full rounded-full bg-on-primary" style={{ width: '80%' }} />
@@ -205,9 +205,9 @@ export default function MyDashboard() {
 
             {/* Bottom */}
             <div className="flex flex-col gap-sm">
-              <p className="font-label-md opacity-70">Next tier: Platinum at 3,000 credits</p>
+              <p className="font-label-md opacity-70">Próximo nivel: Platino a 3.000 créditos</p>
               <Button variant="outline" className="border-on-primary/50 text-on-primary w-full hover:bg-on-primary/10">
-                Redeem Credits
+                Canjear Créditos
               </Button>
             </div>
           </Card>
@@ -215,15 +215,15 @@ export default function MyDashboard() {
 
         {/* Travel Documents table */}
         <div className="px-margin-desktop pb-xl">
-          <h2 className="font-headline-sm text-on-surface mb-md">Travel Documents</h2>
+          <h2 className="font-headline-sm text-on-surface mb-md">Documentos de Viaje</h2>
 
           <Card className="rounded-2xl border border-outline-variant overflow-hidden shadow-sm">
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-outline-variant bg-surface-container-low">
-                  <th className="px-md py-sm font-label-md text-on-surface-variant font-normal">Document</th>
-                  <th className="px-md py-sm font-label-md text-on-surface-variant font-normal">Status</th>
-                  <th className="px-md py-sm font-label-md text-on-surface-variant font-normal text-right">Action</th>
+                  <th className="px-md py-sm font-label-md text-on-surface-variant font-normal">Documento</th>
+                  <th className="px-md py-sm font-label-md text-on-surface-variant font-normal">Estado</th>
+                  <th className="px-md py-sm font-label-md text-on-surface-variant font-normal text-right">Acción</th>
                 </tr>
               </thead>
               <tbody>

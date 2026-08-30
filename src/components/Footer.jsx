@@ -9,22 +9,22 @@ export default function Footer() {
             <img alt="Upsala Trips" className="h-10 w-auto mb-sm" src={LOGO} />
             <p className="font-headline-sm text-primary">UPSALA TRIPS</p>
           </div>
-          <p className="text-on-surface-variant font-body-md">Curated adventure travel across the Patagonia region and beyond.</p>
+          <p className="text-on-surface-variant font-body-md">Viajes de aventura curados en la Patagonia y más allá.</p>
         </div>
         <div className="flex flex-col gap-sm">
-          <h4 className="font-label-md text-primary uppercase tracking-wider">Navigation</h4>
-          <a className="text-on-surface-variant hover:text-secondary font-body-md" href="#">About Us</a>
-          <a className="text-on-surface-variant hover:text-secondary font-body-md" href="#">Expeditions</a>
-          <a className="text-on-surface-variant hover:text-secondary font-body-md" href="#">Safety Protocol</a>
+          <h4 className="font-label-md text-primary uppercase tracking-wider">Navegación</h4>
+          <a className="text-on-surface-variant hover:text-secondary font-body-md" href="#">Nosotros</a>
+          <a className="text-on-surface-variant hover:text-secondary font-body-md" href="#">Expediciones</a>
+          <a className="text-on-surface-variant hover:text-secondary font-body-md" href="#">Protocolo de Seguridad</a>
         </div>
         <div className="flex flex-col gap-sm">
-          <h4 className="font-label-md text-primary uppercase tracking-wider">Contact</h4>
+          <h4 className="font-label-md text-primary uppercase tracking-wider">Contacto</h4>
           <p className="text-on-surface-variant font-body-md">info@upsalatrips.com</p>
           <p className="text-on-surface-variant font-body-md">+54 11 4832-0000</p>
           <p className="text-on-surface-variant font-body-md">Buenos Aires, Argentina</p>
         </div>
         <div className="flex flex-col gap-sm">
-          <h4 className="font-label-md text-primary uppercase tracking-wider">Follow Us</h4>
+          <h4 className="font-label-md text-primary uppercase tracking-wider">Síguenos</h4>
           <div className="flex gap-md">
             <span className="material-symbols-outlined text-primary cursor-pointer hover:text-secondary">share</span>
             <span className="material-symbols-outlined text-primary cursor-pointer hover:text-secondary">public</span>

@@ -43,19 +43,19 @@ const reviews = [
 
 const days = [
   {
-    label: 'Day 1',
-    title: 'Arrival & Welcome',
-    desc: 'Private transfer from Mendoza airport to Las Leñas resort. Equipment fitting, welcome dinner with the guide team.',
+    label: 'Día 1',
+    title: 'Llegada y Bienvenida',
+    desc: 'Traslado privado desde el aeropuerto de Mendoza hasta el resort de Las Leñas. Ajuste de equipo y cena de bienvenida con el equipo de guías.',
   },
   {
-    label: 'Days 2-3',
-    title: 'Ski Clinic & First Descents',
-    desc: 'Morning technique sessions with certified instructors. Afternoon free to explore main slopes at your own pace.',
+    label: 'Días 2-3',
+    title: 'Clínica de Esquí y Primeras Bajadas',
+    desc: 'Sesiones de técnica por la mañana con instructores certificados. Tarde libre para explorar las pistas principales a tu propio ritmo.',
   },
   {
-    label: 'Days 4-6',
-    title: 'Alpine Exploration',
-    desc: 'Intense ski days including the legendary "Marte" run and off-piste expeditions weather permitting. Farewell dinner.',
+    label: 'Días 4-6',
+    title: 'Exploración Alpina',
+    desc: 'Intensas jornadas de esquí incluyendo la legendaria bajada "Marte" y expediciones fuera de pista según las condiciones climáticas. Cena de despedida.',
   },
 ]
 
@@ -154,27 +154,28 @@ export default function TripDetail({ navigate }) {
               <StarRating stars={4.9} />
               <span className="font-body-md text-on-surface font-semibold">4.9</span>
             </div>
-            <p className="font-headline-md text-primary">$2,850 <span className="font-body-md text-on-surface-variant">per person</span></p>
+            <p className="font-headline-md text-primary">$2,850 <span className="font-body-md text-on-surface-variant">por persona</span></p>
           </div>
 
           {/* Badge row */}
           <div className="flex flex-wrap gap-sm">
-            <Badge variant="secondary">7 Days</Badge>
-            <Badge variant="secondary" className="animate-pulse">High Demand</Badge>
-            <Badge variant="secondary">Expert Level</Badge>
+            <Badge variant="secondary">7 Días</Badge>
+            <Badge variant="secondary" className="animate-pulse">Alta Demanda</Badge>
+            <Badge variant="secondary">Nivel Experto</Badge>
           </div>
 
           {/* Description */}
           <p className="font-body-md text-on-surface-variant leading-relaxed">
-            Immerse yourself in the vast expanse of the Andes with this premium freeride expedition
-            to Las Leñas. Designed for adventurers seeking world-class powder skiing combined with
-            exceptional mountain hospitality. Explore legendary off-piste terrain, pristine alpine
-            bowls, and breathtaking Andean landscapes under the guidance of expert local guides.
+            Sumérgete en la inmensidad de los Andes con esta expedición premium de freeride a Las
+            Leñas. Diseñada para aventureros que buscan el esquí en polvo de clase mundial combinado
+            con una hospitalidad de montaña excepcional. Explorá terrenos fuera de pista legendarios,
+            cuencos alpinos vírgenes y paisajes andinos impresionantes bajo la guía de expertos
+            locales.
           </p>
 
           {/* Guide */}
           <div className="flex flex-col gap-sm">
-            <h2 className="font-headline-sm text-on-surface">Your Guide</h2>
+            <h2 className="font-headline-sm text-on-surface">Tu Guía</h2>
             <div className="flex items-center gap-md bg-surface-container-lowest rounded-2xl p-md shadow-sm">
               <img
                 src={GUIDE_IMG}
@@ -183,14 +184,14 @@ export default function TripDetail({ navigate }) {
               />
               <div>
                 <p className="font-headline-sm text-on-surface">Tomas Alarcon</p>
-                <p className="font-body-md text-on-surface-variant">Mountain Guide · 12 Years Exp.</p>
+                <p className="font-body-md text-on-surface-variant">Guía de Montaña · 12 Años de Exp.</p>
               </div>
             </div>
           </div>
 
           {/* Itinerary */}
           <div className="flex flex-col gap-sm">
-            <h2 className="font-headline-sm text-on-surface">Itinerary</h2>
+            <h2 className="font-headline-sm text-on-surface">Itinerario</h2>
             <Accordion type="single" collapsible className="flex flex-col gap-sm">
               {days.map((day, idx) => (
                 <AccordionItem
@@ -216,7 +217,7 @@ export default function TripDetail({ navigate }) {
 
           {/* Reviews */}
           <div className="flex flex-col gap-sm">
-            <h2 className="font-headline-sm text-on-surface">Reviews</h2>
+            <h2 className="font-headline-sm text-on-surface">Reseñas</h2>
             <div className="flex flex-col gap-sm">
               {reviews.map((r) => (
                 <div
@@ -240,7 +241,7 @@ export default function TripDetail({ navigate }) {
         {/* Bottom sticky CTA */}
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.1)] px-margin-mobile py-md">
           <Button variant="default" size="lg" className="w-full" onClick={() => navigate('checkout')}>
-            Secure Your Spot – $2,850
+            Asegurar mi Lugar – $2,850
           </Button>
         </div>
       </div>
@@ -273,7 +274,7 @@ export default function TripDetail({ navigate }) {
               <div className="flex items-center gap-sm">
                 <StarRating stars={4.9} size={20} />
                 <span className="font-body-lg text-on-surface font-semibold">4.9</span>
-                <span className="font-body-md text-on-surface-variant">/ 42 reviews</span>
+                <span className="font-body-md text-on-surface-variant">/ 42 reseñas</span>
               </div>
             </div>
 
@@ -281,24 +282,25 @@ export default function TripDetail({ navigate }) {
 
             {/* About */}
             <div className="flex flex-col gap-sm">
-              <h2 className="font-headline-md text-on-surface">About This Expedition</h2>
+              <h2 className="font-headline-md text-on-surface">Sobre Esta Expedición</h2>
               <p className="font-body-lg text-on-surface-variant leading-relaxed">
-                Las Leñas is one of South America's premier freeride destinations, boasting over
-                3,000 meters of vertical and reliably dry Andean powder. This expedition places
-                you at the heart of the mountain's most coveted terrain — from wide open alpine
-                bowls to steep chutes accessible only with a certified guide.
+                Las Leñas es uno de los principales destinos de freeride de América del Sur, con
+                más de 3.000 metros de desnivel y un polvo andino confiablemente seco. Esta
+                expedición te coloca en el corazón del terreno más codiciado de la montaña: desde
+                amplios cuencos alpinos hasta canales empinados accesibles solo con un guía
+                certificado.
               </p>
               <p className="font-body-lg text-on-surface-variant leading-relaxed">
-                Each day is crafted to maximize your time on snow while ensuring safety and
-                comfort. Evenings are reserved for immersive mountain culture: shared meals,
-                route briefings, and the camaraderie that only high-altitude adventure fosters.
-                This is skiing as it was meant to be experienced.
+                Cada día está diseñado para maximizar tu tiempo en la nieve garantizando seguridad
+                y confort. Las noches están reservadas para la cultura de montaña: cenas compartidas,
+                briefings de rutas y la camaradería que solo la aventura de alta montaña genera.
+                Así es como el esquí debe vivirse.
               </p>
             </div>
 
             {/* Difficulty meter */}
             <div className="flex flex-col gap-sm">
-              <h2 className="font-headline-sm text-on-surface">Difficulty</h2>
+              <h2 className="font-headline-sm text-on-surface">Dificultad</h2>
               <div className="flex items-center gap-md">
                 <div className="flex gap-xs">
                   {[1, 2, 3, 4].map((i) => (
@@ -311,7 +313,7 @@ export default function TripDetail({ navigate }) {
                     />
                   ))}
                 </div>
-                <span className="font-body-md text-on-surface-variant">Advanced / Expert</span>
+                <span className="font-body-md text-on-surface-variant">Avanzado / Experto</span>
               </div>
             </div>
 
@@ -319,7 +321,7 @@ export default function TripDetail({ navigate }) {
 
             {/* Itinerary accordion */}
             <div className="flex flex-col gap-sm">
-              <h2 className="font-headline-md text-on-surface">Itinerary</h2>
+              <h2 className="font-headline-md text-on-surface">Itinerario</h2>
               <Accordion type="single" collapsible className="flex flex-col gap-sm">
                 {days.map((day, idx) => (
                   <AccordionItem
@@ -349,7 +351,7 @@ export default function TripDetail({ navigate }) {
 
             {/* Guide card */}
             <div className="flex flex-col gap-sm">
-              <h2 className="font-headline-md text-on-surface">Your Guide</h2>
+              <h2 className="font-headline-md text-on-surface">Tu Guía</h2>
               <div className="bg-surface-container-lowest rounded-2xl p-md shadow-sm flex items-start gap-md">
                 <img
                   src={GUIDE_IMG}
@@ -359,20 +361,20 @@ export default function TripDetail({ navigate }) {
                 <div className="flex flex-col gap-sm flex-1">
                   <div>
                     <h3 className="font-headline-sm text-on-surface">Tomas Alarcon</h3>
-                    <p className="font-body-md text-on-surface-variant">Mountain Guide · 12 Years Exp.</p>
+                    <p className="font-body-md text-on-surface-variant">Guía de Montaña · 12 Años de Exp.</p>
                   </div>
                   <p className="font-body-md text-on-surface-variant leading-relaxed">
-                    Tomas grew up in the Mendoza foothills and has spent over a decade guiding
-                    expeditions in Las Leñas and beyond. Certified by the Argentine Mountain Guide
-                    Association, he brings deep terrain knowledge, calm leadership, and an
-                    infectious passion for the mountains to every trip.
+                    Tomas creció en las estribaciones de Mendoza y lleva más de una década guiando
+                    expediciones en Las Leñas y más allá. Certificado por la Asociación Argentina
+                    de Guías de Montaña, aporta a cada viaje un profundo conocimiento del terreno,
+                    liderazgo tranquilo y una pasión contagiosa por la montaña.
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-xs text-secondary-container font-body-md">
                       <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                      <span className="font-label-md text-on-surface">4.9 Rating</span>
+                      <span className="font-label-md text-on-surface">4.9 Puntuación</span>
                     </div>
-                    <Button variant="outline">Message Guide</Button>
+                    <Button variant="outline">Contactar Guía</Button>
                   </div>
                 </div>
               </div>
@@ -382,7 +384,7 @@ export default function TripDetail({ navigate }) {
 
             {/* Reviews */}
             <div className="flex flex-col gap-md">
-              <h2 className="font-headline-md text-on-surface">Reviews</h2>
+              <h2 className="font-headline-md text-on-surface">Reseñas</h2>
               <div className="grid grid-cols-3 gap-md">
                 {reviews.map((r) => (
                   <div
@@ -412,16 +414,16 @@ export default function TripDetail({ navigate }) {
                 <div className="flex items-end justify-between">
                   <div>
                     <p className="font-headline-md text-on-surface">$2,850</p>
-                    <p className="font-body-md text-on-surface-variant">per person</p>
+                    <p className="font-body-md text-on-surface-variant">por persona</p>
                   </div>
-                  <Badge variant="secondary" className="animate-pulse">High Demand</Badge>
+                  <Badge variant="secondary" className="animate-pulse">Alta Demanda</Badge>
                 </div>
 
                 <Separator className="border-outline-variant" />
 
                 {/* Departure date select */}
                 <div className="flex flex-col gap-xs">
-                  <label className="font-label-md text-on-surface-variant">Departure Date</label>
+                  <label className="font-label-md text-on-surface-variant">Fecha de Salida</label>
                   <select
                     value={departure}
                     onChange={(e) => setDeparture(e.target.value)}
@@ -435,7 +437,7 @@ export default function TripDetail({ navigate }) {
 
                 {/* Travelers stepper */}
                 <div className="flex flex-col gap-xs">
-                  <label className="font-label-md text-on-surface-variant">Travelers</label>
+                  <label className="font-label-md text-on-surface-variant">Viajeros</label>
                   <div className="flex items-center gap-sm">
                     <Button
                       variant="ghost"
@@ -460,7 +462,7 @@ export default function TripDetail({ navigate }) {
                   size="lg"
                   onClick={() => navigate('checkout')}
                 >
-                  Secure Your Spot
+                  Asegurar mi Lugar
                 </Button>
 
                 <Separator className="border-outline-variant" />
@@ -468,9 +470,9 @@ export default function TripDetail({ navigate }) {
                 {/* Trust indicators */}
                 <div className="flex flex-col gap-sm">
                   {[
-                    { icon: 'replay', label: '100% Refundable · 30 days' },
-                    { icon: 'lock', label: 'Secure Payment' },
-                    { icon: 'support_agent', label: 'Expert Support 24/7' },
+                    { icon: 'replay', label: '100% Reembolsable · 30 días' },
+                    { icon: 'lock', label: 'Pago Seguro' },
+                    { icon: 'support_agent', label: 'Soporte Experto 24/7' },
                   ].map(({ icon, label }) => (
                     <div key={label} className="flex items-center gap-sm text-on-surface-variant">
                       <span className="material-symbols-outlined text-[18px] text-primary">{icon}</span>

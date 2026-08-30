@@ -11,20 +11,20 @@ const TRIP2_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCdu0Jncvq
 const TRIP3_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhomfFa9pgqWHTgirl1AvZRG3WQNGK-8ab7tQn59qlvMK4ICbQ8Kr-Num_PN-JAMnFGJt6NVTqBhdqv6JsA52FORXqaPWYQvahOxLQUY_0WoHYjfj7CUGpZBKv27Nixw43h-9No0DyhiLDw2RocuYGSACznBoQAkwuUkjcP_mc5Rgt9KMfKDzUp8msDUEHiu3BNtpG-DtQXvd6Uh0LY7EukEsBrx7bZx4ELRlPS9Opj_q09dajmfyM2g'
 
 const kpis = [
-  { label: 'Total Revenue', value: '$124,500', change: '+14.2%', positive: true, icon: 'payments', primary: true },
-  { label: 'Active Bookings', value: '342', change: '+8.1%', positive: true, icon: 'confirmation_number', primary: false },
-  { label: 'Avg. Order Value', value: '$890', change: '+2.3%', positive: true, icon: 'trending_up', primary: false },
-  { label: 'New Customers', value: '128', change: '-3.5%', positive: false, icon: 'person_add', primary: false },
+  { label: 'Ingresos Totales', value: '$124,500', change: '+14.2%', positive: true, icon: 'payments', primary: true },
+  { label: 'Reservas Activas', value: '342', change: '+8.1%', positive: true, icon: 'confirmation_number', primary: false },
+  { label: 'Valor Promedio', value: '$890', change: '+2.3%', positive: true, icon: 'trending_up', primary: false },
+  { label: 'Nuevos Clientes', value: '128', change: '-3.5%', positive: false, icon: 'person_add', primary: false },
 ]
 
 const expeditions = [
-  { img: TRIP1_IMG, name: 'Perito Moreno Traverse', date: 'Nov 12', spots: '18/20', revenue: '$32,400', status: 'Confirmed' },
-  { img: TRIP2_IMG, name: 'Fitz Roy Summit Push', date: 'Nov 18', spots: '12/15', revenue: '$87,000', status: 'Confirmed' },
-  { img: TRIP3_IMG, name: 'Lake Argentino Kayak', date: 'Dec 01', spots: '8/12', revenue: '$11,400', status: 'Open' },
+  { img: TRIP1_IMG, name: 'Perito Moreno Traverse', date: 'Nov 12', spots: '18/20', revenue: '$32,400', status: 'Confirmado' },
+  { img: TRIP2_IMG, name: 'Fitz Roy Summit Push', date: 'Nov 18', spots: '12/15', revenue: '$87,000', status: 'Confirmado' },
+  { img: TRIP3_IMG, name: 'Lake Argentino Kayak', date: 'Dec 01', spots: '8/12', revenue: '$11,400', status: 'Abierto' },
 ]
 
 const chartData = [65000, 72000, 68000, 95000, 88000, 124500]
-const chartLabels = ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']
+const chartLabels = ['Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago']
 
 // Compute SVG polyline points
 const CHART_W = 600
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
         {/* Mobile content */}
         <main className="pt-16 pb-24 px-margin-mobile flex flex-col gap-lg">
 
-          <h1 className="font-headline-md text-on-surface pt-lg">Dashboard</h1>
+          <h1 className="font-headline-md text-on-surface pt-lg">Panel de Control</h1>
 
           {/* Mobile KPI cards */}
           <div className="flex flex-col gap-sm">
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
 
           {/* Mobile recent trips */}
           <div className="flex flex-col gap-sm">
-            <h2 className="font-headline-sm text-on-surface">Recent Trips</h2>
+            <h2 className="font-headline-sm text-on-surface">Expediciones Recientes</h2>
             {expeditions.map((exp) => (
               <div
                 key={exp.name}
@@ -132,13 +132,13 @@ export default function AdminDashboard() {
                 <div className="p-md flex flex-col gap-xs">
                   <div className="flex items-center justify-between">
                     <span className="font-label-md text-on-surface">{exp.name}</span>
-                    <Badge variant={exp.status === 'Confirmed' ? 'default' : 'outline'}>
+                    <Badge variant={exp.status === 'Confirmado' ? 'default' : 'outline'}>
                       {exp.status}
                     </Badge>
                   </div>
                   <div className="flex gap-md">
                     <span className="font-body-md text-on-surface-variant">{exp.date}</span>
-                    <span className="font-body-md text-on-surface-variant">{exp.spots} spots</span>
+                    <span className="font-body-md text-on-surface-variant">{exp.spots} cupos</span>
                     <span className="font-body-md text-on-surface">{exp.revenue}</span>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
             ))}
           </div>
 
-          <Button variant="outline" className="w-full">Export Report</Button>
+          <Button variant="outline" className="w-full">Exportar Informe</Button>
         </main>
       </div>
 
@@ -155,18 +155,18 @@ export default function AdminDashboard() {
 
         {/* Page header */}
         <div className="px-margin-desktop py-lg flex items-center justify-between">
-          <h1 className="font-headline-xl text-on-surface">Dashboard</h1>
+          <h1 className="font-headline-xl text-on-surface">Panel de Control</h1>
           <div className="flex items-center gap-sm">
             <select className="border border-outline-variant/40 rounded-lg px-sm py-xs font-body-md text-on-surface bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/30">
-              <option>Last 30 days</option>
-              <option>Last 90 days</option>
-              <option>This year</option>
+              <option>Últimos 30 días</option>
+              <option>Últimos 90 días</option>
+              <option>Este año</option>
             </select>
             <Button variant="outline" className="flex items-center gap-xs">
               <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 0" }}>download</span>
-              Export
+              Exportar Informe
             </Button>
-            <Button>Add Expedition</Button>
+            <Button>Nueva Expedición</Button>
           </div>
         </div>
 
@@ -222,12 +222,12 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-start justify-between pb-sm">
               <div className="flex flex-col gap-xs">
-                <CardTitle className="font-headline-sm text-on-surface">Revenue Analytics</CardTitle>
-                <span className="font-body-md text-on-surface-variant">Last 6 Months</span>
+                <CardTitle className="font-headline-sm text-on-surface">Análisis de Ingresos</CardTitle>
+                <span className="font-body-md text-on-surface-variant">Últimos 6 Meses</span>
               </div>
               <div className="text-right">
                 <div className="font-headline-sm text-on-surface">$124,500</div>
-                <div className="font-body-md text-green-600">+14.2% vs last month</div>
+                <div className="font-body-md text-green-600">+14.2% vs mes anterior</div>
               </div>
             </CardHeader>
             <CardContent className="pt-0">
@@ -314,17 +314,17 @@ export default function AdminDashboard() {
           <div className="col-span-2">
             <Card className="h-full">
               <CardHeader>
-                <CardTitle className="font-headline-sm text-on-surface">Recent Expeditions</CardTitle>
+                <CardTitle className="font-headline-sm text-on-surface">Expediciones Recientes</CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-outline-variant/20">
-                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Expedition</th>
-                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Date</th>
-                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Spots</th>
-                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Revenue</th>
-                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Status</th>
+                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Expedición</th>
+                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Fecha</th>
+                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Cupos</th>
+                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Ingresos</th>
+                      <th className="pb-sm font-label-md text-on-surface-variant font-normal">Estado</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -347,7 +347,7 @@ export default function AdminDashboard() {
                         <td className="py-sm pr-md font-body-md text-on-surface">{exp.spots}</td>
                         <td className="py-sm pr-md font-label-md text-on-surface">{exp.revenue}</td>
                         <td className="py-sm">
-                          <Badge variant={exp.status === 'Confirmed' ? 'default' : 'outline'}>
+                          <Badge variant={exp.status === 'Confirmado' ? 'default' : 'outline'}>
                             {exp.status}
                           </Badge>
                         </td>
@@ -363,7 +363,7 @@ export default function AdminDashboard() {
           <div>
             <Card className="h-full">
               <CardHeader>
-                <CardTitle className="font-headline-sm text-on-surface">Active Region</CardTitle>
+                <CardTitle className="font-headline-sm text-on-surface">Región Activa</CardTitle>
               </CardHeader>
               <CardContent className="pt-0 flex flex-col gap-md">
                 <div className="bg-surface-container rounded-xl h-48 flex flex-col items-center justify-center gap-sm">
@@ -378,16 +378,16 @@ export default function AdminDashboard() {
                 <Separator />
                 <div className="flex flex-col gap-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-body-md text-on-surface-variant">Active expeditions</span>
+                    <span className="font-body-md text-on-surface-variant">Expediciones activas</span>
                     <span className="font-label-md text-on-surface">3</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="font-body-md text-on-surface-variant">Total participants</span>
+                    <span className="font-body-md text-on-surface-variant">Total participantes</span>
                     <span className="font-label-md text-on-surface">38</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="font-body-md text-on-surface-variant">Season</span>
-                    <span className="font-label-md text-on-surface">Nov–Dec 2024</span>
+                    <span className="font-body-md text-on-surface-variant">Temporada</span>
+                    <span className="font-label-md text-on-surface">Nov–Dic 2024</span>
                   </div>
                 </div>
               </CardContent>

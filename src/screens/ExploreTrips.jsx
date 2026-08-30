@@ -19,20 +19,20 @@ const mobileTrips = [
 const deskCards = [
   {
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD_njxmnsDM6fO6HggG-9TSJRwDeEVomg9Re9M5-jvDFSRv79UfzIg_mixVg4DDlJDZ2lF2lSsB_d37KsNEeAYnm-deWln2ZoGYyk4MW-VGrRX_nDCb73I3eQAAmj-PCj6_2X3hxmqIqylmUzISOzWw3H8Pg8AuoDgkJo8jI2kYkeyH4uJCHVmO3rL0gp3lgk91j4WdHcEjeEFb_YqX-B9Ho2vaB7YMLxVMmKDDE4jA5oY_UYDg1NjBTw',
-    badge: 'High Demand', badgeIcon: 'local_fire_department', badgeIconColor: 'text-secondary',
+    badge: 'Alta Demanda', badgeIcon: 'local_fire_department', badgeIconColor: 'text-secondary',
     location: 'El Chaltén, Argentina', title: 'Fitz Roy Massif Trek',
     desc: 'An iconic multi-day circuit navigating the rugged granite spires and glacial valleys of Los Glaciares National Park.',
-    duration: '7 Days', difficulty: 'Strenuous', diffDots: [true,true,true,false],
-    date: 'Nov 12 - Nov 18', spotsText: '4 spots left', spotsColor: 'text-secondary', spotsBar: 'bg-secondary', spotsPct: 80,
+    duration: '7 Días', difficulty: 'Intenso', diffDots: [true,true,true,false],
+    date: 'Nov 12 - Nov 18', spotsText: '4 cupos', spotsColor: 'text-secondary', spotsBar: 'bg-secondary', spotsPct: 80,
     price: '$1,850', btnStyle: 'bg-primary text-on-primary hover:bg-on-primary-fixed-variant',
   },
   {
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2PB2E_l8B9Oo8WpwG5Du4Tnslmkv2I8OVMOFvVCgwr3V7sJNkkC1VQU7oGnUDgCKGrMyrGXlRJ5JlPG0JruIVpCY4JoLLR3280A1A86J8ZqToAgaPt7nt3tuHB2ra8BtfaxGlYA2PKrzEwU_VtNnl4B7V8mQ51z31dzNA8y9ipjP9hXflFWhfnvCVqN5rotZnASYEmAgB-W4Dm2xND49rGI9FTaX3DaFuaCUjAiA1YckWiDHJ1fL1UA',
-    badge: 'New Route', badgeIcon: 'new_releases', badgeIconColor: 'text-primary',
+    badge: 'Nueva Ruta', badgeIcon: 'new_releases', badgeIconColor: 'text-primary',
     location: 'Torres del Paine, Chile', title: 'Grey Glacier Kayak',
     desc: 'Navigate through massive icebergs in a double sea kayak, approaching the towering blue walls of Glacier Grey.',
-    duration: '3 Days', difficulty: 'Moderate', diffDots: [true,true,false,false],
-    date: 'Dec 01 - Dec 03', spotsText: 'Available', spotsColor: 'text-primary', spotsBar: 'bg-primary', spotsPct: 30,
+    duration: '3 Días', difficulty: 'Moderado', diffDots: [true,true,false,false],
+    date: 'Dec 01 - Dec 03', spotsText: 'Disponible', spotsColor: 'text-primary', spotsBar: 'bg-primary', spotsPct: 30,
     price: '$950', btnStyle: 'bg-surface text-primary border border-primary hover:bg-primary-container',
   },
   {
@@ -40,8 +40,8 @@ const deskCards = [
     badge: null,
     location: 'Atacama, Chile', title: 'Altiplano Overland',
     desc: 'An intense 4x4 expedition crossing the high-altitude deserts, salt flats, and geothermal fields of northern Chile.',
-    duration: '10 Days', difficulty: 'Extreme', diffDots: [true,true,true,true],
-    date: 'Jan 10 - Jan 20', spotsText: '2 spots left', spotsColor: 'text-secondary', spotsBar: 'bg-secondary', spotsPct: 90,
+    duration: '10 Días', difficulty: 'Extremo', diffDots: [true,true,true,true],
+    date: 'Jan 10 - Jan 20', spotsText: '2 cupos', spotsColor: 'text-secondary', spotsBar: 'bg-secondary', spotsPct: 90,
     price: '$3,200', btnStyle: 'bg-surface text-primary border border-primary hover:bg-primary-container',
   },
 ]
@@ -148,17 +148,17 @@ export default function ExploreTrips({ navigate }) {
         <section className="w-full px-margin-desktop py-xl bg-surface-container-low">
           <div className="flex items-end justify-between">
             <div className="max-w-2xl">
-              <span className="block text-primary font-label-md uppercase tracking-wider mb-sm">Explore</span>
-              <h1 className="font-headline-xl text-on-surface">Curated Expeditions</h1>
-              <p className="font-body-lg text-on-surface-variant mt-md">Find your next adventure across Patagonia and beyond. Filter by activity level, duration, and environment to discover the perfect expedition.</p>
+              <span className="block text-primary font-label-md uppercase tracking-wider mb-sm">Explorar</span>
+              <h1 className="font-headline-xl text-on-surface">Expediciones Curadas</h1>
+              <p className="font-body-lg text-on-surface-variant mt-md">Encontrá tu próxima aventura en la Patagonia y más allá. Filtrá por nivel de actividad, duración y entorno para descubrir la expedición perfecta.</p>
             </div>
             <div className="hidden lg:flex items-center gap-md">
-              <span className="text-on-surface-variant font-label-md uppercase">Sort by:</span>
+              <span className="text-on-surface-variant font-label-md uppercase">Ordenar por:</span>
               <select className="bg-surface font-body-md text-on-surface px-md py-sm rounded-lg shadow-sm border border-outline-variant/30 focus:outline-none focus:border-primary appearance-none cursor-pointer">
-                <option>Recommended</option>
-                <option>Date: Upcoming</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
+                <option>Recomendados</option>
+                <option>Fecha: Próximas</option>
+                <option>Precio: menor a mayor</option>
+                <option>Precio: mayor a menor</option>
               </select>
             </div>
           </div>
@@ -169,9 +169,9 @@ export default function ExploreTrips({ navigate }) {
           {/* Sidebar */}
           <aside className="w-72 shrink-0 space-y-lg sticky top-32">
             <div className="space-y-md">
-              <h3 className="font-headline-sm text-on-surface">Destination</h3>
+              <h3 className="font-headline-sm text-on-surface">Destino</h3>
               <div className="flex flex-col gap-sm">
-                {[['Patagonia (All)', '42', true], ['Tierra del Fuego', '18', false], ['Atacama Desert', '12', false]].map(([label, count, checked]) => (
+                {[['Patagonia (Todo)', '42', true], ['Tierra del Fuego', '18', false], ['Atacama Desert', '12', false]].map(([label, count, checked]) => (
                   <div key={label} className="flex items-center gap-sm cursor-pointer group">
                     <Checkbox id={`dest-${label}`} defaultChecked={checked} className="border-outline-variant data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
                     <Label htmlFor={`dest-${label}`} className="font-body-md text-on-surface group-hover:text-primary transition-colors cursor-pointer">{label}</Label>
@@ -181,9 +181,9 @@ export default function ExploreTrips({ navigate }) {
               </div>
             </div>
             <div className="space-y-md">
-              <h3 className="font-headline-sm text-on-surface">Activity Level</h3>
+              <h3 className="font-headline-sm text-on-surface">Nivel de Actividad</h3>
               <div className="grid grid-cols-3 gap-xs">
-                {[['hiking', 'Moderate', false], ['landscape', 'Strenuous', true], ['kayaking', 'Extreme', false]].map(([icon, label, active]) => (
+                {[['hiking', 'Moderado', false], ['landscape', 'Intenso', true], ['kayaking', 'Extremo', false]].map(([icon, label, active]) => (
                   <button key={label} className={`flex flex-col items-center justify-center p-sm rounded-lg border transition-colors ${active ? 'bg-primary-container border-2 border-primary' : 'bg-surface border-outline-variant hover:border-primary'} group`}>
                     <span className={`material-symbols-outlined mb-xs ${active ? 'text-primary' : 'text-on-surface-variant group-hover:text-primary'}`}>{icon}</span>
                     <span className={`font-label-md text-[10px] ${active ? 'text-primary' : 'text-on-surface-variant group-hover:text-primary'}`}>{label}</span>
@@ -192,7 +192,7 @@ export default function ExploreTrips({ navigate }) {
               </div>
             </div>
             <div className="space-y-md">
-              <h3 className="font-headline-sm text-on-surface">Price Range</h3>
+              <h3 className="font-headline-sm text-on-surface">Rango de Precio</h3>
               <div className="w-full h-12 relative flex items-center">
                 <div className="w-full h-1 bg-surface-variant rounded-full absolute" />
                 <div className="w-3/4 h-1 bg-primary rounded-full absolute left-[10%]" />
@@ -204,7 +204,7 @@ export default function ExploreTrips({ navigate }) {
               </div>
             </div>
             <Button variant="outline" className="w-full py-md font-label-md uppercase tracking-wide border-primary text-primary hover:bg-primary-container">
-              Apply Filters
+              Aplicar Filtros
             </Button>
           </aside>
 
@@ -212,14 +212,14 @@ export default function ExploreTrips({ navigate }) {
           <div className="flex-1">
             {/* Active filters */}
             <div className="flex flex-wrap items-center gap-sm mb-lg">
-              <span className="font-body-md text-on-surface-variant mr-sm">Active Filters:</span>
-              {['Patagonia', 'Strenuous'].map(f => (
+              <span className="font-body-md text-on-surface-variant mr-sm">Filtros Activos:</span>
+              {['Patagonia', 'Intenso'].map(f => (
                 <span key={f} className="inline-flex items-center gap-xs px-sm py-xs bg-surface-container rounded-full text-on-surface font-label-md">
                   {f} <span className="material-symbols-outlined text-[16px] cursor-pointer hover:text-error">close</span>
                 </span>
               ))}
-              <button className="font-label-md text-primary ml-sm hover:underline">Clear All</button>
-              <span className="ml-auto font-body-md text-on-surface-variant">Showing 14 Results</span>
+              <button className="font-label-md text-primary ml-sm hover:underline">Borrar Todo</button>
+              <span className="ml-auto font-body-md text-on-surface-variant">Mostrando 14 Resultados</span>
             </div>
 
             {/* Grid */}
@@ -249,12 +249,12 @@ export default function ExploreTrips({ navigate }) {
                     <p className="font-body-md text-on-surface-variant line-clamp-2 mb-md">{c.desc}</p>
                     <div className="flex items-center justify-between py-sm border-t border-b border-surface-variant mb-md">
                       <div className="flex flex-col">
-                        <span className="font-label-md text-on-surface-variant text-xs uppercase">Duration</span>
+                        <span className="font-label-md text-on-surface-variant text-xs uppercase">Duración</span>
                         <span className="font-body-md text-on-surface font-semibold">{c.duration}</span>
                       </div>
                       <div className="w-px h-8 bg-surface-variant" />
                       <div className="flex flex-col">
-                        <span className="font-label-md text-on-surface-variant text-xs uppercase">Difficulty</span>
+                        <span className="font-label-md text-on-surface-variant text-xs uppercase">Dificultad</span>
                         <span className="font-body-md text-on-surface font-semibold flex items-center gap-1">
                           {c.difficulty}
                           <div className="flex gap-[2px]">
@@ -276,11 +276,11 @@ export default function ExploreTrips({ navigate }) {
                     </div>
                     <div className="flex items-center justify-between mt-auto">
                       <div className="flex flex-col">
-                        <span className="font-label-md text-on-surface-variant text-xs">From</span>
+                        <span className="font-label-md text-on-surface-variant text-xs">Desde</span>
                         <span className="font-headline-sm text-on-surface">{c.price}</span>
                       </div>
                       <Button className={`font-label-md px-md rounded-lg shadow-sm ${c.btnStyle}`} onClick={e => { e.stopPropagation(); navigate('detail') }}>
-                        View Details
+                        Ver Detalles
                       </Button>
                     </div>
                   </div>

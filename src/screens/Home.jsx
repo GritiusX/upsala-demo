@@ -40,24 +40,24 @@ const faqs = [
 /* ── Desktop expedition cards ───────────────────────────────────── */
 const deskCards = [
   {
-    img: CARD1_IMG, badge: 'High Demand', badgeColor: 'bg-secondary w-2 h-2 rounded-full',
+    img: CARD1_IMG, badge: 'Alta Demanda', badgeColor: 'bg-secondary w-2 h-2 rounded-full',
     title: 'Glacier Core Traverse', rating: '4.9',
-    desc: 'A highly technical ice-trekking expedition navigating the deepest crevasses of the Southern Patagonian Ice Field.',
-    difficulty: 'Advanced', diffBars: [true, true, true, false],
+    desc: 'Expedición técnica de trekking en hielo navegando las grietas más profundas del Campo de Hielo Patagónico Sur.',
+    difficulty: 'Avanzado', diffBars: [true, true, true, false],
     price: '$3,200', stagger: '', diffColor: 'bg-primary',
   },
   {
-    img: CARD2_IMG, badge: 'New Route', badgeColor: 'bg-primary w-2 h-2 rounded-full',
+    img: CARD2_IMG, badge: 'Nueva Ruta', badgeColor: 'bg-primary w-2 h-2 rounded-full',
     title: 'High Desert Solitude', rating: '5.0',
-    desc: 'Experience complete isolation in the high Andes. Private camps, astronomical observation, and silent landscapes.',
-    difficulty: 'Moderate', diffBars: [true, true, false, false],
+    desc: 'Experimentá el aislamiento total en los Andes. Campamentos privados, observación astronómica y paisajes en silencio.',
+    difficulty: 'Moderado', diffBars: [true, true, false, false],
     price: '$4,150', stagger: 'md:-mt-8', diffColor: 'bg-primary',
   },
   {
     img: CARD3_IMG, badge: null,
     title: 'Fitz Roy Summit Push', rating: '4.8',
-    desc: 'A demanding ascent targeting the iconic granite spires. Requires previous alpine experience and peak physical condition.',
-    difficulty: 'Expert', diffBars: [true, true, true, true],
+    desc: 'Un ascenso exigente apuntando a los icónicos picos de granito. Requiere experiencia alpina previa y condición física óptima.',
+    difficulty: 'Experto', diffBars: [true, true, true, true],
     price: '$5,800', stagger: 'lg:mt-8', diffColor: 'bg-secondary',
   },
 ]
@@ -224,61 +224,68 @@ export default function Home({ navigate }) {
 
       {/* ══════════════════ DESKTOP ══════════════════ */}
       <div className="hidden md:block pt-20">
-        {/* Hero */}
-        <section className="relative h-[85vh] w-full flex items-center overflow-hidden -mt-20">
+        {/* Hero — imagen full, texto abajo a la izquierda */}
+        <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden -mt-20">
+          {/* Fondo */}
           <div className="absolute inset-0 z-0">
             <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('${HERO_DESK}')` }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-surface/60" />
+            {/* gradiente de izquierda blanca a transparente */}
+            <div className="absolute inset-0 bg-gradient-to-r from-surface/90 via-surface/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent" />
           </div>
-          <div className="relative z-10 w-full max-w-7xl px-margin-desktop pt-20 flex flex-col items-start mt-xl gap-lg">
-            <div className="max-w-2xl space-y-md">
-              <h1 className="font-headline-xl text-on-surface leading-tight drop-shadow-md">
-                Venture Beyond the <span className="text-primary block">Expected.</span>
+
+          {/* Contenido — anclado abajo */}
+          <div className="relative z-10 px-margin-desktop pb-xl pt-[calc(80px+120px)] flex flex-col gap-lg max-w-4xl">
+            <div className="flex flex-col gap-md">
+              <h1 className="font-headline-xl text-on-surface leading-[1.1]">
+                Aventurá más allá de<br />
+                <span className="text-primary">lo esperado.</span>
               </h1>
-              <p className="font-body-lg text-on-surface-variant drop-shadow-sm">
-                Curated expeditions to the rawest corners of Patagonia and the Andes. Expert guides, premium logistics, unfiltered nature.
+              <p className="font-body-lg text-on-surface-variant max-w-lg">
+                Expediciones a los rincones más salvajes de la Patagonia y los Andes. Guías expertos, logística premium, naturaleza sin filtros.
               </p>
             </div>
-            {/* Search widget */}
-            <div className="w-full max-w-4xl bg-surface/95 backdrop-blur-xl rounded-2xl p-sm shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex items-center gap-sm">
-              <div className="flex-1 bg-surface-container rounded-xl flex items-center px-md py-sm hover:bg-surface-container-high transition-colors">
-                <span className="material-symbols-outlined text-primary mr-sm">location_on</span>
-                <div className="flex flex-col w-full">
-                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider">Destination</label>
-                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/50 w-full" placeholder="Where to next?" type="text" />
+
+            {/* Buscador */}
+            <div className="w-full max-w-3xl bg-surface/95 backdrop-blur-xl rounded-2xl p-xs shadow-[0_8px_32px_rgba(0,0,0,0.10)] flex items-stretch gap-xs">
+              <div className="flex-1 flex items-center px-md py-sm gap-sm hover:bg-surface-container/40 rounded-xl transition-colors">
+                <span className="material-symbols-outlined text-primary shrink-0">location_on</span>
+                <div className="flex flex-col">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.08em]">Destino</label>
+                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/60 w-full" placeholder="¿A dónde vas?" type="text" />
                 </div>
               </div>
-              <div className="w-px h-12 bg-outline-variant/30" />
-              <div className="flex-1 bg-surface-container rounded-xl flex items-center px-md py-sm hover:bg-surface-container-high transition-colors">
-                <span className="material-symbols-outlined text-primary mr-sm">calendar_today</span>
-                <div className="flex flex-col w-full">
-                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider">Dates</label>
-                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/50 w-full" placeholder="Select timeframe" type="text" />
+              <div className="w-px self-stretch my-sm bg-outline-variant/40" />
+              <div className="flex-1 flex items-center px-md py-sm gap-sm hover:bg-surface-container/40 rounded-xl transition-colors">
+                <span className="material-symbols-outlined text-primary shrink-0">calendar_today</span>
+                <div className="flex flex-col">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.08em]">Fechas</label>
+                  <input className="bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/60 w-full" placeholder="Elegí un período" type="text" />
                 </div>
               </div>
-              <div className="w-px h-12 bg-outline-variant/30" />
-              <div className="flex-1 bg-surface-container rounded-xl flex items-center px-md py-sm hover:bg-surface-container-high transition-colors">
-                <span className="material-symbols-outlined text-primary mr-sm">group</span>
-                <div className="flex flex-col w-full">
-                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider">Travelers</label>
-                  <select className="bg-transparent border-none outline-none font-body-md text-on-surface w-full appearance-none">
-                    <option>2 Explorers</option>
-                    <option>1 Explorer</option>
-                    <option>3-4 Explorers</option>
-                    <option>Group (5+)</option>
+              <div className="w-px self-stretch my-sm bg-outline-variant/40" />
+              <div className="flex-1 flex items-center px-md py-sm gap-sm hover:bg-surface-container/40 rounded-xl transition-colors">
+                <span className="material-symbols-outlined text-primary shrink-0">group</span>
+                <div className="flex flex-col">
+                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.08em]">Viajeros</label>
+                  <select className="bg-transparent border-none outline-none font-body-md text-on-surface w-full appearance-none cursor-pointer">
+                    <option>2 Exploradores</option>
+                    <option>1 Explorador</option>
+                    <option>3-4 Exploradores</option>
+                    <option>Grupo (5+)</option>
                   </select>
                 </div>
               </div>
-              <Button variant="secondary" size="lg" onClick={() => navigate('trips')} className="px-xl rounded-xl hover:-translate-y-0.5 whitespace-nowrap shadow-[0_4px_12px_rgba(253,101,30,0.3)]">
-                FIND EXPEDITION
+              <Button onClick={() => navigate('trips')} className="shrink-0 px-lg self-stretch rounded-xl bg-secondary-container text-on-secondary-container hover:bg-secondary-container/90 shadow-[0_4px_14px_rgba(253,101,30,0.4)] hover:-translate-y-0.5 transition-all font-label-md whitespace-nowrap">
+                ENCONTRAR EXPEDICIÓN
               </Button>
             </div>
           </div>
         </section>
 
-        {/* Logo bar */}
+        {/* Barra de partners */}
         <section className="w-full py-lg bg-surface-container-lowest border-y border-outline-variant/20 flex flex-col items-center justify-center">
-          <p className="font-label-md text-on-surface-variant mb-md uppercase tracking-[0.2em]">Trusted by Adventure Partners Worldwide</p>
+          <p className="font-label-md text-on-surface-variant mb-md uppercase tracking-[0.2em]">Socios de Aventura de Todo el Mundo</p>
           <div className="flex flex-wrap items-center justify-center gap-xl opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
             <img alt="Upsala Trips" className="h-12 w-auto object-contain" src={LOGO_DESK} />
             <img className="h-10 w-auto object-contain" src={PARTNER1} alt="Partner" />
@@ -287,19 +294,19 @@ export default function Home({ navigate }) {
           </div>
         </section>
 
-        {/* Featured Expeditions */}
+        {/* Expediciones destacadas */}
         <section className="w-full py-[120px] px-margin-desktop bg-surface">
           <div className="max-w-7xl mx-auto flex flex-col">
             <div className="flex flex-col md:flex-row justify-between items-end mb-xl">
               <div className="max-w-xl">
                 <span className="font-label-md text-primary uppercase tracking-[0.1em] flex items-center gap-2 mb-xs">
-                  <span className="w-8 h-px bg-primary" /> Curated Routes
+                  <span className="w-8 h-px bg-primary" /> Rutas Curadas
                 </span>
-                <h2 className="font-headline-lg text-on-surface">Signature Expeditions</h2>
-                <p className="font-body-lg text-on-surface-variant mt-sm">Our most sought-after itineraries, balancing extreme landscapes with refined comfort.</p>
+                <h2 className="font-headline-lg text-on-surface">Expediciones Exclusivas</h2>
+                <p className="font-body-lg text-on-surface-variant mt-sm">Nuestros itinerarios más buscados, combinando paisajes extremos con comodidad refinada.</p>
               </div>
               <Button variant="outline" onClick={() => navigate('trips')} className="mt-md md:mt-0 px-lg font-label-md flex items-center gap-2 border-primary/20 text-primary hover:bg-primary/5">
-                VIEW ALL EXPEDITIONS <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+                VER TODAS LAS EXPEDICIONES <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
               </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
@@ -327,7 +334,7 @@ export default function Home({ navigate }) {
                     <p className="font-body-md text-on-surface-variant flex-1 line-clamp-3 mb-md">{c.desc}</p>
                     <div className="w-full mb-md">
                       <div className="flex justify-between font-label-md text-xs text-on-surface-variant mb-1">
-                        <span>Difficulty</span><span className="text-on-surface">{c.difficulty}</span>
+                        <span>Dificultad</span><span className="text-on-surface">{c.difficulty}</span>
                       </div>
                       <div className="w-full h-1.5 flex gap-1">
                         {c.diffBars.map((filled, i) => (
@@ -337,11 +344,11 @@ export default function Home({ navigate }) {
                     </div>
                     <div className="flex justify-between items-center pt-md border-t border-outline-variant/20">
                       <div>
-                        <span className="font-label-md text-xs text-on-surface-variant block">FROM</span>
+                        <span className="font-label-md text-xs text-on-surface-variant block">DESDE</span>
                         <span className="font-headline-sm text-on-surface">{c.price}</span>
                       </div>
                       <Button variant="default" size="sm" onClick={() => navigate('detail')} className="font-label-md flex items-center gap-1">
-                        Ver Detalles <span className="material-symbols-outlined text-[18px]">east</span>
+                        Explorar <span className="material-symbols-outlined text-[18px]">east</span>
                       </Button>
                     </div>
                   </div>

@@ -47,7 +47,7 @@ export default function Checkout({ navigate }) {
             </button>
             <div className="flex items-center gap-sm flex-1 min-w-0">
               <img src={LOGO} alt="Upsala Logo" className="h-6 w-auto shrink-0" />
-              <span className="font-headline-sm text-on-surface truncate">Checkout</span>
+              <span className="font-headline-sm text-on-surface truncate">Pago</span>
             </div>
             <img
               src={PROFILE}
@@ -73,15 +73,15 @@ export default function Checkout({ navigate }) {
               </div>
             ))}
           </div>
-          <p className="text-center font-body-md text-on-surface-variant -mt-sm">Step 3 of 3</p>
+          <p className="text-center font-body-md text-on-surface-variant -mt-sm">Paso 3 de 3</p>
 
           {/* Step 1 – Your Details */}
           <section className="flex flex-col gap-md">
-            <h2 className="font-headline-sm text-on-surface">Step 1 — Your Details</h2>
+            <h2 className="font-headline-sm text-on-surface">Paso 1 — Tus Datos</h2>
             <form className="flex flex-col gap-md" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-sm">
                 <div className="flex flex-col gap-xs">
-                  <Label htmlFor="m-firstName" className="font-label-md text-on-surface">First Name</Label>
+                  <Label htmlFor="m-firstName" className="font-label-md text-on-surface">Nombre</Label>
                   <Input
                     id="m-firstName"
                     placeholder="Jane"
@@ -91,7 +91,7 @@ export default function Checkout({ navigate }) {
                   />
                 </div>
                 <div className="flex flex-col gap-xs">
-                  <Label htmlFor="m-lastName" className="font-label-md text-on-surface">Last Name</Label>
+                  <Label htmlFor="m-lastName" className="font-label-md text-on-surface">Apellido</Label>
                   <Input
                     id="m-lastName"
                     placeholder="Doe"
@@ -113,7 +113,7 @@ export default function Checkout({ navigate }) {
                 />
               </div>
               <div className="flex flex-col gap-xs">
-                <Label htmlFor="m-phone" className="font-label-md text-on-surface">Phone</Label>
+                <Label htmlFor="m-phone" className="font-label-md text-on-surface">Teléfono</Label>
                 <Input
                   id="m-phone"
                   type="tel"
@@ -124,7 +124,7 @@ export default function Checkout({ navigate }) {
               </div>
 
               {/* Step 2 – Payment */}
-              <h2 className="font-headline-sm text-on-surface mt-sm">Step 2 — Payment</h2>
+              <h2 className="font-headline-sm text-on-surface mt-sm">Paso 2 — Método de Pago</h2>
 
               {/* Payment option cards */}
               <div className="flex flex-col gap-sm">
@@ -140,10 +140,10 @@ export default function Checkout({ navigate }) {
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-label-md text-on-surface">Full Payment</span>
+                    <span className="font-label-md text-on-surface">Pago Completo</span>
                     <span className="font-headline-sm text-primary">$3,400</span>
                   </div>
-                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pay in full and secure your spot immediately.</p>
+                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pagá el total y asegurate el lugar de inmediato.</p>
                 </button>
 
                 {/* Deposit */}
@@ -158,20 +158,20 @@ export default function Checkout({ navigate }) {
                   )}
                 >
                   <Badge className="absolute -top-2 right-md bg-primary text-white font-label-md text-xs">
-                    Recommended
+                    Recomendado
                   </Badge>
                   <div className="flex items-center justify-between">
-                    <span className="font-label-md text-on-surface">Reserve with Deposit</span>
+                    <span className="font-label-md text-on-surface">Reservar con Seña</span>
                     <span className="font-headline-sm text-primary">$850</span>
                   </div>
-                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pay 10% now, the rest before your trip.</p>
+                  <p className="font-body-md text-on-surface-variant text-sm mt-xs">Pagá el 10% ahora, el resto antes del viaje.</p>
                 </button>
               </div>
 
               {/* Card fields */}
               <div className="flex flex-col gap-sm">
                 <div className="flex flex-col gap-xs">
-                  <Label htmlFor="m-card" className="font-label-md text-on-surface">Card Number</Label>
+                  <Label htmlFor="m-card" className="font-label-md text-on-surface">Número de Tarjeta</Label>
                   <Input
                     id="m-card"
                     placeholder="1234 5678 9012 3456"
@@ -182,7 +182,7 @@ export default function Checkout({ navigate }) {
                 </div>
                 <div className="grid grid-cols-2 gap-sm">
                   <div className="flex flex-col gap-xs">
-                    <Label htmlFor="m-expiry" className="font-label-md text-on-surface">Expiry</Label>
+                    <Label htmlFor="m-expiry" className="font-label-md text-on-surface">Vencimiento</Label>
                     <Input
                       id="m-expiry"
                       placeholder="MM/YY"
@@ -205,7 +205,7 @@ export default function Checkout({ navigate }) {
               </div>
 
               <Button type="submit" className="w-full" size="lg">
-                Complete Booking
+                Confirmar Reserva
               </Button>
             </form>
           </section>
@@ -223,8 +223,8 @@ export default function Checkout({ navigate }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           <div className="absolute bottom-0 left-0 px-margin-desktop pb-lg">
-            <p className="font-label-md text-white/70 uppercase tracking-widest mb-xs">Step 3 of 3</p>
-            <h1 className="font-headline-xl text-white">Secure Checkout</h1>
+            <p className="font-label-md text-white/70 uppercase tracking-widest mb-xs">Paso 3 de 3</p>
+            <h1 className="font-headline-xl text-white">Pago Seguro</h1>
           </div>
         </div>
 
@@ -236,12 +236,12 @@ export default function Checkout({ navigate }) {
 
             {/* Step 1 – Traveler Details */}
             <section className="flex flex-col gap-md">
-              <h2 className="font-headline-md text-on-surface">Step 1 — Traveler Details</h2>
+              <h2 className="font-headline-md text-on-surface">Paso 1 — Tus Datos</h2>
               <Card className="bg-surface-container-lowest border-outline-variant shadow-sm">
                 <CardContent className="p-lg">
                   <form className="grid grid-cols-2 gap-md">
                     <div className="flex flex-col gap-xs">
-                      <Label htmlFor="d-firstName" className="font-label-md text-on-surface">First Name</Label>
+                      <Label htmlFor="d-firstName" className="font-label-md text-on-surface">Nombre</Label>
                       <Input
                         id="d-firstName"
                         placeholder="Jane"
@@ -250,7 +250,7 @@ export default function Checkout({ navigate }) {
                       />
                     </div>
                     <div className="flex flex-col gap-xs">
-                      <Label htmlFor="d-lastName" className="font-label-md text-on-surface">Last Name</Label>
+                      <Label htmlFor="d-lastName" className="font-label-md text-on-surface">Apellido</Label>
                       <Input
                         id="d-lastName"
                         placeholder="Doe"
@@ -269,7 +269,7 @@ export default function Checkout({ navigate }) {
                       />
                     </div>
                     <div className="col-span-2 flex flex-col gap-xs">
-                      <Label htmlFor="d-phone" className="font-label-md text-on-surface">Phone</Label>
+                      <Label htmlFor="d-phone" className="font-label-md text-on-surface">Teléfono</Label>
                       <Input
                         id="d-phone"
                         type="tel"
@@ -285,7 +285,7 @@ export default function Checkout({ navigate }) {
 
             {/* Step 2 – Payment Method */}
             <section className="flex flex-col gap-md">
-              <h2 className="font-headline-md text-on-surface">Step 2 — Payment Method</h2>
+              <h2 className="font-headline-md text-on-surface">Paso 2 — Método de Pago</h2>
 
               {/* Payment method selectors */}
               <div className="grid grid-cols-2 gap-md">
@@ -303,7 +303,7 @@ export default function Checkout({ navigate }) {
                   <span className="material-symbols-outlined text-3xl text-primary">account_balance_wallet</span>
                   <div>
                     <p className="font-label-md text-on-surface">Mercado Pago</p>
-                    <p className="font-body-md text-on-surface-variant text-sm">Full Payment $3,400</p>
+                    <p className="font-body-md text-on-surface-variant text-sm">Pago Completo $3,400</p>
                   </div>
                 </button>
 
@@ -320,8 +320,8 @@ export default function Checkout({ navigate }) {
                 >
                   <span className="material-symbols-outlined text-3xl text-primary">credit_card</span>
                   <div>
-                    <p className="font-label-md text-on-surface">Credit / Debit Card</p>
-                    <p className="font-body-md text-on-surface-variant text-sm">Reserve with Deposit $850</p>
+                    <p className="font-label-md text-on-surface">Tarjeta de Crédito/Débito</p>
+                    <p className="font-body-md text-on-surface-variant text-sm">Reservar con Seña $850</p>
                   </div>
                 </button>
               </div>
@@ -331,7 +331,7 @@ export default function Checkout({ navigate }) {
                 <CardContent className="p-lg">
                   <div className="grid grid-cols-2 gap-md">
                     <div className="col-span-2 flex flex-col gap-xs">
-                      <Label htmlFor="d-card" className="font-label-md text-on-surface">Card Number</Label>
+                      <Label htmlFor="d-card" className="font-label-md text-on-surface">Número de Tarjeta</Label>
                       <Input
                         id="d-card"
                         placeholder="1234 5678 9012 3456"
@@ -341,7 +341,7 @@ export default function Checkout({ navigate }) {
                       />
                     </div>
                     <div className="flex flex-col gap-xs">
-                      <Label htmlFor="d-expiry" className="font-label-md text-on-surface">Expiry</Label>
+                      <Label htmlFor="d-expiry" className="font-label-md text-on-surface">Vencimiento</Label>
                       <Input
                         id="d-expiry"
                         placeholder="MM/YY"
@@ -365,15 +365,15 @@ export default function Checkout({ navigate }) {
                   {/* Price breakdown */}
                   <div className="mt-lg flex flex-col gap-xs">
                     <div className="flex justify-between font-body-md text-on-surface-variant">
-                      <span>Base Price</span>
+                      <span>Precio Base</span>
                       <span>$3,400</span>
                     </div>
                     <div className="flex justify-between font-body-md text-on-surface-variant">
-                      <span>Fees</span>
+                      <span>Gastos</span>
                       <span>$245</span>
                     </div>
                     <div className="flex justify-between font-body-md text-on-surface-variant">
-                      <span>Insurance</span>
+                      <span>Seguro</span>
                       <span>$150</span>
                     </div>
                     <Separator className="my-xs" />
@@ -382,14 +382,14 @@ export default function Checkout({ navigate }) {
                       <span>$3,795</span>
                     </div>
                     <p className="font-body-md text-on-surface-variant text-sm text-right">
-                      10% deposit = $379.50
+                      Seña 10% = $379.50
                     </p>
                   </div>
                 </CardContent>
               </Card>
 
               <Button className="w-full" size="lg" onClick={handleSubmit}>
-                Complete Booking
+                Confirmar Reserva
               </Button>
             </section>
           </div>
@@ -413,11 +413,11 @@ export default function Checkout({ navigate }) {
                 <div className="flex flex-col gap-xs">
                   <div className="flex items-center gap-sm font-body-md text-on-surface-variant">
                     <span className="material-symbols-outlined text-[18px]">calendar_month</span>
-                    <span>Nov 12 - Nov 18 · 7 Days</span>
+                    <span>Nov 12 - Nov 18 · 7 Días</span>
                   </div>
                   <div className="flex items-center gap-sm font-body-md text-on-surface-variant">
                     <span className="material-symbols-outlined text-[18px]">group</span>
-                    <span>2 Travelers</span>
+                    <span>2 Viajeros</span>
                   </div>
                 </div>
 
@@ -426,15 +426,15 @@ export default function Checkout({ navigate }) {
                 {/* Price breakdown */}
                 <div className="flex flex-col gap-xs">
                   <div className="flex justify-between font-body-md text-on-surface-variant">
-                    <span>Base Price</span>
+                    <span>Precio Base</span>
                     <span>$3,400</span>
                   </div>
                   <div className="flex justify-between font-body-md text-on-surface-variant">
-                    <span>Equipment Fees</span>
+                    <span>Equipamiento</span>
                     <span>$245</span>
                   </div>
                   <div className="flex justify-between font-body-md text-on-surface-variant">
-                    <span>Travel Insurance</span>
+                    <span>Seguro de Viaje</span>
                     <span>$150</span>
                   </div>
                   <Separator className="my-xs" />
@@ -447,7 +447,7 @@ export default function Checkout({ navigate }) {
                 {/* Deposit highlight */}
                 <div className="bg-primary/10 rounded-xl p-sm">
                   <p className="font-body-md text-primary text-sm text-center">
-                    Today's payment (10% deposit):{' '}
+                    Pago de hoy (seña 10%):{' '}
                     <span className="font-semibold">$379.50</span>
                   </p>
                 </div>
@@ -474,8 +474,8 @@ export default function Checkout({ navigate }) {
             </div>
 
             <div className="flex flex-col gap-xs">
-              <h3 className="font-headline-md text-on-surface">Booking Confirmed!</h3>
-              <p className="font-body-md text-on-surface-variant">Your expedition is secured. Get ready for adventure.</p>
+              <h3 className="font-headline-md text-on-surface">¡Reserva Confirmada!</h3>
+              <p className="font-body-md text-on-surface-variant">Tu expedición está asegurada. ¡Preparate para la aventura!</p>
             </div>
 
             <Button
@@ -483,7 +483,7 @@ export default function Checkout({ navigate }) {
               size="lg"
               onClick={() => { setShowConfirm(false); navigate('my-trips') }}
             >
-              View My Trips
+              Ver Mis Viajes
             </Button>
           </div>
         </div>

@@ -81,6 +81,8 @@ function FAQ({ q, a }) {
 }
 
 export default function Home({ navigate }) {
+  const [travelers, setTravelers] = useState(2)
+
   return (
     <main className="min-h-screen bg-surface">
 
@@ -257,11 +259,15 @@ export default function Home({ navigate }) {
               <div className="w-px self-stretch my-md bg-outline-variant/40 shrink-0" />
 
               {/* Fecha */}
-              <div className="flex-1 flex items-center px-md py-md gap-sm hover:bg-surface-container/30 transition-colors min-w-0">
+              <div
+                className="flex-1 flex items-center px-md py-md gap-sm hover:bg-surface-container/30 transition-colors min-w-0 cursor-pointer"
+                onClick={() => document.getElementById('fecha-salida')?.showPicker?.()}
+              >
                 <span className="material-symbols-outlined text-primary shrink-0 text-[22px]">calendar_month</span>
                 <div className="flex flex-col w-full">
-                  <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-[2px]">Fecha de salida</label>
+                  <label htmlFor="fecha-salida" className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-[2px] cursor-pointer">Fecha de salida</label>
                   <input
+                    id="fecha-salida"
                     type="date"
                     className="bg-transparent border-none outline-none font-body-md text-on-surface w-full cursor-pointer"
                     style={{ colorScheme: 'light' }}
@@ -276,13 +282,17 @@ export default function Home({ navigate }) {
                 <span className="material-symbols-outlined text-primary shrink-0 text-[22px]">group</span>
                 <div className="flex flex-col">
                   <label className="text-[10px] font-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-[2px]">Viajeros</label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="20"
-                    defaultValue="2"
-                    className="bg-transparent border-none outline-none font-body-md text-on-surface w-20 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  />
+                  <div className="flex items-center gap-2 mt-[1px]">
+                    <button
+                      onClick={() => setTravelers(t => Math.max(1, t - 1))}
+                      className="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors text-base leading-none font-semibold"
+                    >−</button>
+                    <span className="font-body-md text-on-surface w-5 text-center">{travelers}</span>
+                    <button
+                      onClick={() => setTravelers(t => Math.min(20, t + 1))}
+                      className="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors text-base leading-none font-semibold"
+                    >+</button>
+                  </div>
                 </div>
               </div>
 

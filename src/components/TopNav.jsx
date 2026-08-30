@@ -9,6 +9,7 @@ export default function TopNav({ current, navigate, overlay = false }) {
     { label: 'Inicio', tab: 'home', screen: 'home' },
     { label: 'Viajes', tab: 'trips', screen: 'trips' },
     { label: 'Mi dashboard', tab: 'my-trips', screen: 'my-trips' },
+    { label: 'Admin', tab: 'admin', screen: 'admin' },
   ]
 
   return (
@@ -51,14 +52,6 @@ export default function TopNav({ current, navigate, overlay = false }) {
               {l.label}
             </button>
           ))}
-          {current === 'admin' && (
-            <button
-              onClick={() => navigate('admin')}
-              className="px-4 py-2 text-sm font-medium rounded-full bg-primary/15 text-primary"
-            >
-              Admin
-            </button>
-          )}
           {/* CTA */}
           <button
             onClick={() => navigate('my-trips')}

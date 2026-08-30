@@ -8,7 +8,6 @@ export default function TopNav({ current, navigate, overlay = false }) {
   const links = [
     { label: 'Inicio', tab: 'home', screen: 'home' },
     { label: 'Viajes', tab: 'trips', screen: 'trips' },
-    { label: 'Mi dashboard', tab: 'my-trips', screen: 'my-trips' },
     { label: 'Admin', tab: 'admin', screen: 'admin' },
   ]
 

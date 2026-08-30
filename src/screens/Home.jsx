@@ -403,8 +403,10 @@ export default function Home({ navigate }) {
 
             {/* Video embed + reviews grid */}
             <div className="grid grid-cols-12 gap-lg">
+              {/* Left col: video + fotos */}
+              <div className="col-span-7 flex flex-col gap-md">
               {/* Video placeholder */}
-              <div className="col-span-7 relative rounded-2xl overflow-hidden bg-on-surface aspect-video flex items-center justify-center group cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.12)]">
+              <div className="relative rounded-2xl overflow-hidden bg-on-surface aspect-video flex items-center justify-center group cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.12)]">
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpygtKaAZVYaSRsCb3xkst7G9Tkf6JEmz4zewSmOKJnWeC7QfqLSlhvZRj_rk_Pe-k7RtPbieCzjhq5F9beKLzC3judrf3-A9UpGU9SrRi_yhG906jJunBXRpdhJPlE3W7rIqVaJhPcH7iAYmc7i2QK5GaFK9lbyHE0qK-vcDjiqp6WunYPFIeNHL3jrpVmrqzQbsEw353StX7rQqr2pXbOmIgfArkuN7dzxMBah4uS8ym6yoqmxIwPw"
                   alt="Video comunidad"
@@ -417,6 +419,17 @@ export default function Home({ navigate }) {
                   </div>
                   <p className="text-white font-label-md text-sm opacity-80">Mirá el resumen de Las Leñas 2024</p>
                 </div>
+              </div>
+
+              {/* Fotos debajo del video */}
+              <div className="grid grid-cols-3 gap-md">
+                {[CARD1_IMG, CARD2_IMG, CARD3_IMG].map((src, i) => (
+                  <div key={i} className="relative rounded-xl overflow-hidden aspect-square shadow-md">
+                    <img src={src} alt={`foto comunidad ${i+1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+                ))}
+              </div>
               </div>
 
               {/* Reviews column */}
